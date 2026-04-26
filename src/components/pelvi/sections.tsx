@@ -21,9 +21,9 @@ export function Hero() {
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-accent-foreground text-xs font-medium">
             <Sparkles className="h-3 w-3" /> Feito para fisioterapia pélvica
           </span>
-          <h1 className="mt-6 font-display text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-semibold text-graphite">
+          <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-semibold text-foreground">
             Gestão para quem entende a complexidade de ser{" "}
-            <span className="italic text-primary">Pelvi.</span>
+            <span className="text-primary">Pelvi.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
             Um sistema completo de agendamento, prontuário e financeiro feito sob medida para a fisioterapia pélvica — para você cuidar das suas pacientes sem se perder em planilhas, agendas de papel ou ferramentas que não falam a sua língua.
@@ -57,12 +57,12 @@ const pains = [
 
 export function Pains() {
   return (
-    <section className="py-24 bg-sand/40">
+    <section className="py-24 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
             A rotina da fisio pélvica é única.<br />
-            <span className="italic text-primary">Sua gestão também deveria ser.</span>
+            <span className="text-primary">Sua gestão também deveria ser.</span>
           </h2>
         </div>
         <div className="mt-14 grid md:grid-cols-3 gap-6">
@@ -71,7 +71,7 @@ export function Pains() {
               <div className="h-10 w-10 rounded-2xl bg-primary/15 grid place-items-center mb-5">
                 <span className="h-2.5 w-2.5 rounded-full bg-primary" />
               </div>
-              <h3 className="font-display text-xl font-semibold mb-2">{p.t}</h3>
+              <h3 className="text-xl font-semibold mb-2">{p.t}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{p.d}</p>
             </div>
           ))}
@@ -99,7 +99,7 @@ export function Features() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Recursos</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Tudo o que você precisa, num só lugar.
           </h2>
         </div>
@@ -109,7 +109,7 @@ export function Features() {
               <div className="h-11 w-11 rounded-2xl bg-primary-soft grid place-items-center mb-4 group-hover:bg-primary/20 transition-colors">
                 <Icon className="h-5 w-5 text-primary" />
               </div>
-              <h3 className="font-display text-lg font-semibold mb-2">{t}</h3>
+              <h3 className="text-lg font-semibold mb-2">{t}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
             </div>
           ))}
@@ -129,12 +129,12 @@ const profiles = [
 
 export function Audience() {
   return (
-    <section id="para-quem" className="py-24 bg-sand/40 relative overflow-hidden">
+    <section id="para-quem" className="py-24 bg-muted/50 relative overflow-hidden">
       <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-5 gap-12 items-center">
         <div className="lg:col-span-2">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Para quem é</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Para quem é o Pelvi.
           </h2>
           <div className="mt-8 rounded-3xl overflow-hidden shadow-soft">
@@ -145,7 +145,7 @@ export function Audience() {
           {profiles.map((p) => (
             <div key={p.t} className="rounded-3xl bg-card p-7 border border-border/60 hover:-translate-y-1 transition-transform shadow-card">
               <div className="h-2 w-12 rounded-full bg-primary mb-5" />
-              <h3 className="font-display text-xl font-semibold mb-2">{p.t}</h3>
+              <h3 className="text-xl font-semibold mb-2">{p.t}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{p.d}</p>
             </div>
           ))}
@@ -168,7 +168,7 @@ export function HowItWorks() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Como funciona</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Três passos. Sem fricção.
           </h2>
         </div>
@@ -176,8 +176,8 @@ export function HowItWorks() {
           {steps.map((s, i) => (
             <div key={s.n} className="relative">
               <div className="rounded-3xl p-8 bg-card border border-border/60 h-full shadow-card">
-                <div className="font-display text-6xl text-primary/30 leading-none mb-4">{s.n}</div>
-                <h3 className="font-display text-xl font-semibold mb-2">{s.t}</h3>
+                <div className="text-6xl text-primary/30 leading-none mb-4">{s.n}</div>
+                <h3 className="text-xl font-semibold mb-2">{s.t}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.d}</p>
               </div>
               {i < steps.length - 1 && (
@@ -203,19 +203,19 @@ const compareRows = [
 
 export function Compare() {
   return (
-    <section className="py-24 bg-sand/40">
+    <section className="py-24 bg-muted/50">
       <div className="mx-auto max-w-5xl px-6">
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Diferenciais</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Por que Pelvi e não um sistema genérico?
           </h2>
         </div>
         <div className="mt-12 rounded-3xl overflow-hidden border border-border/60 bg-card shadow-card">
-          <div className="grid grid-cols-3 bg-sand/60 px-6 py-4 text-sm font-medium">
+          <div className="grid grid-cols-3 bg-muted/40 px-6 py-4 text-sm font-medium">
             <div></div>
             <div className="text-center text-muted-foreground">Genéricos</div>
-            <div className="text-center font-display text-primary text-base">Pelvi</div>
+            <div className="text-center text-primary text-base">Pelvi</div>
           </div>
           {compareRows.map(([label, generic, pelvi]) => (
             <div key={label as string} className="grid grid-cols-3 px-6 py-4 border-t border-border/60 items-center text-sm">
@@ -244,7 +244,7 @@ export function Testimonial() {
     <section className="py-24">
       <div className="mx-auto max-w-3xl px-6 text-center">
         <img src={marinaImg} alt="Dra. Marina Toledo" className="mx-auto h-24 w-24 rounded-full object-cover shadow-soft" loading="lazy" width={512} height={512} />
-        <blockquote className="mt-8 font-display text-2xl md:text-3xl leading-snug text-graphite italic">
+        <blockquote className="mt-8 text-2xl md:text-3xl leading-snug text-foreground italic">
           “Antes eu perdia uma manhã inteira por semana só organizando recibos e remarcações. Hoje o Pelvi faz isso pra mim — e ainda me lembra qual paciente está na quinta sessão do pacote.”
         </blockquote>
         <div className="mt-6 text-sm text-muted-foreground">
@@ -274,11 +274,11 @@ const plans = [
 
 export function Pricing() {
   return (
-    <section id="planos" className="py-24 bg-sand/40">
+    <section id="planos" className="py-24 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl mx-auto text-center">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Planos</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Comece pequeno. Cresça sem trocar de ferramenta.
           </h2>
         </div>
@@ -297,10 +297,10 @@ export function Pricing() {
                   {p.badge}
                 </span>
               )}
-              <h3 className="font-display text-2xl font-semibold">{p.name}</h3>
+              <h3 className="text-2xl font-semibold">{p.name}</h3>
               <div className="mt-4 flex items-baseline gap-1">
                 <span className="text-sm opacity-80">R$</span>
-                <span className="font-display text-5xl font-semibold">{p.price}</span>
+                <span className="text-5xl font-semibold">{p.price}</span>
                 <span className="text-sm opacity-80">/mês</span>
               </div>
               <ul className="mt-6 space-y-3 flex-1">
@@ -348,14 +348,14 @@ export function FAQ() {
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center max-w-xl mx-auto">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Perguntas frequentes</span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-graphite leading-tight">
+          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Boas dúvidas, respostas francas.
           </h2>
         </div>
         <Accordion type="single" collapsible className="mt-12 rounded-3xl bg-card border border-border/60 px-6 shadow-card">
           {faqs.map(([q, a], i) => (
             <AccordionItem key={q} value={`item-${i}`} className="border-border/60">
-              <AccordionTrigger className="font-display text-base text-left hover:no-underline">{q}</AccordionTrigger>
+              <AccordionTrigger className="text-base text-left hover:no-underline">{q}</AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed">{a}</AccordionContent>
             </AccordionItem>
           ))}
@@ -372,7 +372,7 @@ export function FinalCTA() {
       <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-primary text-primary-foreground px-8 py-20 text-center relative overflow-hidden">
         <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-background/10 blur-3xl" aria-hidden />
         <div className="absolute -bottom-24 -right-10 h-80 w-80 rounded-full bg-background/5 blur-3xl" aria-hidden />
-        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl mx-auto relative">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl mx-auto relative">
           Sua rotina merece uma ferramenta que entende você.
         </h2>
         <Button asChild size="lg" className="mt-10 rounded-full bg-background text-primary hover:bg-background/90 h-14 px-10 text-base relative">
@@ -392,14 +392,14 @@ export function Footer() {
     { t: "Legal", l: ["Termos", "Privacidade", "LGPD"] },
   ];
   return (
-    <footer className="border-t border-border/60 bg-sand/40">
+    <footer className="border-t border-border/60 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6 py-16 grid md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-2">
             <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
               <span className="h-3 w-3 rounded-full bg-primary" />
             </span>
-            <span className="font-display text-2xl font-semibold text-graphite">Pelvi</span>
+            <span className="text-2xl font-semibold text-foreground">Pelvi</span>
           </div>
           <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
             Gestão clínica feita para quem cuida da saúde pélvica.

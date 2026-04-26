@@ -19,7 +19,7 @@ export function Header() {
           <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
             <span className="h-3 w-3 rounded-full bg-primary" />
           </span>
-          <span className="font-display text-2xl font-semibold tracking-tight text-graphite">Pelvi</span>
+          <span className="text-2xl font-semibold tracking-tight text-foreground">Pelvi</span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           {links.map((l) => (
