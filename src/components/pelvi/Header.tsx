@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -12,6 +12,12 @@ const links = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+  useEffect(() => {
+    const root = document.documentElement;
+    if (dark) root.classList.add("dark");
+    else root.classList.remove("dark");
+  }, [dark]);
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
@@ -29,8 +35,15 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={() => setDark((d) => !d)}
+            aria-label="Alternar tema"
+            className="h-9 w-9 grid place-items-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          >
+            {dark ? <Sun className="h-4 w-4" strokeWidth={1.5} /> : <Moon className="h-4 w-4" strokeWidth={1.5} />}
+          </button>
           <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Entrar</a>
-          <Button asChild variant="default" className="rounded-full px-5">
+          <Button asChild variant="default" className="rounded-xl px-5">
             <a href="#planos">Começar gratuitamente</a>
           </Button>
         </div>
