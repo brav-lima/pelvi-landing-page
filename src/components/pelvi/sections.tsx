@@ -13,15 +13,15 @@ import marinaImg from "@/assets/marina.jpg";
 /* HERO */
 export function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/15 blur-3xl" aria-hidden />
-      <div className="absolute top-40 -right-24 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" aria-hidden />
+    <section id="top" className="relative overflow-hidden bg-gradient-to-b from-accent/40 to-background">
+      <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" aria-hidden />
+      <div className="absolute top-40 -right-24 h-80 w-80 rounded-full bg-accent/60 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 grid lg:grid-cols-2 gap-12 items-center">
         <div className="animate-fade-up">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-accent-foreground text-xs font-medium">
-            <Sparkles className="h-3 w-3" /> Feito para fisioterapia pélvica
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium">
+            <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Feito para fisioterapia pélvica
           </span>
-          <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-semibold text-foreground">
+          <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-bold tracking-tight text-foreground">
             Gestão para quem entende a complexidade de ser{" "}
             <span className="text-primary">Pelvi.</span>
           </h1>
