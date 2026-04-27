@@ -22,22 +22,26 @@ export function Hero() {
             <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Feito para fisioterapia pélvica
           </span>
           <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-bold tracking-tight text-foreground">
-            Gestão para quem entende a complexidade de ser{" "}
-            <span className="text-primary">Pelvi.</span>
+            O sistema feito para fisioterapeutas pélvicas —{" "}
+            <span className="text-primary">não adaptado, feito.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Um sistema completo de agendamento, prontuário e financeiro feito sob medida para a fisioterapia pélvica — para você cuidar das suas pacientes sem se perder em planilhas, agendas de papel ou ferramentas que não falam a sua língua.
+            Agendamento, prontuário e financeiro feitos sob medida para a fisioterapia pélvica. Sem planilhas, sem papel, sem ferramenta genérica.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button asChild size="lg" className="rounded-full px-7 h-12 text-base shadow-soft">
               <a href="#planos">Começar grátis por 14 dias</a>
             </Button>
             <Button asChild variant="ghost" size="lg" className="rounded-full h-12 text-base">
-              <a href="#recursos">Ver demonstração →</a>
+              <a href="#recursos">Ver como funciona →</a>
             </Button>
           </div>
           <p className="mt-6 text-xs text-muted-foreground">
-            Sem cartão de crédito · LGPD-ready · Suporte humano em português
+            <span>Sem cartão de crédito</span>
+            <span aria-hidden="true"> · </span>
+            <span>Conforme a LGPD</span>
+            <span aria-hidden="true"> · </span>
+            <span>Atendimento por brasileiras, em português</span>
           </p>
         </div>
         <div className="animate-fade-up" style={{ animationDelay: "120ms" }}>
@@ -50,9 +54,9 @@ export function Hero() {
 
 /* PAINS */
 const pains = [
-  { t: "Sessões longas e seriadas", d: "Tratamentos pélvicos raramente são consulta única. Você precisa acompanhar pacotes, sessões consumidas, evolução semana a semana." },
-  { t: "Prontuário sensível, intimidade real", d: "Anamneses pélvicas pedem sigilo, profundidade e flexibilidade que formulários genéricos não entregam." },
-  { t: "Você é a clínica inteira", d: "Atende, agenda, cobra, registra evolução e ainda gerencia recepcionista (quando tem). Precisa de uma ferramenta que respeite isso." },
+  { t: "Tratamentos que duram meses, não consultas avulsas", d: "Tratamentos pélvicos raramente são consulta única. Você precisa acompanhar pacotes, sessões consumidas, evolução semana a semana." },
+  { t: "Anamneses íntimas que pedem cuidado de verdade", d: "Anamneses pélvicas pedem sigilo, profundidade e flexibilidade que formulários genéricos não entregam." },
+  { t: "Você é a clínica inteira", d: "Atende, agenda, cobra, registra evolução e às vezes ainda coordena uma recepcionista. Você precisa de uma ferramenta que reconheça isso." },
 ];
 
 export function Pains() {
@@ -83,14 +87,14 @@ export function Pains() {
 
 /* FEATURES */
 const features = [
-  { i: CalendarDays, t: "Agenda inteligente", d: "Visualizações por dia, semana e mês. Arraste e solte para reagendar. Bloqueio de horários por profissional. Status: agendado, confirmado, cancelado, realizado. Ideal para encaixar avaliações pélvicas longas e sessões de retorno mais curtas no mesmo dia." },
-  { i: FileHeart, t: "Prontuário com anamnese flexível", d: "Estrutura adaptável para anamneses uroginecológicas, obstétricas, oncológicas ou de dor pélvica. Cada clínica modela o seu jeito." },
+  { i: CalendarDays, t: "Agenda inteligente", d: "Encaixe avaliações de 60 minutos e retornos de 30 no mesmo dia, sem conflitos. Arraste e solte para reagendar." },
+  { i: FileHeart, t: "Prontuário com anamnese flexível", d: "Cada paciente, do jeito que sua especialidade pede. Anamnese uroginecológica, obstétrica, oncológica ou de dor pélvica — você modela." },
   { i: History, t: "Linha do tempo de evoluções", d: "Acompanhe cada paciente em formato de timeline clínica. Veja a jornada completa do tratamento em uma rolagem." },
-  { i: Package, t: "Pacotes de tratamento", d: "Crie pacotes de sessões com parcelamento automático no financeiro. O sistema desconta sessões usadas a cada atendimento." },
+  { i: Package, t: "Pacotes de tratamento", d: "Venda pacotes, parcele no automático e veja o saldo de sessões a cada atendimento." },
   { i: Users, t: "Cadastro completo de pacientes", d: "Busca rápida, paginação, dados sigilosos protegidos, histórico de atendimentos integrado." },
   { i: Stethoscope, t: "Gestão de procedimentos", d: "Cadastre cada serviço com duração e valor próprios — avaliação, reabilitação do assoalho pélvico, biofeedback, eletroestimulação, etc." },
   { i: Wallet, t: "Financeiro descomplicado", d: "Lance entradas e saídas, vincule à paciente e ao agendamento, dê baixa em pagamentos com um clique, veja o resumo do mês com saldo, recebido, pendente e despesas." },
-  { i: Building2, t: "Multi-clínica e multi-profissional", d: "Atua em mais de um espaço? Faça login com o mesmo CPF e troque de contexto em segundos. Dados isolados por clínica. Permissões por papel: admin, profissional, recepção." },
+  { i: Building2, t: "Multi-clínica e multi-profissional", d: "Atende em consultório próprio e em clínica parceira? Um login, dois contextos, dados isolados." },
 ];
 
 export function Features() {
@@ -100,7 +104,7 @@ export function Features() {
         <div className="max-w-3xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Recursos</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Tudo o que você precisa, num só lugar.
+            Tudo o que sua clínica precisa para rodar — sem improviso.
           </h2>
         </div>
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -122,9 +126,9 @@ export function Features() {
 /* AUDIENCE */
 const profiles = [
   { t: "Fisio pélvica autônoma", d: "Quer parar de viver entre planilhas, WhatsApp e agenda de papel." },
-  { t: "Clínicas de saúde da mulher", d: "Múltiplas profissionais, recepção, controle financeiro real." },
-  { t: "Especialistas em uroginecologia e oncologia pélvica", d: "Precisam de prontuário sensível e linha do tempo clínica robusta." },
-  { t: "Profissionais que atendem em mais de um lugar", d: "Consultório próprio + clínica parceira, sem precisar de duas ferramentas." },
+  { t: "Clínicas de saúde da mulher", d: "Você coordena várias profissionais, recepção e o financeiro — e quer ver tudo num painel só." },
+  { t: "Especialistas em uroginecologia e oncologia pélvica", d: "Você precisa de prontuário sensível e linha do tempo clínica robusta." },
+  { t: "Profissionais que atendem em mais de um lugar", d: "Você atende em consultório próprio e em clínica parceira, e cansou de pular entre dois sistemas." },
 ];
 
 export function Audience() {
@@ -135,7 +139,7 @@ export function Audience() {
         <div className="lg:col-span-2">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Para quem é</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Para quem é o Pelvi.
+            Quatro perfis. Uma ferramenta certa pra cada um.
           </h2>
           <div className="mt-8 rounded-3xl overflow-hidden shadow-soft">
             <img src={clinicImg} alt="Consultório acolhedor de fisioterapia pélvica" className="w-full h-72 object-cover" loading="lazy" width={1024} height={1024} />
@@ -157,8 +161,8 @@ export function Audience() {
 
 /* HOW */
 const steps = [
-  { n: "1", t: "Crie sua clínica", d: "Cadastro em menos de 2 minutos. Você define os procedimentos, equipe e horários." },
-  { n: "2", t: "Importe ou cadastre suas pacientes", d: "Comece com o histórico que já tem, no seu ritmo." },
+  { n: "1", t: "Crie sua clínica", d: "Em menos de 2 minutos você define equipe, procedimentos e horários." },
+  { n: "2", t: "Importe ou cadastre suas pacientes", d: "Traga seu histórico — ou comece do zero, no seu ritmo." },
   { n: "3", t: "Atenda com tranquilidade", d: "Agenda, prontuário, financeiro e evolução em um lugar só, do celular ou do computador." },
 ];
 
@@ -169,14 +173,14 @@ export function HowItWorks() {
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Como funciona</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Três passos. Sem fricção.
+            Três passos. Sem complicação.
           </h2>
         </div>
         <div className="mt-14 grid md:grid-cols-3 gap-6 relative">
           {steps.map((s, i) => (
             <div key={s.n} className="relative">
               <div className="rounded-3xl p-8 bg-card border border-border/60 h-full shadow-card">
-                <div className="text-6xl text-primary/30 leading-none mb-4">{s.n}</div>
+                <div className="text-6xl text-primary/30 leading-none mb-4" aria-hidden="true">{s.n}</div>
                 <h3 className="text-xl font-semibold mb-2">{s.t}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.d}</p>
               </div>
@@ -195,9 +199,9 @@ export function HowItWorks() {
 const compareRows = [
   ["Pensado para fisio pélvica", false, true],
   ["Pacotes de sessões com parcelamento", false, true],
-  ["Anamnese flexível por especialidade", "Limitada", true],
+  ["Anamnese flexível por especialidade", "Limitada nos genéricos", true],
   ["Multi-clínica com mesmo CPF", "Raro", true],
-  ["Suporte que entende sua rotina", false, true],
+  ["Suporte que sabe o que é avaliação intracavitária", false, true],
   ["Interface em PT-BR feita aqui", "Tradução", true],
 ] as const;
 
@@ -208,7 +212,7 @@ export function Compare() {
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Diferenciais</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Por que Pelvi e não um sistema genérico?
+            O que você não acha em sistemas genéricos.
           </h2>
         </div>
         <div className="mt-12 rounded-3xl overflow-hidden border border-border/60 bg-card shadow-card">
@@ -259,15 +263,15 @@ export function Testimonial() {
 /* PRICING */
 const plans = [
   {
-    name: "Essencial", price: "79", featured: false,
+    name: "Essencial", price: "79", featured: false, cta: "Testar o Essencial grátis",
     items: ["1 profissional", "Até 100 pacientes", "Agenda, prontuário, financeiro", "Suporte por e-mail"],
   },
   {
-    name: "Profissional", price: "149", featured: true, badge: "Mais popular",
-    items: ["Até 3 profissionais", "Pacientes ilimitadas", "Pacotes de tratamento", "Multi-clínica", "Suporte prioritário"],
+    name: "Profissional", price: "149", featured: true, badge: "Mais popular", cta: "Começar com o Profissional",
+    items: ["Até 3 profissionais", "Pacientes ilimitadas", "Pacotes de tratamento com parcelamento automático", "Multi-clínica (até 3 locais)", "Suporte prioritário"],
   },
   {
-    name: "Clínica", price: "279", featured: false,
+    name: "Clínica", price: "279", featured: false, cta: "Falar com a gente",
     items: ["Profissionais ilimitados", "Recepção + admin", "Relatórios financeiros", "Suporte dedicado por WhatsApp"],
   },
 ];
@@ -319,7 +323,7 @@ export function Pricing() {
                     : ""
                 }`}
               >
-                <a href="#">Começar 14 dias grátis</a>
+                <a href="#">{p.cta}</a>
               </Button>
             </div>
           ))}
@@ -337,9 +341,11 @@ const faqs = [
   ["Preciso ser de fisio pélvica para usar?", "Não, mas o Pelvi foi desenhado pensando em vocês. Outras especialidades de consultório (psicologia, fonoaudiologia, nutrição) também se beneficiam."],
   ["Meus dados ficam seguros?", "Sim. Banco de dados isolado por clínica, autenticação JWT e práticas alinhadas à LGPD."],
   ["Posso usar no celular?", "Sim, totalmente responsivo. Atenda da maca, do consultório ou da sala de espera."],
-  ["Funciona offline?", "Não. O Pelvi é 100% web, mas nosso uptime é > 99,9%."],
+  ["Funciona offline?", "O Pelvi é 100% web — você precisa de internet para usar. Em compensação, nosso uptime é maior que 99,9%, e tudo fica salvo na nuvem em tempo real."],
   ["Como faço para migrar minha agenda atual?", "A gente te ajuda. No primeiro mês a migração é gratuita."],
-  ["Tem aplicativo para a paciente?", "Por enquanto não. O foco do Pelvi é a profissional. Lembretes para pacientes via WhatsApp estão no roadmap."],
+  ["Tem aplicativo para a paciente?", "Por enquanto não. O foco do Pelvi é facilitar o seu dia. Lembretes automáticos para pacientes via WhatsApp estão no roadmap para 2026."],
+  ["Posso emitir recibo ou nota fiscal pela plataforma?", "Ainda não. Emissão de recibos e NFS-e está no roadmap. Por enquanto você registra o pagamento no financeiro e exporta o histórico quando precisar."],
+  ["Como o Pelvi se compara a outros sistemas de gestão clínica?", "A maioria dos sistemas foram feitos para clínicas genéricas e adaptados para fisio pélvica depois. O Pelvi foi construído do zero para essa especialidade — anamneses uroginecológicas, pacotes de sessões e linha do tempo clínica são nativos, não gambiarra."],
 ];
 
 export function FAQ() {
@@ -379,7 +385,7 @@ export function FinalCTA() {
           Sua rotina merece uma ferramenta que entende você.
         </h2>
         <Button asChild size="lg" className="mt-10 rounded-xl bg-white text-[#2A9D8F] hover:bg-white/90 h-14 px-10 text-base relative shadow-soft">
-          <a href="#">Começar gratuitamente</a>
+          <a href="#">Começar agora — 14 dias grátis</a>
         </Button>
         <p className="mt-5 text-sm text-white/80 relative">14 dias grátis. Sem cartão. Sem letrinhas miúdas.</p>
       </div>
@@ -388,12 +394,19 @@ export function FinalCTA() {
 }
 
 /* FOOTER */
+const produtoLinks = [
+  { label: "Recursos", href: "#recursos" },
+  { label: "Planos", href: "#planos" },
+  { label: "Como funciona", href: "#como-funciona" },
+  { label: "FAQ", href: "#faq" },
+];
+
+const pendingCols = [
+  { t: "Empresa", l: ["Sobre", "Blog", "Contato"] },
+  { t: "Legal", l: ["Termos", "Privacidade", "LGPD"] },
+];
+
 export function Footer() {
-  const cols = [
-    { t: "Produto", l: ["Recursos", "Planos", "Demonstração", "Roadmap"] },
-    { t: "Empresa", l: ["Sobre", "Blog", "Contato"] },
-    { t: "Legal", l: ["Termos", "Privacidade", "LGPD"] },
-  ];
   return (
     <footer className="border-t border-border/60 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6 py-16 grid md:grid-cols-4 gap-10">
@@ -408,12 +421,22 @@ export function Footer() {
             Gestão clínica feita para quem cuida da saúde pélvica.
           </p>
         </div>
-        {cols.map((c) => (
+        <div>
+          <h4 className="text-sm font-semibold mb-4">Produto</h4>
+          <ul className="space-y-2 text-sm text-muted-foreground">
+            {produtoLinks.map((it) => (
+              <li key={it.label}>
+                <a href={it.href} className="hover:text-foreground transition-colors">{it.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {pendingCols.map((c) => (
           <div key={c.t}>
             <h4 className="text-sm font-semibold mb-4">{c.t}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {c.l.map((it) => (
-                <li key={it}><a href="#" className="hover:text-foreground transition-colors">{it}</a></li>
+                <li key={it}>{it}</li>
               ))}
             </ul>
           </div>

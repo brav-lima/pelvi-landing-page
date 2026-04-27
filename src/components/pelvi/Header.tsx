@@ -44,7 +44,7 @@ export function Header() {
           </button>
           <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Entrar</a>
           <Button asChild variant="default" className="rounded-xl px-5">
-            <a href="#planos">Começar gratuitamente</a>
+            <a href="#planos">Testar 14 dias grátis</a>
           </Button>
         </div>
         <button className="md:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -58,7 +58,7 @@ export function Header() {
               {l.label}
             </a>
           ))}
-          <Button asChild className="w-full rounded-full"><a href="#planos">Começar gratuitamente</a></Button>
+          <Button asChild className="w-full rounded-full"><a href="#planos">Testar 14 dias grátis</a></Button>
         </div>
       )}
     </header>
