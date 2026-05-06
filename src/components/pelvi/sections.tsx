@@ -377,14 +377,14 @@ export function FinalCTA() {
     <section className="px-6 pb-24">
       <div
         className="mx-auto max-w-7xl rounded-3xl px-8 py-20 text-center relative overflow-hidden text-white"
-        style={{ backgroundImage: "linear-gradient(135deg, #2A9D8F 0%, #1F7A70 100%)" }}
+        style={{ backgroundImage: "linear-gradient(135deg, hsl(16 65% 44%) 0%, hsl(16 65% 34%) 100%)" }}
       >
         <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" aria-hidden />
         <div className="absolute -bottom-24 -right-10 h-80 w-80 rounded-full bg-white/5 blur-3xl" aria-hidden />
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl mx-auto relative">
           Sua rotina merece uma ferramenta que entende você.
         </h2>
-        <Button asChild size="lg" className="mt-10 rounded-xl bg-white text-[#2A9D8F] hover:bg-white/90 h-14 px-10 text-base relative shadow-soft">
+        <Button asChild size="lg" className="mt-10 rounded-xl bg-white text-primary hover:bg-white/90 h-14 px-10 text-base relative shadow-soft">
           <a href="#">Começar agora — 14 dias grátis</a>
         </Button>
         <p className="mt-5 text-sm text-white/80 relative">14 dias grátis. Sem cartão. Sem letrinhas miúdas.</p>
