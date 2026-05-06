@@ -36,7 +36,6 @@ export const Route = createRootRoute({
       { property: "og:description", content: "Agenda, prontuário e financeiro feitos sob medida para a fisioterapia pélvica." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
