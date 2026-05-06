@@ -1,8 +1,10 @@
+import { useState } from "react";
 import {
   CalendarDays, FileHeart, History, Package, Users, Stethoscope,
   Wallet, Building2, Sparkles, Check, X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ContactModal } from "./ContactModal";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -263,20 +265,22 @@ export function Testimonial() {
 /* PRICING */
 const plans = [
   {
-    name: "Essencial", price: "79", featured: false, cta: "Testar o Essencial grátis",
+    name: "Essencial", price: "79", featured: false, contact: false, cta: "Testar o Essencial grátis",
     items: ["1 profissional", "Até 100 pacientes", "Agenda, prontuário, financeiro", "Suporte por e-mail"],
   },
   {
-    name: "Profissional", price: "149", featured: true, badge: "Mais popular", cta: "Começar com o Profissional",
+    name: "Profissional", price: "149", featured: true, contact: false, badge: "Mais popular", cta: "Começar com o Profissional",
     items: ["Até 3 profissionais", "Pacientes ilimitadas", "Pacotes de tratamento com parcelamento automático", "Multi-clínica (até 3 locais)", "Suporte prioritário"],
   },
   {
-    name: "Clínica", price: "279", featured: false, cta: "Falar com a gente",
+    name: "Clínica", price: "279", featured: false, contact: true, cta: "Falar com a gente",
     items: ["Profissionais ilimitados", "Recepção + admin", "Relatórios financeiros", "Suporte dedicado por WhatsApp"],
   },
 ];
 
 export function Pricing() {
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
     <section id="planos" className="py-24 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6">
@@ -315,16 +319,23 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Button
-                asChild
-                className={`mt-8 rounded-full h-11 ${
-                  p.featured
-                    ? "bg-background text-primary hover:bg-background/90"
-                    : ""
-                }`}
-              >
-                <a href="#">{p.cta}</a>
-              </Button>
+              {p.contact ? (
+                <Button
+                  onClick={() => setContactOpen(true)}
+                  className="mt-8 rounded-full h-11"
+                >
+                  {p.cta}
+                </Button>
+              ) : (
+                <Button
+                  asChild
+                  className={`mt-8 rounded-full h-11 ${
+                    p.featured ? "bg-background text-primary hover:bg-background/90" : ""
+                  }`}
+                >
+                  <a href="#">{p.cta}</a>
+                </Button>
+              )}
             </div>
           ))}
         </div>
@@ -332,6 +343,7 @@ export function Pricing() {
           Sem fidelidade. Cancele quando quiser. Migração de dados gratuita no primeiro mês.
         </p>
       </div>
+      <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
     </section>
   );
 }
