@@ -1,9 +1,19 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
 
-// @ts-expect-error — built at deploy time
-import handler from "../dist/server/server.js";
+type StartServer = { fetch: (req: Request) => Promise<Response> };
 
-export default async function (req: IncomingMessage, res: ServerResponse) {
+let server: StartServer | null = null;
+
+async function getServer(): Promise<StartServer> {
+  if (server) return server;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const mod: any = await import("../dist/server/server.js");
+  // Handle both ESM default export and CJS interop wrapper
+  server = (mod.default?.fetch ? mod.default : mod) as StartServer;
+  return server;
+}
+
+export default async function handler(req: IncomingMessage, res: ServerResponse) {
   const protocol = (req.headers["x-forwarded-proto"] as string) ?? "https";
   const host = req.headers["x-forwarded-host"] ?? req.headers.host ?? "localhost";
   const url = `${protocol}://${host}${req.url}`;
@@ -21,10 +31,10 @@ export default async function (req: IncomingMessage, res: ServerResponse) {
     body: body?.byteLength ? body : undefined,
   });
 
-  const webResponse: Response = await handler.default.fetch(webRequest);
+  const start = await getServer();
+  const webResponse = await start.fetch(webRequest);
 
   res.statusCode = webResponse.status;
   webResponse.headers.forEach((value, key) => res.setHeader(key, value));
-  const buffer = Buffer.from(await webResponse.arrayBuffer());
-  res.end(buffer);
+  res.end(Buffer.from(await webResponse.arrayBuffer()));
 }
