@@ -3,11 +3,8 @@ import { Menu, X, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
-  { href: "#recursos", label: "Recursos" },
+  { href: "#recursos", label: "O que vem por aí" },
   { href: "#para-quem", label: "Para quem é" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#planos", label: "Planos" },
-  { href: "#faq", label: "FAQ" },
 ];
 
 export function Header() {
@@ -42,14 +39,8 @@ export function Header() {
           >
             {dark ? <Sun className="h-4 w-4" strokeWidth={1.5} /> : <Moon className="h-4 w-4" strokeWidth={1.5} />}
           </button>
-          <a
-            href={import.meta.env.VITE_CLINIC_APP_URL ?? "#"}
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Entrar
-          </a>
           <Button asChild variant="default" className="rounded-xl px-5">
-            <a href="/cadastro">Testar 14 dias grátis</a>
+            <a href="#early-access">Garantir acesso antecipado</a>
           </Button>
         </div>
         <button className="md:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -63,7 +54,7 @@ export function Header() {
               {l.label}
             </a>
           ))}
-          <Button asChild className="w-full rounded-full"><a href="/cadastro">Testar 14 dias grátis</a></Button>
+          <Button asChild className="w-full rounded-full"><a href="#early-access">Garantir acesso antecipado</a></Button>
         </div>
       )}
     </header>

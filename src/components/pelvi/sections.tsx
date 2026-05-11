@@ -1,16 +1,78 @@
 import { useState } from "react";
 import {
   CalendarDays, FileHeart, History, Package, Users, Stethoscope,
-  Wallet, Building2, Sparkles, Check, X,
+  Wallet, Building2, Sparkles, ArrowRight, Loader2, CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ContactModal } from "./ContactModal";
-import {
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
-} from "@/components/ui/accordion";
-import { DashboardMockup } from "./DashboardMockup";
+import { Input } from "@/components/ui/input";
+import { addAudienceContact } from "@/server/addAudienceContact";
 import clinicImg from "@/assets/clinic.jpg";
-import marinaImg from "@/assets/marina.jpg";
+
+/* EARLY ACCESS FORM */
+function EarlyAccessForm({ className }: { className?: string }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      await addAudienceContact({ data: { name, email } });
+      setStatus("done");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "done") {
+    return (
+      <div className={`flex items-center gap-3 text-sm ${className}`}>
+        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+        <p className="text-foreground font-medium">
+          Você está na lista! Avisaremos assim que abrirmos o acesso.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className={`flex flex-col sm:flex-row gap-3 ${className}`}>
+      <Input
+        placeholder="Seu nome"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+        disabled={status === "loading"}
+        className="h-12 rounded-xl bg-background/80 backdrop-blur-sm"
+      />
+      <Input
+        type="email"
+        placeholder="Seu melhor e-mail"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        disabled={status === "loading"}
+        className="h-12 rounded-xl bg-background/80 backdrop-blur-sm"
+      />
+      <Button
+        type="submit"
+        size="lg"
+        disabled={status === "loading"}
+        className="h-12 rounded-xl px-7 shrink-0 shadow-soft"
+      >
+        {status === "loading" ? (
+          <Loader2 className="h-4 w-4 animate-spin" />
+        ) : (
+          <>Garantir acesso antecipado <ArrowRight className="ml-2 h-4 w-4" /></>
+        )}
+      </Button>
+      {status === "error" && (
+        <p className="text-xs text-destructive mt-1">Algo deu errado. Tente novamente.</p>
+      )}
+    </form>
+  );
+}
 
 /* HERO */
 export function Hero() {
@@ -18,36 +80,26 @@ export function Hero() {
     <section id="top" className="relative overflow-hidden bg-gradient-to-b from-accent/40 to-background">
       <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" aria-hidden />
       <div className="absolute top-40 -right-24 h-80 w-80 rounded-full bg-accent/60 blur-3xl" aria-hidden />
-      <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 lg:pt-24 lg:pb-32 grid lg:grid-cols-2 gap-12 items-center">
-        <div className="animate-fade-up">
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-medium">
-            <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Feito para fisioterapia pélvica
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 lg:pt-24 lg:pb-32">
+        <div className="max-w-3xl animate-fade-up">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-semibold tracking-wide uppercase">
+            <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Em breve
           </span>
           <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-bold tracking-tight text-foreground">
             O sistema feito para fisioterapeutas pélvicas —{" "}
             <span className="text-primary">não adaptado, feito.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-            Agendamento, prontuário e financeiro feitos sob medida para a fisioterapia pélvica. Sem planilhas, sem papel, sem ferramenta genérica.
+            Agendamento, prontuário e financeiro feitos sob medida para a fisioterapia pélvica. Estamos nos preparando para abrir o acesso — garanta sua vaga antes de todo mundo.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button asChild size="lg" className="rounded-full px-7 h-12 text-base shadow-soft">
-              <a href="#planos">Começar grátis por 14 dias</a>
-            </Button>
-            <Button asChild variant="ghost" size="lg" className="rounded-full h-12 text-base">
-              <a href="#recursos">Ver como funciona →</a>
-            </Button>
+          <div className="mt-10">
+            <EarlyAccessForm />
           </div>
-          <p className="mt-6 text-xs text-muted-foreground">
-            <span>Sem cartão de crédito</span>
+          <p className="mt-4 text-xs text-muted-foreground">
+            <span>Sem spam</span>
             <span aria-hidden="true"> · </span>
             <span>Conforme a LGPD</span>
-            <span aria-hidden="true"> · </span>
-            <span>Atendimento por brasileiras, em português</span>
           </p>
-        </div>
-        <div className="animate-fade-up" style={{ animationDelay: "120ms" }}>
-          <DashboardMockup />
         </div>
       </div>
     </section>
@@ -104,7 +156,7 @@ export function Features() {
     <section id="recursos" className="py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Recursos</span>
+          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">O que vem por aí</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Tudo o que sua clínica precisa para rodar — sem improviso.
           </h2>
@@ -161,303 +213,51 @@ export function Audience() {
   );
 }
 
-/* HOW */
-const steps = [
-  { n: "1", t: "Crie sua clínica", d: "Em menos de 2 minutos você define equipe, procedimentos e horários." },
-  { n: "2", t: "Importe ou cadastre suas pacientes", d: "Traga seu histórico — ou comece do zero, no seu ritmo." },
-  { n: "3", t: "Atenda com tranquilidade", d: "Agenda, prontuário, financeiro e evolução em um lugar só, do celular ou do computador." },
-];
-
-export function HowItWorks() {
+/* EARLY ACCESS CTA */
+export function EarlyAccessCTA() {
   return (
-    <section id="como-funciona" className="py-24">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Como funciona</span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Três passos. Sem complicação.
-          </h2>
-        </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-6 relative">
-          {steps.map((s, i) => (
-            <div key={s.n} className="relative">
-              <div className="rounded-3xl p-8 bg-card border border-border/60 h-full shadow-card">
-                <div className="text-6xl text-primary/30 leading-none mb-4" aria-hidden="true">{s.n}</div>
-                <h3 className="text-xl font-semibold mb-2">{s.t}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.d}</p>
-              </div>
-              {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-3 h-px w-6 bg-border" aria-hidden />
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* COMPARE */
-const compareRows = [
-  ["Pensado para fisio pélvica", false, true],
-  ["Pacotes de sessões com parcelamento", false, true],
-  ["Anamnese flexível por especialidade", "Limitada nos genéricos", true],
-  ["Multi-clínica com mesmo CPF", "Raro", true],
-  ["Suporte que sabe o que é avaliação intracavitária", false, true],
-  ["Interface em PT-BR feita aqui", "Tradução", true],
-] as const;
-
-export function Compare() {
-  return (
-    <section className="py-24 bg-muted/50">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="max-w-2xl">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Diferenciais</span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            O que você não acha em sistemas genéricos.
-          </h2>
-        </div>
-        <div className="mt-12 rounded-3xl overflow-hidden border border-border/60 bg-card shadow-card">
-          <div className="grid grid-cols-3 bg-muted/40 px-6 py-4 text-sm font-medium">
-            <div></div>
-            <div className="text-center text-muted-foreground">Genéricos</div>
-            <div className="text-center text-primary text-base">Pelvi</div>
-          </div>
-          {compareRows.map(([label, generic, pelvi]) => (
-            <div key={label as string} className="grid grid-cols-3 px-6 py-4 border-t border-border/60 items-center text-sm">
-              <div>{label}</div>
-              <div className="text-center text-muted-foreground">
-                {typeof generic === "boolean"
-                  ? (generic ? <Check className="h-4 w-4 text-secondary inline" /> : <X className="h-4 w-4 inline opacity-50" />)
-                  : <span className="text-xs">{generic}</span>}
-              </div>
-              <div className="text-center">
-                {typeof pelvi === "boolean"
-                  ? (pelvi ? <Check className="h-5 w-5 text-primary inline" /> : <X className="h-4 w-4 inline opacity-50" />)
-                  : <span className="text-xs">{pelvi}</span>}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* TESTIMONIAL */
-export function Testimonial() {
-  return (
-    <section className="py-24">
-      <div className="mx-auto max-w-3xl px-6 text-center">
-        <img src={marinaImg} alt="Dra. Marina Toledo" className="mx-auto h-24 w-24 rounded-full object-cover shadow-soft" loading="lazy" width={512} height={512} />
-        <blockquote className="mt-8 text-2xl md:text-3xl leading-snug text-foreground italic">
-          “Antes eu perdia uma manhã inteira por semana só organizando recibos e remarcações. Hoje o Pelvi faz isso pra mim — e ainda me lembra qual paciente está na quinta sessão do pacote.”
-        </blockquote>
-        <div className="mt-6 text-sm text-muted-foreground">
-          <p className="font-medium text-foreground">Dra. Marina Toledo</p>
-          <p>Fisioterapeuta pélvica · Belo Horizonte/MG</p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* PRICING */
-const plans = [
-  {
-    name: "Essencial", price: "79", featured: false, contact: false, cta: "Testar o Essencial grátis",
-    items: ["1 profissional", "Até 100 pacientes", "Agenda, prontuário, financeiro", "Suporte por e-mail"],
-  },
-  {
-    name: "Profissional", price: "149", featured: true, contact: false, badge: "Mais popular", cta: "Começar com o Profissional",
-    items: ["Até 3 profissionais", "Pacientes ilimitadas", "Pacotes de tratamento com parcelamento automático", "Multi-clínica (até 3 locais)", "Suporte prioritário"],
-  },
-  {
-    name: "Clínica", price: "279", featured: false, contact: true, cta: "Falar com a gente",
-    items: ["Profissionais ilimitados", "Recepção + admin", "Relatórios financeiros", "Suporte dedicado por WhatsApp"],
-  },
-];
-
-export function Pricing() {
-  const [contactOpen, setContactOpen] = useState(false);
-
-  return (
-    <section id="planos" className="py-24 bg-muted/50">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-2xl mx-auto text-center">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Planos</span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Comece pequeno. Cresça sem trocar de ferramenta.
-          </h2>
-        </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-6 items-stretch">
-          {plans.map((p) => (
-            <div
-              key={p.name}
-              className={`rounded-3xl p-8 border flex flex-col ${
-                p.featured
-                  ? "bg-primary text-primary-foreground border-primary shadow-soft md:scale-105"
-                  : "bg-card border-border/60 shadow-card"
-              }`}
-            >
-              {p.featured && (
-                <span className="inline-flex w-fit px-3 py-1 rounded-full bg-background/20 text-xs font-medium mb-4">
-                  {p.badge}
-                </span>
-              )}
-              <h3 className="text-2xl font-semibold">{p.name}</h3>
-              <div className="mt-4 flex items-baseline gap-1">
-                <span className="text-sm opacity-80">R$</span>
-                <span className="text-5xl font-semibold">{p.price}</span>
-                <span className="text-sm opacity-80">/mês</span>
-              </div>
-              <ul className="mt-6 space-y-3 flex-1">
-                {p.items.map((it) => (
-                  <li key={it} className="flex items-start gap-2 text-sm">
-                    <Check className={`h-4 w-4 mt-0.5 shrink-0 ${p.featured ? "" : "text-primary"}`} />
-                    <span className={p.featured ? "" : "text-muted-foreground"}>{it}</span>
-                  </li>
-                ))}
-              </ul>
-              {p.contact ? (
-                <Button
-                  onClick={() => setContactOpen(true)}
-                  className="mt-8 rounded-full h-11"
-                >
-                  {p.cta}
-                </Button>
-              ) : (
-                <Button
-                  asChild
-                  className={`mt-8 rounded-full h-11 ${
-                    p.featured ? "bg-background text-primary hover:bg-background/90" : ""
-                  }`}
-                >
-                  <a href="#">{p.cta}</a>
-                </Button>
-              )}
-            </div>
-          ))}
-        </div>
-        <p className="mt-8 text-center text-sm text-muted-foreground">
-          Sem fidelidade. Cancele quando quiser. Migração de dados gratuita no primeiro mês.
-        </p>
-      </div>
-      <ContactModal open={contactOpen} onOpenChange={setContactOpen} />
-    </section>
-  );
-}
-
-/* FAQ */
-const faqs = [
-  ["Preciso ser de fisio pélvica para usar?", "Não, mas o Pelvi foi desenhado pensando em vocês. Outras especialidades de consultório (psicologia, fonoaudiologia, nutrição) também se beneficiam."],
-  ["Meus dados ficam seguros?", "Sim. Banco de dados isolado por clínica, autenticação JWT e práticas alinhadas à LGPD."],
-  ["Posso usar no celular?", "Sim, totalmente responsivo. Atenda da maca, do consultório ou da sala de espera."],
-  ["Funciona offline?", "O Pelvi é 100% web — você precisa de internet para usar. Em compensação, nosso uptime é maior que 99,9%, e tudo fica salvo na nuvem em tempo real."],
-  ["Como faço para migrar minha agenda atual?", "A gente te ajuda. No primeiro mês a migração é gratuita."],
-  ["Tem aplicativo para a paciente?", "Por enquanto não. O foco do Pelvi é facilitar o seu dia. Lembretes automáticos para pacientes via WhatsApp estão no roadmap para 2026."],
-  ["Posso emitir recibo ou nota fiscal pela plataforma?", "Ainda não. Emissão de recibos e NFS-e está no roadmap. Por enquanto você registra o pagamento no financeiro e exporta o histórico quando precisar."],
-  ["Como o Pelvi se compara a outros sistemas de gestão clínica?", "A maioria dos sistemas foram feitos para clínicas genéricas e adaptados para fisio pélvica depois. O Pelvi foi construído do zero para essa especialidade — anamneses uroginecológicas, pacotes de sessões e linha do tempo clínica são nativos, não gambiarra."],
-];
-
-export function FAQ() {
-  return (
-    <section id="faq" className="py-24">
-      <div className="mx-auto max-w-3xl px-6">
-        <div className="text-center max-w-xl mx-auto">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Perguntas frequentes</span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Boas dúvidas, respostas francas.
-          </h2>
-        </div>
-        <Accordion type="single" collapsible className="mt-12 rounded-3xl bg-card border border-border/60 px-6 shadow-card">
-          {faqs.map(([q, a], i) => (
-            <AccordionItem key={q} value={`item-${i}`} className="border-border/60">
-              <AccordionTrigger className="text-base text-left hover:no-underline">{q}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">{a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
-  );
-}
-
-/* FINAL CTA */
-export function FinalCTA() {
-  return (
-    <section className="px-6 pb-24">
+    <section id="early-access" className="px-6 pb-24 pt-12">
       <div
-        className="mx-auto max-w-7xl rounded-3xl px-8 py-20 text-center relative overflow-hidden text-white"
+        className="mx-auto max-w-4xl rounded-3xl px-8 py-20 text-center relative overflow-hidden text-white"
         style={{ backgroundImage: "linear-gradient(135deg, hsl(16 65% 44%) 0%, hsl(16 65% 34%) 100%)" }}
       >
         <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" aria-hidden />
         <div className="absolute -bottom-24 -right-10 h-80 w-80 rounded-full bg-white/5 blur-3xl" aria-hidden />
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight max-w-3xl mx-auto relative">
-          Sua rotina merece uma ferramenta que entende você.
+        <span className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold tracking-wide uppercase mb-6">
+          <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Acesso antecipado
+        </span>
+        <h2 className="relative text-4xl md:text-5xl font-semibold leading-tight max-w-2xl mx-auto">
+          Seja das primeiras a usar o Pelvi.
         </h2>
-        <Button asChild size="lg" className="mt-10 rounded-xl bg-white text-primary hover:bg-white/90 h-14 px-10 text-base relative shadow-soft">
-          <a href="#">Começar agora — 14 dias grátis</a>
-        </Button>
-        <p className="mt-5 text-sm text-white/80 relative">14 dias grátis. Sem cartão. Sem letrinhas miúdas.</p>
+        <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed">
+          Quem entrar agora garante acesso antecipado, condições especiais de lançamento e voz ativa no desenvolvimento.
+        </p>
+        <div className="relative mt-10 max-w-2xl mx-auto">
+          <EarlyAccessForm className="[&_input]:border-white/30 [&_input]:text-foreground" />
+        </div>
+        <p className="relative mt-5 text-xs text-white/60">Sem spam. Saia da lista quando quiser.</p>
       </div>
     </section>
   );
 }
 
 /* FOOTER */
-const produtoLinks = [
-  { label: "Recursos", href: "#recursos" },
-  { label: "Planos", href: "#planos" },
-  { label: "Como funciona", href: "#como-funciona" },
-  { label: "FAQ", href: "#faq" },
-];
-
-const pendingCols = [
-  { t: "Empresa", l: ["Sobre", "Blog", "Contato"] },
-  { t: "Legal", l: ["Termos", "Privacidade", "LGPD"] },
-];
-
 export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-muted/50">
-      <div className="mx-auto max-w-7xl px-6 py-16 grid md:grid-cols-4 gap-10">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
-              <span className="h-3 w-3 rounded-full bg-primary" />
-            </span>
-            <span className="text-2xl font-semibold text-foreground">Pelvi</span>
-          </div>
-          <p className="mt-4 text-sm text-muted-foreground max-w-xs leading-relaxed">
-            Gestão clínica feita para quem cuida da saúde pélvica.
-          </p>
+      <div className="mx-auto max-w-7xl px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="flex items-center gap-2">
+          <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
+            <span className="h-3 w-3 rounded-full bg-primary" />
+          </span>
+          <span className="text-2xl font-semibold text-foreground">Pelvi</span>
         </div>
-        <div>
-          <h4 className="text-sm font-semibold mb-4">Produto</h4>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            {produtoLinks.map((it) => (
-              <li key={it.label}>
-                <a href={it.href} className="hover:text-foreground transition-colors">{it.label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {pendingCols.map((c) => (
-          <div key={c.t}>
-            <h4 className="text-sm font-semibold mb-4">{c.t}</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {c.l.map((it) => (
-                <li key={it}>{it}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="border-t border-border/60">
-        <div className="mx-auto max-w-7xl px-6 py-6 text-xs text-muted-foreground text-center">
-          © 2026 Pelvi · Feito no Brasil para quem cuida da saúde pélvica.
-        </div>
+        <p className="text-sm text-muted-foreground">
+          Gestão clínica feita para quem cuida da saúde pélvica.
+        </p>
+        <p className="text-xs text-muted-foreground">
+          © 2026 Pelvi · Feito no Brasil
+        </p>
       </div>
     </footer>
   );
