@@ -86,7 +86,7 @@ export function Hero() {
             <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Em breve
           </span>
           <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-bold tracking-tight text-foreground">
-            O sistema feito para fisioterapeutas pélvicas —{" "}
+            O sistema feito para a fisioterapia pélvica —{" "}
             <span className="text-primary">não adaptado, feito.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
@@ -119,7 +119,7 @@ export function Pains() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-            A rotina da fisio pélvica é única.<br />
+            A rotina da fisioterapia pélvica é única.<br />
             <span className="text-primary">Sua gestão também deveria ser.</span>
           </h2>
         </div>
@@ -179,9 +179,9 @@ export function Features() {
 
 /* AUDIENCE */
 const profiles = [
-  { t: "Fisio pélvica autônoma", d: "Quer parar de viver entre planilhas, WhatsApp e agenda de papel." },
-  { t: "Clínicas de saúde da mulher", d: "Você coordena várias profissionais, recepção e o financeiro — e quer ver tudo num painel só." },
-  { t: "Especialistas em uroginecologia e oncologia pélvica", d: "Você precisa de prontuário sensível e linha do tempo clínica robusta." },
+  { t: "Fisioterapeuta pélvico(a) autônomo(a)", d: "Quer parar de viver entre planilhas, WhatsApp e agenda de papel." },
+  { t: "Clínicas de saúde pélvica", d: "Você coordena vários profissionais, a recepção e o financeiro — e quer ver tudo num painel só." },
+  { t: "Especialistas em saúde pélvica e disfunção do assoalho", d: "Uroginecologia, andrologia, oncologia pélvica ou reabilitação pediátrica — você precisa de prontuário sensível e linha do tempo clínica robusta." },
   { t: "Profissionais que atendem em mais de um lugar", d: "Você atende em consultório próprio e em clínica parceira, e cansou de pular entre dois sistemas." },
 ];
 
@@ -227,7 +227,7 @@ export function EarlyAccessCTA() {
           <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Acesso antecipado
         </span>
         <h2 className="relative text-4xl md:text-5xl font-semibold leading-tight max-w-2xl mx-auto">
-          Seja das primeiras a usar o Pelvi.
+          Entre para a primeira turma do Pelvi.
         </h2>
         <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed">
           Quem entrar agora garante acesso antecipado, condições especiais de lançamento e voz ativa no desenvolvimento.
