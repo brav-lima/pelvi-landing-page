@@ -219,7 +219,7 @@ export function EarlyAccessCTA() {
     <section id="early-access" className="px-6 pb-24 pt-12">
       <div
         className="mx-auto max-w-4xl rounded-3xl px-8 py-20 text-center relative overflow-hidden text-white"
-        style={{ backgroundImage: "linear-gradient(135deg, hsl(16 65% 44%) 0%, hsl(16 65% 34%) 100%)" }}
+        style={{ backgroundImage: "linear-gradient(135deg, hsl(296 28% 32%) 0%, hsl(296 28% 24%) 100%)" }}
       >
         <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" aria-hidden />
         <div className="absolute -bottom-24 -right-10 h-80 w-80 rounded-full bg-white/5 blur-3xl" aria-hidden />
