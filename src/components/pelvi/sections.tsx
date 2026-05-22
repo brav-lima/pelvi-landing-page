@@ -191,7 +191,7 @@ export function Audience() {
       <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-5 gap-12 items-center">
         <div className="lg:col-span-2">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Para quem é</span>
+          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Para quem é pelvi.</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
             Quatro perfis. Uma ferramenta certa pra cada um.
           </h2>
@@ -227,7 +227,8 @@ export function EarlyAccessCTA() {
           <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Acesso antecipado
         </span>
         <h2 className="relative text-4xl md:text-5xl font-semibold leading-tight max-w-2xl mx-auto">
-          Entre para a primeira turma do Pelvi.
+          <span className="block text-white/50 font-medium">Sou fisio pélvica.</span>
+          <span className="block">Sou Pelvi.</span>
         </h2>
         <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed">
           Quem entrar agora garante acesso antecipado, condições especiais de lançamento e voz ativa no desenvolvimento.
@@ -250,10 +251,13 @@ export function Footer() {
           <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
             <span className="h-3 w-3 rounded-full bg-primary" />
           </span>
-          <span className="text-2xl font-semibold text-foreground">Pelvi</span>
+          <span className="text-2xl font-semibold text-foreground">
+            <span className="font-medium opacity-50">Sou</span>{" "}
+            <span className="text-primary">Pelvi</span>
+          </span>
         </div>
         <p className="text-sm text-muted-foreground">
-          Gestão clínica feita para quem cuida da saúde pélvica.
+          Para quem é pelvi.
         </p>
         <p className="text-xs text-muted-foreground">
           © 2026 Pelvi · Feito no Brasil

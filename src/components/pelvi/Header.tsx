@@ -22,7 +22,10 @@ export function Header() {
           <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
             <span className="h-3 w-3 rounded-full bg-primary" />
           </span>
-          <span className="text-2xl font-semibold tracking-tight text-foreground">Pelvi</span>
+          <span className="text-2xl font-semibold tracking-tight text-foreground">
+            <span className="font-medium opacity-50">Sou</span>{" "}
+            <span className="text-primary">Pelvi</span>
+          </span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           {links.map((l) => (
