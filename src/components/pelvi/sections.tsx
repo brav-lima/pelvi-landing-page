@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  CalendarDays, FileHeart, History, Package, Users, Stethoscope,
+  FileHeart, History, Package,
   Wallet, Building2, Sparkles, ArrowRight, Loader2, CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -81,15 +81,15 @@ export function Hero() {
       <div className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" aria-hidden />
       <div className="absolute top-40 -right-24 h-80 w-80 rounded-full bg-accent/60 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-24 lg:pt-24 lg:pb-32">
-        <div className="max-w-3xl animate-fade-up">
+        <div className="max-w-3xl mx-auto text-center animate-fade-up">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-semibold tracking-wide uppercase">
             <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Em breve
           </span>
           <h1 className="mt-6 text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.05] font-bold tracking-tight text-foreground">
-            O sistema feito para a fisioterapia pélvica —{" "}
-            <span className="text-primary">não adaptado, feito.</span>
+            O sistema feito para a fisioterapia pélvica.{" "}
+            <span className="text-primary whitespace-nowrap">Não adaptado, feito.</span>
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
+          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
             Agendamento, prontuário e financeiro feitos sob medida para a fisioterapia pélvica. Estamos nos preparando para abrir o acesso — garanta sua vaga antes de todo mundo.
           </p>
           <div className="mt-10">
@@ -106,65 +106,35 @@ export function Hero() {
   );
 }
 
-/* PAINS */
-const pains = [
-  { t: "Tratamentos que duram meses, não consultas avulsas", d: "Tratamentos pélvicos raramente são consulta única. Você precisa acompanhar pacotes, sessões consumidas, evolução semana a semana." },
-  { t: "Anamneses íntimas que pedem cuidado de verdade", d: "Anamneses pélvicas pedem sigilo, profundidade e flexibilidade que formulários genéricos não entregam." },
-  { t: "Você é a clínica inteira", d: "Atende, agenda, cobra, registra evolução e às vezes ainda coordena uma recepcionista. Você precisa de uma ferramenta que reconheça isso." },
-];
-
-export function Pains() {
-  return (
-    <section className="py-24 bg-muted/50">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-foreground leading-tight">
-            A rotina da fisioterapia pélvica é única.<br />
-            <span className="text-primary">Sua gestão também deveria ser.</span>
-          </h2>
-        </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-6">
-          {pains.map((p) => (
-            <div key={p.t} className="rounded-3xl bg-card p-8 border border-border/60 shadow-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300">
-              <div className="h-10 w-10 rounded-2xl bg-primary/15 grid place-items-center mb-5">
-                <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">{p.t}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{p.d}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* FEATURES */
 const features = [
-  { i: CalendarDays, t: "Agenda inteligente", d: "Encaixe avaliações de 60 minutos e retornos de 30 no mesmo dia, sem conflitos. Arraste e solte para reagendar." },
-  { i: FileHeart, t: "Prontuário com anamnese flexível", d: "Cada paciente, do jeito que sua especialidade pede. Anamnese uroginecológica, obstétrica, oncológica ou de dor pélvica — você modela." },
+  { i: FileHeart, t: "Anamnese e exame físico personalizados", d: "Por aqui nada é genérico. Tudo é pensado para a rotina na fisio pélvica, da anamnese nos diferentes cenários clínicos (dor, gestação, pós-parto, incontinências) até a avaliação física do assoalho pélvico." },
+  { i: Package, t: "Planos de tratamento", d: "Os tratamentos raramente são atendimentos isolados. Aqui construímos com você toda a sequência do plano do seu paciente: cadastro, anamnese, exame físico e evoluções." },
   { i: History, t: "Linha do tempo de evoluções", d: "Acompanhe cada paciente em formato de timeline clínica. Veja a jornada completa do tratamento em uma rolagem." },
-  { i: Package, t: "Pacotes de tratamento", d: "Venda pacotes, parcele no automático e veja o saldo de sessões a cada atendimento." },
-  { i: Users, t: "Cadastro completo de pacientes", d: "Busca rápida, paginação, dados sigilosos protegidos, histórico de atendimentos integrado." },
-  { i: Stethoscope, t: "Gestão de procedimentos", d: "Cadastre cada serviço com duração e valor próprios — avaliação, reabilitação do assoalho pélvico, biofeedback, eletroestimulação, etc." },
   { i: Wallet, t: "Financeiro descomplicado", d: "Lance entradas e saídas, vincule à paciente e ao agendamento, dê baixa em pagamentos com um clique, veja o resumo do mês com saldo, recebido, pendente e despesas." },
-  { i: Building2, t: "Multi-clínica e multi-profissional", d: "Atende em consultório próprio e em clínica parceira? Um login, dois contextos, dados isolados." },
+  { i: Building2, t: "Multi-clínica e multi-profissional", d: "Atende em consultório próprio e em clínica parceira? Um login, dois contextos e dados isolados." },
 ];
 
 export function Features() {
   return (
-    <section id="recursos" className="py-24">
+    <section id="recursos" className="py-24 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="max-w-3xl">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">O que vem por aí</span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Tudo o que sua clínica precisa para rodar — sem improviso.
-          </h2>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+          <div>
+            <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">O que vem por aí</span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
+              <span className="block">A rotina na fisio pélvica é única.</span>
+              <span className="block text-primary">A sua gestão também deve ser.</span>
+            </h2>
+          </div>
         </div>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {features.map(({ i: Icon, t, d }) => (
-            <div key={t} className="rounded-3xl p-6 bg-card border border-border/60 hover:border-primary/40 hover:shadow-card transition-all duration-300 group">
-              <div className="h-11 w-11 rounded-2xl bg-primary-soft grid place-items-center mb-4 group-hover:bg-primary/20 transition-colors">
+        <div className="mt-14 grid md:grid-cols-2 gap-5">
+          {features.map(({ i: Icon, t, d }, idx) => (
+            <div
+              key={t}
+              className={`rounded-3xl p-6 bg-card border border-border/60 hover:border-primary/40 hover:shadow-card transition-all duration-300 group${idx === features.length - 1 ? " md:col-span-2" : ""}`}
+            >
+              <div className="h-11 w-11 rounded-2xl bg-primary/10 grid place-items-center mb-4 group-hover:bg-primary/20 transition-colors">
                 <Icon className="h-5 w-5 text-primary" />
               </div>
               <h3 className="text-lg font-semibold mb-2">{t}</h3>
@@ -179,27 +149,27 @@ export function Features() {
 
 /* AUDIENCE */
 const profiles = [
-  { t: "Fisioterapeuta pélvico(a) autônomo(a)", d: "Quer parar de viver entre planilhas, WhatsApp e agenda de papel." },
-  { t: "Clínicas de saúde pélvica", d: "Você coordena vários profissionais, a recepção e o financeiro — e quer ver tudo num painel só." },
-  { t: "Especialistas em saúde pélvica e disfunção do assoalho", d: "Uroginecologia, andrologia, oncologia pélvica ou reabilitação pediátrica — você precisa de prontuário sensível e linha do tempo clínica robusta." },
-  { t: "Profissionais que atendem em mais de um lugar", d: "Você atende em consultório próprio e em clínica parceira, e cansou de pular entre dois sistemas." },
+  { t: "Fisioterapeuta pélvico autônomo", d: "Você quer parar de viver entre agenda de papel, planilhas e WhatsApp." },
+  { t: "Clínicas de fisioterapia pélvica", d: "Você precisa coordenar vários profissionais e quer ver tudo num painel só." },
+  { t: "Profissionais que atendem em mais de um local", d: "Você atende em consultório próprio e/ou em clínica parceira e cansou de pular entre dois sistemas." },
 ];
 
 export function Audience() {
   return (
-    <section id="para-quem" className="py-24 bg-muted/50 relative overflow-hidden">
+    <section id="para-quem" className="py-24 relative overflow-hidden">
       <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-5 gap-12 items-center">
         <div className="lg:col-span-2">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Para quem é pelvi.</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Quatro perfis. Uma ferramenta certa pra cada um.
+            Três perfis diferentes.{" "}
+            <span className="text-primary">Uma ferramenta que atende todos.</span>
           </h2>
           <div className="mt-8 rounded-3xl overflow-hidden shadow-soft">
             <img src={clinicImg} alt="Consultório acolhedor de fisioterapia pélvica" className="w-full h-72 object-cover" loading="lazy" width={1024} height={1024} />
           </div>
         </div>
-        <div className="lg:col-span-3 grid sm:grid-cols-2 gap-5">
+        <div className="lg:col-span-3 flex flex-col gap-5">
           {profiles.map((p) => (
             <div key={p.t} className="rounded-3xl bg-card p-7 border border-border/60 hover:-translate-y-1 transition-transform shadow-card">
               <div className="h-2 w-12 rounded-full bg-primary mb-5" />
@@ -227,7 +197,7 @@ export function EarlyAccessCTA() {
           <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Acesso antecipado
         </span>
         <h2 className="relative text-4xl md:text-5xl font-semibold leading-tight max-w-2xl mx-auto">
-          <span className="block text-white/50 font-medium">Sou fisio pélvica.</span>
+          <span className="block text-white/50 font-medium">Venha fazer parte do</span>
           <span className="block">Sou Pelvi.</span>
         </h2>
         <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed">
