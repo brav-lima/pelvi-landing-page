@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   FileHeart, History, Package,
-  Wallet, Building2, Sparkles, ArrowRight, Loader2, CheckCircle2,
+  Wallet, MapPin, Sparkles, ArrowRight, Loader2, CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -90,7 +90,7 @@ export function Hero() {
             <span className="text-primary whitespace-nowrap">Não adaptado, feito.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Agendamento, prontuário e financeiro feitos sob medida para a fisioterapia pélvica. Estamos nos preparando para abrir o acesso — garanta sua vaga antes de todo mundo.
+            Prontuário especializado, agendamento e financeiro feitos para a fisioterapeuta pélvica — atenda em consultório próprio, clínica parceira ou domicílio com tudo em um só lugar. Estamos nos preparando para abrir o acesso: garante sua vaga antes de todo mundo.
           </p>
           <div className="mt-10">
             <EarlyAccessForm />
@@ -112,7 +112,7 @@ const features = [
   { i: Package, t: "Planos de tratamento", d: "Os tratamentos raramente são atendimentos isolados. Aqui construímos com você toda a sequência do plano do seu paciente: cadastro, anamnese, exame físico e evoluções." },
   { i: History, t: "Linha do tempo de evoluções", d: "Acompanhe cada paciente em formato de timeline clínica. Veja a jornada completa do tratamento em uma rolagem." },
   { i: Wallet, t: "Financeiro descomplicado", d: "Lance entradas e saídas, vincule à paciente e ao agendamento, dê baixa em pagamentos com um clique, veja o resumo do mês com saldo, recebido, pendente e despesas." },
-  { i: Building2, t: "Multi-clínica e multi-profissional", d: "Atende em consultório próprio e em clínica parceira? Um login, dois contextos e dados isolados." },
+  { i: MapPin, t: "Trabalhe onde quiser, seus dados vão junto", d: "Atende em clínica parceira, consultório próprio ou domicílio? Um único login, agenda e prontuários organizados por local de atendimento — sem misturar históricos ou financeiro." },
 ];
 
 export function Features() {
@@ -149,9 +149,8 @@ export function Features() {
 
 /* AUDIENCE */
 const profiles = [
-  { t: "Fisioterapeuta pélvico autônomo", d: "Você quer parar de viver entre agenda de papel, planilhas e WhatsApp." },
-  { t: "Clínicas de fisioterapia pélvica", d: "Você precisa coordenar vários profissionais e quer ver tudo num painel só." },
-  { t: "Profissionais que atendem em mais de um local", d: "Você atende em consultório próprio e/ou em clínica parceira e cansou de pular entre dois sistemas." },
+  { t: "Fisioterapeuta autônoma em consultório ou clínica", d: "Você quer parar de viver entre agenda de papel, planilhas e WhatsApp — e ter um prontuário que fale a língua da fisio pélvica." },
+  { t: "Fisioterapeuta que atende em mais de um local", d: "Você divide a semana entre clínica parceira, consultório próprio ou domicílio e cansa de manter históricos e financeiros separados." },
 ];
 
 export function Audience() {
@@ -162,8 +161,8 @@ export function Audience() {
         <div className="lg:col-span-2">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Para quem é pelvi.</span>
           <h2 className="mt-3 text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            Três perfis diferentes.{" "}
-            <span className="text-primary">Uma ferramenta que atende todos.</span>
+            Um local ou vários.{" "}
+            <span className="text-primary">Uma ferramenta que acompanha você.</span>
           </h2>
           <div className="mt-8 rounded-3xl overflow-hidden shadow-soft">
             <img src={clinicImg} alt="Consultório acolhedor de fisioterapia pélvica" className="w-full h-72 object-cover" loading="lazy" width={1024} height={1024} />
