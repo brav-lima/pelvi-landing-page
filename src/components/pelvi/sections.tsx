@@ -27,9 +27,11 @@ function EarlyAccessForm({ className }: { className?: string }) {
 
   if (status === "done") {
     return (
-      <div className={`flex items-center gap-3 text-sm ${className}`}>
-        <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
-        <p className="text-foreground font-medium">
+      <div
+        className={`inline-flex items-center gap-3 rounded-2xl bg-white px-5 py-4 text-sm shadow-soft ${className}`}
+      >
+        <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0" />
+        <p className="text-zinc-900 font-medium">
           Você está na lista! Avisaremos assim que abrirmos o acesso.
         </p>
       </div>

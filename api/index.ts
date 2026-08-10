@@ -7,6 +7,7 @@ let server: StartServer | null = null;
 async function getServer(): Promise<StartServer> {
   if (server) return server;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // @ts-expect-error dist/server/server.js is a build artifact with no declaration file
   const mod: any = await import("../dist/server/server.js");
   // Handle both ESM default export and CJS interop wrapper
   server = (mod.default?.fetch ? mod.default : mod) as StartServer;
