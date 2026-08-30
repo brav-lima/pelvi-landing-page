@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 
 const links = [
   { href: "#recursos", label: "O que vem por aí" },
@@ -12,14 +13,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
       <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2">
-          <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
-            <span className="h-3 w-3 rounded-full bg-primary" />
-          </span>
-          <span className="text-2xl font-semibold tracking-tight text-foreground">
-            <span className="font-medium opacity-50">Sou</span>{" "}
-            <span className="text-primary">Pelvi</span>
-          </span>
+        <a href="#top" className="flex items-center">
+          <img src={logo} alt="Sou Pelvi" className="h-8 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           {links.map((l) => (

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { addAudienceContact } from "@/server/addAudienceContact";
 import clinicImg from "@/assets/clinic.jpg";
+import logo from "@/assets/logo.png";
 
 /* EARLY ACCESS FORM */
 function EarlyAccessForm({ className }: { className?: string }) {
@@ -218,15 +219,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-muted/50">
       <div className="mx-auto max-w-7xl px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-2">
-          <span className="h-8 w-8 rounded-full bg-primary/15 grid place-items-center">
-            <span className="h-3 w-3 rounded-full bg-primary" />
-          </span>
-          <span className="text-2xl font-semibold text-foreground">
-            <span className="font-medium opacity-50">Sou</span>{" "}
-            <span className="text-primary">Pelvi</span>
-          </span>
-        </div>
+        <img src={logo} alt="Sou Pelvi" className="h-7 w-auto" />
         <p className="text-sm text-muted-foreground">
           Para quem é pelvi.
         </p>
