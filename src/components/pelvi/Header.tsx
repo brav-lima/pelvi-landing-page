@@ -12,9 +12,9 @@ export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/60">
-      <div className="mx-auto max-w-7xl px-6 h-16 flex items-center justify-between">
+      <div className="mx-auto max-w-7xl px-6 h-14 flex items-center justify-between">
         <a href="#top" className="flex items-center">
-          <img src={logo} alt="Sou Pelvi" className="h-8 w-auto" />
+          <img src={logo} alt="Sou Pelvi" className="h-6 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
           {links.map((l) => (
