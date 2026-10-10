@@ -116,6 +116,19 @@
     border-color: var(--color-border);
   }
 
+  /* Quebras de linha mais naturais em português: títulos equilibrados, sem palavra órfã nos parágrafos */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  address {
+    text-wrap: pretty;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -123,7 +136,11 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, .font-display {
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
     font-family: var(--font-display);
     font-feature-settings: "ss01", "ss02";
     letter-spacing: -0.01em;
@@ -131,17 +148,39 @@
 }
 
 @layer utilities {
-  .shadow-soft { box-shadow: var(--shadow-soft); }
-  .shadow-card { box-shadow: var(--shadow-card); }
-  .bg-primary-soft { background-color: var(--primary-soft); }
-  .bg-primary-dark { background-color: var(--primary-dark); }
-  .text-success { color: var(--success); }
-  .text-warning { color: var(--warning); }
-  .text-info { color: var(--info); }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  .bg-primary-soft {
+    background-color: var(--primary-soft);
+  }
+  .bg-primary-dark {
+    background-color: var(--primary-dark);
+  }
+  .text-success {
+    color: var(--success);
+  }
+  .text-warning {
+    color: var(--warning);
+  }
+  .text-info {
+    color: var(--info);
+  }
 }
 
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.animate-fade-up { animation: fade-up 0.7s ease-out both; }
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}

@@ -34,3 +34,9 @@ dist-ssr
 docs
 
 .env
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# Originais de marca em alta resolução (versões web ficam em public/brand)
+/design/
