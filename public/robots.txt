@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://soupelvi.com.br/sitemap.xml
+Sitemap: https://www.soupelvi.com.br/sitemap.xml

@@ -3,7 +3,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 
 // Domínio público da landing. Ajuste aqui se o domínio final for outro.
-const SITE_URL = "https://soupelvi.com.br";
+const SITE_URL = "https://www.soupelvi.com.br";
 const TITLE = "soupelvi — feito pra quem vive a fisioterapia pélvica";
 const DESCRIPTION =
   "Um espaço só seu, pensado para fisioterapeutas pélvicas, onde quer que você atenda. Primeira turma com poucas vagas: lista aberta até 31/10.";
