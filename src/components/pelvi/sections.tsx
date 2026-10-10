@@ -191,22 +191,14 @@ export function Hero() {
     <section
       id="top"
       className="relative overflow-hidden"
-      style={{ background: "hsl(296 28% 12%)" }}
+      style={{
+        backgroundColor: "hsl(296 28% 12%)",
+        backgroundImage: [
+          "radial-gradient(circle 420px at 0% 0%, hsl(296 28% 32% / 0.2), hsl(296 28% 32% / 0.1) 55%, transparent)",
+          "radial-gradient(circle 340px at 100% 260px, hsl(296 28% 22% / 0.4), hsl(296 28% 22% / 0.2) 55%, transparent)",
+        ].join(", "),
+      }}
     >
-      <div
-        className="absolute -top-40 -left-40 h-[32rem] w-[32rem]"
-        style={{
-          background: "radial-gradient(closest-side, hsl(296 28% 32% / 0.2), transparent)",
-        }}
-        aria-hidden
-      />
-      <div
-        className="absolute top-32 -right-32 h-[26rem] w-[26rem]"
-        style={{
-          background: "radial-gradient(closest-side, hsl(296 28% 22% / 0.4), transparent)",
-        }}
-        aria-hidden
-      />
       <div className="mx-auto max-w-6xl px-6 pt-10 pb-20 lg:pt-12 lg:pb-28 text-center relative animate-fade-up">
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-semibold tracking-wide uppercase">
           <Sparkles className="h-3 w-3" strokeWidth={1.5} /> 13 de outubro · Dia do Fisioterapeuta
