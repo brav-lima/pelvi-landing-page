@@ -185,23 +185,30 @@ function Countdown() {
 /* ------------------------------------------------------------------ */
 /* HERO                                                                 */
 /* ------------------------------------------------------------------ */
+// Brilho com queda suave (curva tipo gaussiana): sem "quina" visível na borda.
+const GLOW_STOPS = [1, 0.85, 0.65, 0.45, 0.28, 0.15, 0.07, 0.02, 0];
+function glow(shape: string, hsl: string, alpha: number) {
+  const stops = GLOW_STOPS.map(
+    (k, i) =>
+      `hsl(${hsl} / ${+(alpha * k).toFixed(4)}) ${Math.round((i / (GLOW_STOPS.length - 1)) * 100)}%`,
+  );
+  return `radial-gradient(${shape}, ${stops.join(", ")})`;
+}
+
 export function Hero() {
   const listOpen = useListOpen();
   return (
     <section
       id="top"
       className="relative overflow-hidden"
-      style={{ background: "hsl(296 28% 12%)" }}
+      style={{
+        backgroundColor: "hsl(296 28% 12%)",
+        backgroundImage: [
+          glow("circle 480px at 0% 0%", "296 28% 32%", 0.2),
+          glow("circle 400px at 100% 260px", "296 28% 22%", 0.4),
+        ].join(", "),
+      }}
     >
-      <div
-        className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/20 blur-3xl"
-        aria-hidden
-      />
-      <div
-        className="absolute top-40 -right-24 h-80 w-80 rounded-full blur-3xl"
-        style={{ background: "hsl(296 28% 22% / 0.4)" }}
-        aria-hidden
-      />
       <div className="mx-auto max-w-6xl px-6 pt-10 pb-20 lg:pt-12 lg:pb-28 text-center relative animate-fade-up">
         <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-semibold tracking-wide uppercase">
           <Sparkles className="h-3 w-3" strokeWidth={1.5} /> 13 de outubro · Dia do Fisioterapeuta
