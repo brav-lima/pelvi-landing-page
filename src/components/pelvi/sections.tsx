@@ -194,12 +194,17 @@ export function Hero() {
       style={{ background: "hsl(296 28% 12%)" }}
     >
       <div
-        className="absolute -top-32 -left-32 h-96 w-96 rounded-full bg-primary/20 blur-3xl"
+        className="absolute -top-40 -left-40 h-[32rem] w-[32rem]"
+        style={{
+          background: "radial-gradient(closest-side, hsl(296 28% 32% / 0.2), transparent)",
+        }}
         aria-hidden
       />
       <div
-        className="absolute top-40 -right-24 h-80 w-80 rounded-full blur-3xl"
-        style={{ background: "hsl(296 28% 22% / 0.4)" }}
+        className="absolute top-32 -right-32 h-[26rem] w-[26rem]"
+        style={{
+          background: "radial-gradient(closest-side, hsl(296 28% 22% / 0.4), transparent)",
+        }}
         aria-hidden
       />
       <div className="mx-auto max-w-6xl px-6 pt-10 pb-20 lg:pt-12 lg:pb-28 text-center relative animate-fade-up">
