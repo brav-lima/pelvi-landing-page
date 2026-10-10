@@ -185,6 +185,16 @@ function Countdown() {
 /* ------------------------------------------------------------------ */
 /* HERO                                                                 */
 /* ------------------------------------------------------------------ */
+// Brilho com queda suave (curva tipo gaussiana): sem "quina" visível na borda.
+const GLOW_STOPS = [1, 0.85, 0.65, 0.45, 0.28, 0.15, 0.07, 0.02, 0];
+function glow(shape: string, hsl: string, alpha: number) {
+  const stops = GLOW_STOPS.map(
+    (k, i) =>
+      `hsl(${hsl} / ${+(alpha * k).toFixed(4)}) ${Math.round((i / (GLOW_STOPS.length - 1)) * 100)}%`,
+  );
+  return `radial-gradient(${shape}, ${stops.join(", ")})`;
+}
+
 export function Hero() {
   const listOpen = useListOpen();
   return (
@@ -194,8 +204,8 @@ export function Hero() {
       style={{
         backgroundColor: "hsl(296 28% 12%)",
         backgroundImage: [
-          "radial-gradient(circle 420px at 0% 0%, hsl(296 28% 32% / 0.2), hsl(296 28% 32% / 0.1) 55%, transparent)",
-          "radial-gradient(circle 340px at 100% 260px, hsl(296 28% 22% / 0.4), hsl(296 28% 22% / 0.2) 55%, transparent)",
+          glow("circle 480px at 0% 0%", "296 28% 32%", 0.2),
+          glow("circle 400px at 100% 260px", "296 28% 22%", 0.4),
         ].join(", "),
       }}
     >
