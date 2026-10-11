@@ -216,6 +216,9 @@ export function Hero() {
         <div className="mt-6 flex justify-center">
           <Logo variant="vertical-branco" priority className="h-20 md:h-24" />
         </div>
+        <p className="mt-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
+          Plataforma para fisioterapeutas pélvicas
+        </p>
         <h1 className="mt-4 text-[2rem] sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] font-semibold tracking-tight text-white">
           <span className="block">Um espaço só seu,</span>{" "}
           <span className="block">feito pra&nbsp;quem vive a&nbsp;fisioterapia&nbsp;pélvica.</span>
@@ -224,7 +227,7 @@ export function Hero() {
           <span className="lg:block">
             Você atende aqui, ali, na casa da paciente, e carrega cada história com você.
           </span>{" "}
-          <span className="lg:block">A&nbsp;gente criou um lugar pra isso.</span>{" "}
+          <span className="lg:block">A&nbsp;gente criou uma plataforma pra isso.</span>{" "}
           <span className="lg:block">
             Ainda não dá pra mostrar tudo, mas já dá pra&nbsp;guardar o seu lugar.
           </span>
@@ -235,11 +238,12 @@ export function Hero() {
           </div>
         ) : (
           <p className="mt-10 text-white/80">
-            A lista da primeira turma foi encerrada. Deixe seu e-mail para saber das próximas.
+            A lista de acesso antecipado foi encerrada. Deixe seu e-mail para saber das próximas
+            liberações.
           </p>
         )}
         <p className="mt-6 text-sm text-white/70">
-          Primeira turma com poucas vagas · acesso gratuito durante o período de teste
+          Acesso antecipado · poucas vagas · grátis durante o período de teste
         </p>
         <div className="mt-4 mx-auto max-w-3xl">
           <EarlyAccessForm idPrefix="hero" inputClass="border-white/20 text-foreground" />
@@ -303,7 +307,7 @@ export function ForYou() {
         </div>
         <p className="mt-12 text-center text-muted-foreground">
           E o que tem lá dentro?{" "}
-          <span className="text-foreground font-medium">A primeira turma descobre antes.</span>
+          <span className="text-foreground font-medium">Quem entra primeiro descobre antes.</span>
         </p>
         <div className="mt-8 mx-auto max-w-2xl rounded-2xl border border-border/60 bg-muted/40 px-6 py-5 flex items-start gap-4">
           <Users className="h-5 w-5 text-primary shrink-0 mt-0.5" strokeWidth={1.5} aria-hidden />
@@ -327,7 +331,7 @@ const timeline = [
   {
     n: "01",
     t: "Agora, até 31 de outubro",
-    d: "A lista está aberta. Deixe seu nome e e-mail e guarde seu lugar na primeira turma.",
+    d: "A lista está aberta. Deixe seu nome e e-mail e guarde seu lugar nos primeiros acessos.",
   },
   {
     n: "02",
@@ -374,7 +378,7 @@ export function Timeline() {
 }
 
 /* ------------------------------------------------------------------ */
-/* PRIMEIRA TURMA                                                       */
+/* PRIMEIROS ACESSOS                                                     */
 /* ------------------------------------------------------------------ */
 const testerHighlights = [
   "Poucas vagas, por escolha: queremos acompanhar cada pessoa de perto.",
@@ -386,11 +390,11 @@ const testerHighlights = [
 
 export function TesterProgram() {
   return (
-    <section id="primeira-turma" className="py-24 bg-background">
+    <section id="primeiros-acessos" className="py-24 bg-background">
       <div className="mx-auto max-w-5xl px-6">
         <div className="rounded-3xl p-8 md:p-12 bg-card border border-border/60 shadow-card">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">
-            Primeira turma
+            Primeiros acessos
           </span>
           <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground leading-tight">
             Um grupo pequeno, pra&nbsp;construir com&nbsp;calma e&nbsp;de&nbsp;perto.
@@ -455,8 +459,8 @@ export function CtaSection() {
           </span>
         </h2>
         <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed">
-          A lista da primeira turma fica aberta até 31 de outubro, com poucas vagas. Entre agora e
-          receba o convite assim que os acessos começarem a sair.
+          A lista de acesso antecipado fica aberta até 31 de outubro, com poucas vagas. Entre agora
+          e receba o convite assim que os acessos começarem a sair.
         </p>
         <div className="relative mt-10 max-w-2xl mx-auto">
           <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
@@ -482,7 +486,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col gap-1">
             <p className="text-sm" style={{ color: "hsl(296 20% 70%)" }}>
-              Feito pra quem vive a fisioterapia pélvica.
+              Plataforma para fisioterapeutas pélvicas.
             </p>
             <address className="not-italic text-xs" style={{ color: "hsl(296 20% 60%)" }}>
               Edifício Primavera Office | Florianópolis - SC
