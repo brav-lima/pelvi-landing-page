@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   Loader2,
@@ -127,6 +128,17 @@ function EarlyAccessForm({
           )}
         </Button>
       </div>
+      <p className="mt-3 text-xs opacity-80">
+        Ao enviar, você concorda com os{" "}
+        <Link to="/termos" className="underline underline-offset-2">
+          Termos de uso
+        </Link>{" "}
+        e a{" "}
+        <Link to="/privacidade" className="underline underline-offset-2">
+          Política de privacidade
+        </Link>
+        .
+      </p>
       {status === "error" && (
         <p role="alert" className="mt-3 text-sm text-red-300">
           Não conseguimos guardar sua inscrição agora. Confira o e-mail e tente de novo em
@@ -492,9 +504,17 @@ export function Footer() {
               Edifício Primavera Office | Florianópolis - SC
             </address>
           </div>
-          <p className="text-xs md:text-right" style={{ color: "hsl(296 20% 60%)" }}>
-            © 2026 soupelvi · Feito no Brasil
-          </p>
+          <div className="flex flex-col gap-1 text-xs md:items-end" style={{ color: "hsl(296 20% 60%)" }}>
+            <nav aria-label="Documentos legais" className="flex justify-center gap-4">
+              <Link to="/termos" className="hover:underline">
+                Termos de uso
+              </Link>
+              <Link to="/privacidade" className="hover:underline">
+                Privacidade
+              </Link>
+            </nav>
+            <p>© 2026 soupelvi · Feito no Brasil</p>
+          </div>
         </div>
       </div>
     </footer>
