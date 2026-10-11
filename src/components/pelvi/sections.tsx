@@ -448,17 +448,13 @@ export function CtaSection() {
       <div
         className="mx-auto max-w-4xl rounded-3xl px-5 sm:px-8 py-16 sm:py-20 text-center relative overflow-hidden text-white"
         style={{
-          backgroundImage: "linear-gradient(135deg, hsl(296 28% 32%) 0%, hsl(296 28% 24%) 100%)",
+          backgroundImage: [
+            "radial-gradient(circle at 0% 0%, hsl(0 0% 100% / 0.10) 0%, hsl(0 0% 100% / 0.06) 15%, hsl(0 0% 100% / 0.03) 30%, hsl(0 0% 100% / 0) 50%)",
+            "radial-gradient(circle at 100% 100%, hsl(0 0% 100% / 0.05) 0%, hsl(0 0% 100% / 0.03) 15%, hsl(0 0% 100% / 0.015) 30%, hsl(0 0% 100% / 0) 50%)",
+            "linear-gradient(135deg, hsl(296 28% 32%) 0%, hsl(296 28% 24%) 100%)",
+          ].join(", "),
         }}
       >
-        <div
-          className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-white/10 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="absolute -bottom-24 -right-10 h-80 w-80 rounded-full bg-white/5 blur-3xl"
-          aria-hidden
-        />
         <span className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold tracking-wide uppercase mb-6">
           <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Feliz dia, fisio
         </span>
@@ -470,13 +466,9 @@ export function CtaSection() {
             Deixa a&nbsp;gente&nbsp;cuidar de&nbsp;um&nbsp;pedacinho da&nbsp;sua&nbsp;rotina.
           </span>
         </h2>
-        <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed text-balance">
-          <span className="block">
-            A lista de acesso antecipado fica aberta até&nbsp;31&nbsp;de&nbsp;outubro, com&nbsp;poucas&nbsp;vagas.
-          </span>{" "}
-          <span className="block">
-            Entre agora e&nbsp;receba o&nbsp;convite assim que os&nbsp;acessos começarem a&nbsp;sair.
-          </span>
+        <p className="relative mt-5 text-base text-white/80 max-w-2xl mx-auto leading-relaxed text-balance">
+          A lista de acesso antecipado fica aberta até&nbsp;31&nbsp;de&nbsp;outubro, com poucas vagas.
+          Entre agora e receba o convite assim que os acessos começarem a sair.
         </p>
         <div className="relative mt-10 max-w-2xl mx-auto">
           <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
