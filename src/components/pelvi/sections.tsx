@@ -470,9 +470,13 @@ export function CtaSection() {
             Deixa a&nbsp;gente&nbsp;cuidar de&nbsp;um&nbsp;pedacinho da&nbsp;sua&nbsp;rotina.
           </span>
         </h2>
-        <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed">
-          A lista de acesso antecipado fica aberta até 31 de outubro, com poucas vagas. Entre agora
-          e receba o convite assim que os acessos começarem a sair.
+        <p className="relative mt-5 text-base text-white/80 max-w-xl mx-auto leading-relaxed text-balance">
+          <span className="block">
+            A lista de acesso antecipado fica aberta até&nbsp;31&nbsp;de&nbsp;outubro, com&nbsp;poucas&nbsp;vagas.
+          </span>{" "}
+          <span className="block">
+            Entre agora e&nbsp;receba o&nbsp;convite assim que os&nbsp;acessos começarem a&nbsp;sair.
+          </span>
         </p>
         <div className="relative mt-10 max-w-2xl mx-auto">
           <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
