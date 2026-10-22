@@ -3,7 +3,7 @@ import { Logo } from "@/components/pelvi/Logo";
 import { Footer } from "@/components/pelvi/sections";
 
 export const LEGAL_UPDATED_AT = "13 de outubro de 2026";
-export const CONTACT_EMAIL = "soupelvi@gmail.com";
+export const CONTACT_EMAIL = "admin@soupelvi.com.br";
 
 export function LegalLayout({
   title,
