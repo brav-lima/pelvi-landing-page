@@ -10,24 +10,31 @@ import {
   HeartHandshake,
   Clock,
   Users,
+  PauseCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { addAudienceContact } from "@/server/addAudienceContact";
 import { Logo } from "@/components/pelvi/Logo";
+import { SIGNUPS_PAUSED } from "@/lib/signups";
 
 /* ------------------------------------------------------------------ */
-/* DATAS DO LANÇAMENTO                                                  */
+/* AVISO DE INSCRIÇÕES PAUSADAS                                         */
 /* ------------------------------------------------------------------ */
-// A lista fica aberta até o fim de 31/10; os acessos começam a sair a partir daí.
-export const LIST_CLOSE_DATE = new Date("2026-10-31T23:59:59-03:00");
-
-function useListOpen() {
-  const [open, setOpen] = useState(true);
-  useEffect(() => {
-    setOpen(Date.now() < LIST_CLOSE_DATE.getTime());
-  }, []);
-  return open;
+function SignupsPausedNotice({ className = "" }: { className?: string }) {
+  return (
+    <div
+      role="status"
+      className={`mx-auto flex max-w-2xl items-start gap-3 rounded-2xl bg-white px-5 py-4 text-left text-sm shadow-soft ${className}`}
+    >
+      <PauseCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden />
+      <p className="text-zinc-900">
+        <span className="font-semibold">As inscrições estão pausadas neste momento.</span> O período
+        de inscrições para o teste foi encerrado e não estamos recebendo novos cadastros por
+        enquanto. Obrigada pelo interesse!
+      </p>
+    </div>
+  );
 }
 
 /* ------------------------------------------------------------------ */
@@ -150,51 +157,6 @@ function EarlyAccessForm({
 }
 
 /* ------------------------------------------------------------------ */
-/* CONTAGEM ATÉ O FECHAMENTO DA LISTA                                   */
-/* ------------------------------------------------------------------ */
-function Countdown() {
-  const [msLeft, setMsLeft] = useState<number | null>(null);
-
-  useEffect(() => {
-    const update = () => setMsLeft(Math.max(0, LIST_CLOSE_DATE.getTime() - Date.now()));
-    update();
-    const id = setInterval(update, 1000);
-    return () => clearInterval(id);
-  }, []);
-
-  const totalSeconds = Math.floor((msLeft ?? 0) / 1000);
-  const units = [
-    { value: Math.floor(totalSeconds / 86400), label: "dias" },
-    { value: Math.floor((totalSeconds % 86400) / 3600), label: "horas" },
-    { value: Math.floor((totalSeconds % 3600) / 60), label: "min" },
-    { value: totalSeconds % 60, label: "seg" },
-  ];
-
-  return (
-    <div>
-      <p className="text-[0.7rem] uppercase tracking-[0.2em] text-white/50">A lista fecha em</p>
-      <div
-        className="mt-3 flex items-center justify-center gap-3 sm:gap-5"
-        suppressHydrationWarning
-        aria-hidden="true"
-      >
-        {units.map((u) => (
-          <div key={u.label} className="flex flex-col items-center">
-            <span className="text-3xl sm:text-4xl font-bold font-display text-white tabular-nums">
-              {msLeft === null ? "—" : String(u.value).padStart(2, "0")}
-            </span>
-            <span className="mt-1 text-[0.65rem] sm:text-xs uppercase tracking-widest text-white/50">
-              {u.label}
-            </span>
-          </div>
-        ))}
-      </div>
-      <p className="sr-only">A lista de espera fica aberta até 31 de outubro de 2026.</p>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
 /* HERO                                                                 */
 /* ------------------------------------------------------------------ */
 // Brilho com queda suave (curva tipo gaussiana): sem "quina" visível na borda.
@@ -208,7 +170,6 @@ function glow(shape: string, hsl: string, alpha: number) {
 }
 
 export function Hero() {
-  const listOpen = useListOpen();
   return (
     <section
       id="top"
@@ -244,21 +205,17 @@ export function Hero() {
             Ainda não dá pra mostrar tudo, mas já dá pra&nbsp;guardar o seu lugar.
           </span>
         </p>
-        {listOpen ? (
-          <div className="mt-8">
-            <Countdown />
-          </div>
-        ) : (
-          <p className="mt-10 text-white/80">
-            A lista de acesso antecipado foi encerrada. Deixe seu e-mail para saber das próximas
-            liberações.
-          </p>
-        )}
-        <p className="mt-6 text-sm text-white/70">
-          Acesso antecipado · poucas vagas · grátis durante o período de teste
+        <p className="mt-8 text-sm text-white/70">
+          {SIGNUPS_PAUSED
+            ? "Inscrições pausadas · período de inscrições do teste encerrado"
+            : "Acesso antecipado · poucas vagas · grátis durante o período de teste"}
         </p>
         <div className="mt-4 mx-auto max-w-3xl">
-          <EarlyAccessForm idPrefix="hero" inputClass="border-white/20 text-foreground" />
+          {SIGNUPS_PAUSED ? (
+            <SignupsPausedNotice />
+          ) : (
+            <EarlyAccessForm idPrefix="hero" inputClass="border-white/20 text-foreground" />
+          )}
         </div>
         <p className="mt-4 text-xs text-white/50">
           <span>Sem spam</span>
@@ -342,8 +299,8 @@ export function ForYou() {
 const timeline = [
   {
     n: "01",
-    t: "Agora, até 31 de outubro",
-    d: "A lista está aberta. Deixe seu nome e e-mail e guarde seu lugar nos primeiros acessos.",
+    t: "Até 31 de outubro",
+    d: "Período de inscrições do teste. Ele foi encerrado e as inscrições estão pausadas.",
   },
   {
     n: "02",
@@ -425,13 +382,17 @@ export function TesterProgram() {
           </ul>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-primary/5 p-6">
             <p className="text-sm text-muted-foreground">
-              A lista fica aberta até 31 de outubro. Depois disso, os acessos começam a sair.
+              {SIGNUPS_PAUSED
+                ? "As inscrições estão pausadas neste momento. O período de inscrições do teste foi encerrado."
+                : "A lista fica aberta até 31 de outubro. Depois disso, os acessos começam a sair."}
             </p>
-            <Button asChild className="rounded-xl px-6 shrink-0">
-              <a href="#lista">
-                Guardar meu lugar <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
+            {!SIGNUPS_PAUSED && (
+              <Button asChild className="rounded-xl px-6 shrink-0">
+                <a href="#lista">
+                  Guardar meu lugar <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            )}
           </div>
         </div>
       </div>
@@ -467,15 +428,22 @@ export function CtaSection() {
           </span>
         </h2>
         <p className="relative mt-5 text-base text-white/80 max-w-2xl mx-auto leading-relaxed text-balance">
-          A lista de acesso antecipado fica aberta até&nbsp;31&nbsp;de&nbsp;outubro, com poucas vagas.
-          Entre agora e receba o convite assim que os acessos começarem a sair.
+          {SIGNUPS_PAUSED
+            ? "O período de inscrições do teste foi encerrado e as inscrições estão pausadas neste momento."
+            : "A lista de acesso antecipado fica aberta até\u00a031\u00a0de\u00a0outubro, com poucas vagas. Entre agora e receba o convite assim que os acessos começarem a sair."}
         </p>
         <div className="relative mt-10 max-w-2xl mx-auto">
-          <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
+          {SIGNUPS_PAUSED ? (
+            <SignupsPausedNotice />
+          ) : (
+            <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
+          )}
         </div>
-        <p className="relative mt-5 text-xs text-white/60">
-          Só vamos te escrever sobre a soupelvi. Nada&nbsp;de&nbsp;spam.
-        </p>
+        {!SIGNUPS_PAUSED && (
+          <p className="relative mt-5 text-xs text-white/60">
+            Só vamos te escrever sobre a soupelvi. Nada&nbsp;de&nbsp;spam.
+          </p>
+        )}
       </div>
     </section>
   );
