@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { Resend } from "resend";
 import { z } from "zod";
+import { SIGNUPS_PAUSED } from "@/lib/signups";
 
 const capitalize = (word: string) =>
   word.charAt(0).toLocaleUpperCase("pt-BR") + word.slice(1).toLocaleLowerCase("pt-BR");
@@ -15,6 +16,10 @@ const schema = z.object({
 export const addAudienceContact = createServerFn({ method: "POST" })
   .inputValidator(schema)
   .handler(async ({ data }) => {
+    if (SIGNUPS_PAUSED) {
+      throw new Error("As inscrições estão pausadas no momento.");
+    }
+
     const apiKey = process.env.RESEND_API_KEY;
     const audienceId = process.env.RESEND_AUDIENCE_ID;
 

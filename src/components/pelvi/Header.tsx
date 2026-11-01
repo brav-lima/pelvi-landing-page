@@ -1,6 +1,7 @@
 import { Logo } from "@/components/pelvi/Logo";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { SIGNUPS_PAUSED } from "@/lib/signups";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -30,7 +31,7 @@ export function Header() {
         </nav>
         <div className="hidden lg:flex items-center justify-end gap-3">
           <Button asChild variant="default" className="rounded-xl px-5">
-            <a href="#lista">Guardar meu lugar</a>
+            <a href="#lista">{SIGNUPS_PAUSED ? "Inscrições pausadas" : "Guardar meu lugar"}</a>
           </Button>
         </div>
         <button
@@ -55,7 +56,7 @@ export function Header() {
             </a>
           ))}
           <Button asChild className="w-full rounded-full">
-            <a href="#lista">Guardar meu lugar</a>
+            <a href="#lista">{SIGNUPS_PAUSED ? "Inscrições pausadas" : "Guardar meu lugar"}</a>
           </Button>
         </div>
       )}
