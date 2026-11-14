@@ -1,5 +1,18 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Check, PauseCircle } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  ClipboardList,
+  Download,
+  MessageCircle,
+  PauseCircle,
+  ShieldCheck,
+  Smartphone,
+  Stethoscope,
+  TrendingUp,
+  type LucideIcon,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SpecularButton from "@/components/ui/specular-button";
 import { specularPlum } from "@/lib/specular";
@@ -115,40 +128,40 @@ export function Hero() {
 const h2 = "text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]";
 const lead = "mt-4 text-pretty text-lg leading-relaxed text-muted-foreground";
 
-export function Patients() {
+type Item = { icon: LucideIcon; title: string; text: string };
+
+function ItemList({ items }: { items: Item[] }) {
   return (
-    <section id="produto" className="sec">
-      <div className="wrap">
-        <h2 className={h2}>Pacientes, pacotes e próximas consultas</h2>
-        <p className={`${lead} max-w-4xl`}>
-          <span className="lg:block">
-            Busque por nome, CPF ou telefone, filtre quem tem pacote ou está sem agendamento
-          </span>{" "}
-          <span className="lg:block">e acompanhe as sessões usadas de cada pacote.</span>
-        </p>
-        <div className="mt-10">
-          <Screen
-            name="pacientes"
-            alt="Lista de pacientes com telefone, pacote de sessões com barra de progresso e próxima consulta"
-          />
-        </div>
-      </div>
-    </section>
+    <ul className="mt-8 space-y-6">
+      {items.map(({ icon: Icon, title, text }) => (
+        <li key={title} className="flex gap-4">
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary-soft text-primary">
+            <Icon className="h-5 w-5" aria-hidden />
+          </span>
+          <div>
+            <h3 className="text-lg font-semibold">{title}</h3>
+            <p className="mt-1 text-base leading-relaxed text-muted-foreground">{text}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
 
 function Split({
   id,
+  eyebrow,
   title,
-  text,
+  items,
   screen,
   alt,
   flip = false,
   muted = false,
 }: {
   id: string;
+  eyebrow?: string;
   title: string;
-  text: string;
+  items: Item[];
   screen: "evolucoes" | "agenda";
   alt: string;
   flip?: boolean;
@@ -158,8 +171,13 @@ function Split({
     <section id={id} className={`sec ${muted ? "bg-muted/60" : ""}`}>
       <div className="wrap grid items-center gap-10 lg:grid-cols-12 lg:gap-x-6">
         <div className={flip ? "lg:col-span-5 lg:col-start-8 lg:row-start-1" : "lg:col-span-5"}>
+          {eyebrow && (
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+              {eyebrow}
+            </p>
+          )}
           <h2 className={h2}>{title}</h2>
-          <p className={lead}>{text}</p>
+          <ItemList items={items} />
         </div>
         <div className={flip ? "lg:col-span-7 lg:row-start-1" : "lg:col-span-7 lg:col-start-6"}>
           <Screen name={screen} alt={alt} />
@@ -169,26 +187,54 @@ function Split({
   );
 }
 
-export function Evolutions() {
+export function Prontuario() {
   return (
     <Split
-      id="recursos"
-      muted
-      title="Evolução clínica a cada sessão"
-      text="Registre a evolução ligada ao atendimento, veja o histórico da paciente em ordem e exporte em PDF."
+      id="produto"
+      eyebrow="O que o soupelvi faz por você"
+      title="Prontuário feito para saúde pélvica"
+      items={[
+        {
+          icon: ClipboardList,
+          title: "Anamnese estruturada",
+          text: "Fichas pélvica geral e gestação, com seções objetivas e orientações de “o que investigar” ao lado de cada campo. Rascunho com salvamento automático e histórico de revisões.",
+        },
+        {
+          icon: Stethoscope,
+          title: "Exame físico completo",
+          text: "Inspeção, avaliação neurológica, mobilidade de tecidos, função do assoalho pélvico, dor, exames complementares e diagnóstico cinesiológico funcional, tudo em um único registro.",
+        },
+        {
+          icon: TrendingUp,
+          title: "Evolução com técnicas aplicadas",
+          text: "Cada evolução fica ligada à consulta e às técnicas usadas. Você monta o catálogo de técnicas de cada procedimento e acompanha a linha do tempo da paciente.",
+        },
+      ]}
       screen="evolucoes"
       alt="Evoluções clínicas de uma paciente em linha do tempo, com o atendimento vinculado e o botão de exportar PDF"
     />
   );
 }
 
-export function Agenda() {
+export function Rotina() {
   return (
     <Split
-      id="agenda"
+      id="rotina"
       flip
-      title="Agenda semanal para você"
-      text="Veja a semana, o dia ou o mês, bloqueie horários e abra a paciente direto do atendimento."
+      muted
+      title="A rotina de quem atende"
+      items={[
+        {
+          icon: CalendarDays,
+          title: "Agenda que acompanha seu dia",
+          text: "Visão de dia, semana e mês, blocos proporcionais à duração, remarcação arrastando e filtro por profissional. Avisa quando há conflito de horário.",
+        },
+        {
+          icon: MessageCircle,
+          title: "Confirmação por WhatsApp em um clique",
+          text: "A mensagem já sai pronta, com nome, data, hora e profissional. Você personaliza o texto e envia pelo seu WhatsApp.",
+        },
+      ]}
       screen="agenda"
       alt="Agenda da semana com atendimentos marcados por dia e horário"
     />
@@ -197,14 +243,14 @@ export function Agenda() {
 
 export function Finance() {
   return (
-    <section id="financeiro" className="sec bg-muted/60">
+    <section id="financeiro" className="sec">
       <div className="wrap">
-        <h2 className={h2}>Financeiro por mês, sem planilha</h2>
+        <h2 className={h2}>Financeiro simples</h2>
         <p className={`${lead} max-w-4xl`}>
-          <span className="lg:block">Receitas, despesas e faturas pendentes do mês,</span>{" "}
           <span className="lg:block">
-            com o registro de cada pagamento por paciente e procedimento.
-          </span>
+            Receitas e despesas, resumo do mês, parcelamento e baixa direto na tela.
+          </span>{" "}
+          <span className="lg:block">Dá para receber a consulta a partir da própria agenda.</span>
         </p>
         <div className="mt-10">
           <Screen
@@ -212,6 +258,61 @@ export function Finance() {
             alt="Financeiro do mês com receitas, despesas, faturas pendentes e a lista de registros financeiros"
           />
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function Security() {
+  const cards: Item[] = [
+    {
+      icon: ShieldCheck,
+      title: "Pensado para a LGPD",
+      text: "Registro da base legal dos dados sensíveis, aceite de termos com histórico e consentimento da paciente.",
+    },
+    {
+      icon: Download,
+      title: "Seus dados são seus",
+      text: "Exporte um pacote completo com os seus dados quando quiser, inclusive depois do encerramento do contrato.",
+    },
+  ];
+  return (
+    <section id="seguranca" className="sec bg-muted/60">
+      <div className="wrap">
+        <h2 className={h2}>Segurança e dados</h2>
+        <ul className="mt-10 grid gap-6 md:grid-cols-2">
+          {cards.map(({ icon: Icon, title, text }) => (
+            <li
+              key={title}
+              className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-8"
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary-soft text-primary">
+                <Icon className="h-6 w-6" aria-hidden />
+              </span>
+              <h3 className="mt-5 text-xl font-semibold">{title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground">{text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function ComingSoon() {
+  return (
+    <section id="em-breve" className="sec on-dark text-white" style={heroGround}>
+      <div className="wrap grid items-center gap-8 lg:grid-cols-12 lg:gap-x-6">
+        <div className="lg:col-span-5">
+          <p className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-white">
+            <Smartphone className="h-4 w-4" aria-hidden /> Em breve
+          </p>
+          <h2 className={h2}>Portal e app da paciente</h2>
+        </div>
+        <p className="text-pretty text-lg leading-relaxed text-white/80 lg:col-span-7 lg:col-start-6">
+          A paciente acessa suas consultas e seu plano de tratamento, e registra o diário miccional
+          e o diário evacuatório em casa. Você acompanha tudo no prontuário.
+        </p>
       </div>
     </section>
   );
@@ -362,8 +463,8 @@ export function Closing() {
           <div className="md:text-right">
             <nav aria-label="Seções e documentos" className="flex flex-wrap gap-x-6 md:justify-end">
               {[
-                ["#produto", "Pacientes"],
-                ["#agenda", "Agenda"],
+                ["#produto", "Prontuário"],
+                ["#rotina", "Rotina"],
                 ["#financeiro", "Financeiro"],
                 ["#planos", "Planos"],
                 ["#faq", "Perguntas"],

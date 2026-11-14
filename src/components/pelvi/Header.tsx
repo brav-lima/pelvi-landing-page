@@ -7,8 +7,8 @@ import SpecularButton from "@/components/ui/specular-button";
 import { specularPlum } from "@/lib/specular";
 
 const links = [
-  { href: "#produto", label: "Pacientes" },
-  { href: "#agenda", label: "Agenda" },
+  { href: "#produto", label: "Prontuário" },
+  { href: "#rotina", label: "Rotina" },
   { href: "#financeiro", label: "Financeiro" },
   { href: "#planos", label: "Planos" },
   { href: "#faq", label: "Dúvidas" },
