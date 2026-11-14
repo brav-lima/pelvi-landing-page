@@ -43,3 +43,4 @@ docs
 .env.*
 !.env.example
 .taste-skill/
+prints/

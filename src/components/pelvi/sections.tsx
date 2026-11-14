@@ -1,22 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Check, PauseCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SpecularButton from "@/components/ui/specular-button";
+import { specularPlum } from "@/lib/specular";
 import { Logo } from "@/components/pelvi/Logo";
-import {
-  AgendaFragment,
-  AppWindow,
-  AssessmentFragment,
-  DocsFragment,
-  EvolutionFragment,
-  FinanceFragment,
-  CheckoutWindow,
-  PortalFragment,
-  StepsFragment,
-} from "@/components/pelvi/product-ui";
+import { Screen, StepsFragment } from "@/components/pelvi/product-ui";
 import { SIGNUPS_PAUSED } from "@/lib/signups";
 import {
   ANNUAL_LIST_PRICE,
-  BLACK_FRIDAY,
+  PURPLE_FRIDAY,
   annualCashPrice,
   annualInstallment,
   annualPrice,
@@ -26,13 +18,7 @@ import {
 /* ------------------------------------------------------------------ */
 /* AÇÃO PRINCIPAL                                                       */
 /* ------------------------------------------------------------------ */
-export function SignupButton({
-  className = "",
-  variant = "default",
-}: {
-  className?: string;
-  variant?: "default" | "secondary";
-}) {
+export function SignupButton({ className = "" }: { className?: string }) {
   if (SIGNUPS_PAUSED) {
     return (
       <p
@@ -45,16 +31,15 @@ export function SignupButton({
     );
   }
   return (
-    <Button
-      asChild
-      size="lg"
-      variant={variant}
-      className={`h-12 w-full rounded-xl px-7 sm:w-auto transition-transform active:scale-[0.98] ${className}`}
+    <SpecularButton
+      as={Link}
+      to="/cadastro"
+      size="md"
+      {...specularPlum}
+      className={`min-h-12 w-full sm:w-auto ${className}`}
     >
-      <Link to="/cadastro">
-        Testar por 14 dias <ArrowRight className="ml-2 h-4 w-4" aria-hidden />
-      </Link>
-    </Button>
+      Testar por 14 dias <ArrowRight className="h-4 w-4" aria-hidden />
+    </SpecularButton>
   );
 }
 
@@ -65,46 +50,59 @@ const heroGround = {
 } as const;
 
 /* ------------------------------------------------------------------ */
-/* HERO — uma tela: a promessa à esquerda, o produto à direita          */
+/* HERO — promessa no topo e o sistema logo abaixo                      */
 /* ------------------------------------------------------------------ */
 export function Hero() {
   return (
     <section
       id="top"
-      className="sec on-dark text-white !pt-[104px] lg:!pt-[120px]"
+      className="sec on-dark overflow-hidden text-white !pt-[112px] lg:!pt-[136px] !pb-0"
       style={heroGround}
     >
-      <div className="wrap">
-        <div className="hero-text grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
-          <div className="animate-fade-up lg:col-span-5">
-            {BLACK_FRIDAY && (
-              <p className="mb-5 text-sm text-white">
-                Black Friday: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
+      <div className="wrap hero-text">
+        <div className="animate-fade-up">
+          <div className="mb-5 flex flex-col gap-1.5 text-sm text-white sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
+            <p className="flex items-center gap-2 font-semibold">
+              <Check className="h-4 w-4 text-white" aria-hidden />
+              Um único plano, com tudo liberado
+            </p>
+            {PURPLE_FRIDAY && (
+              <p>
+                Purple Friday: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
                 <strong className="ml-1 font-semibold">{formatBRL(annualPrice)}</strong>
               </p>
             )}
-            <h1 className="text-[2.25rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.25rem]">
-              Gestão para fisioterapeutas pélvicas
-            </h1>
-            <p className="mt-5 text-lg leading-relaxed text-white/80">
-              Agenda, prontuário, evolução e financeiro no mesmo lugar, para atender no consultório,
-              na clínica ou no domicílio. Teste por 14&nbsp;dias.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <SignupButton />
-              <Button
-                asChild
-                size="lg"
-                variant="outline"
-                className="h-12 w-full rounded-xl border-white/30 bg-transparent px-7 text-white hover:bg-white/10 hover:text-white sm:w-auto"
-              >
-                <a href="#planos">Ver preços</a>
-              </Button>
-            </div>
           </div>
-          <div className="hidden sm:block lg:col-span-7 lg:pt-2">
-            <AppWindow compact />
+          <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4rem]">
+            Feito pra quem vive a fisioterapia pélvica.
+          </h1>
+          <p className="mt-5 max-w-4xl text-lg leading-relaxed text-white/80">
+            <span className="lg:block">
+              Agenda, prontuário, evolução e financeiro no mesmo lugar,
+            </span>{" "}
+            <span className="lg:block">
+              para você atender no consultório, na clínica ou no domicílio. Teste por 14&nbsp;dias.
+            </span>
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <SignupButton />
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-12 w-full rounded-xl border-white/30 bg-transparent px-7 text-white hover:bg-white/10 hover:text-white sm:w-auto"
+            >
+              <a href="#planos">Ver preços</a>
+            </Button>
           </div>
+        </div>
+        <div className="mt-14 sm:mt-16">
+          <Screen
+            name="perfil"
+            tone="dark"
+            priority
+            alt="Cadastro de uma paciente no sistema: histórico de consultas, resumo clínico e próximas consultas"
+          />
         </div>
       </div>
     </section>
@@ -112,108 +110,108 @@ export function Hero() {
 }
 
 /* ------------------------------------------------------------------ */
-/* PRODUTO — a janela do app inteira                                    */
+/* RECURSOS — uma tela real por recurso                                 */
 /* ------------------------------------------------------------------ */
-export function Product() {
+const h2 = "text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]";
+const lead = "mt-4 text-pretty text-lg leading-relaxed text-muted-foreground";
+
+export function Patients() {
   return (
-    <section id="produto" className="sec bg-muted/60">
+    <section id="produto" className="sec">
       <div className="wrap">
-        <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
-          Prontuário da paciente ao lado da agenda
-        </h2>
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-          Anamnese, exame físico, avaliação perineal e evolução ficam no cadastro da paciente, no
-          mesmo lugar em que você vê o dia.
+        <h2 className={h2}>Pacientes, pacotes e próximas consultas</h2>
+        <p className={`${lead} max-w-4xl`}>
+          <span className="lg:block">
+            Busque por nome, CPF ou telefone, filtre quem tem pacote ou está sem agendamento
+          </span>{" "}
+          <span className="lg:block">e acompanhe as sessões usadas de cada pacote.</span>
         </p>
         <div className="mt-10">
-          <AppWindow />
+          <Screen
+            name="pacientes"
+            alt="Lista de pacientes com telefone, pacote de sessões com barra de progresso e próxima consulta"
+          />
         </div>
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* RECURSOS — duas seções de três cartões, cada um com sua tela        */
-/* ------------------------------------------------------------------ */
-type Feature = { title: string; text: string; visual: React.ReactNode };
-
-function FeatureGrid({ items }: { items: Feature[] }) {
+function Split({
+  id,
+  title,
+  text,
+  screen,
+  alt,
+  flip = false,
+  muted = false,
+}: {
+  id: string;
+  title: string;
+  text: string;
+  screen: "evolucoes" | "agenda";
+  alt: string;
+  flip?: boolean;
+  muted?: boolean;
+}) {
   return (
-    <ul className="mt-12 grid gap-8 sm:mt-8 sm:gap-5 lg:mt-10 lg:grid-cols-3 lg:gap-6">
-      {items.map((f) => (
-        <li
-          key={f.title}
-          className="grid gap-5 rounded-2xl border border-border bg-card p-6 shadow-card transition-transform sm:p-5 duration-200 hover:-translate-y-0.5 sm:grid-cols-2 sm:items-center lg:flex lg:flex-col lg:items-stretch lg:gap-0"
-        >
-          {f.visual}
-          <div className="lg:mt-5">
-            <h3 className="text-xl font-semibold">{f.title}</h3>
-            <p className="mt-2 text-base leading-relaxed text-muted-foreground">{f.text}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-export function FeaturesClinical() {
-  return (
-    <section id="recursos" className="sec" style={{ "--hm": 2 } as React.CSSProperties}>
-      <div className="wrap">
-        <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
-          Prontuário <span className="text-primary">feito para a fisioterapia pélvica</span>
-        </h2>
-        <FeatureGrid
-          items={[
-            {
-              title: "Avaliação perineal",
-              text: "Registre força, endurance e repetições em campos feitos para a fisioterapia pélvica.",
-              visual: <AssessmentFragment />,
-            },
-            {
-              title: "Evolução por sessão",
-              text: "Acompanhe cada paciente sessão a sessão e volte ao histórico quando precisar.",
-              visual: <EvolutionFragment />,
-            },
-            {
-              title: "Portal da paciente",
-              text: "Convide a paciente para ativar a conta e acompanhar o tratamento pelo celular.",
-              visual: <PortalFragment />,
-            },
-          ]}
-        />
+    <section id={id} className={`sec ${muted ? "bg-muted/60" : ""}`}>
+      <div className="wrap grid items-center gap-10 lg:grid-cols-12 lg:gap-x-6">
+        <div className={flip ? "lg:col-span-5 lg:col-start-8 lg:row-start-1" : "lg:col-span-5"}>
+          <h2 className={h2}>{title}</h2>
+          <p className={lead}>{text}</p>
+        </div>
+        <div className={flip ? "lg:col-span-7 lg:row-start-1" : "lg:col-span-7 lg:col-start-6"}>
+          <Screen name={screen} alt={alt} />
+        </div>
       </div>
     </section>
   );
 }
 
-export function FeaturesRoutine() {
+export function Evolutions() {
   return (
-    <section id="rotina" className="sec bg-muted/60" style={{ "--hm": 2 } as React.CSSProperties}>
+    <Split
+      id="recursos"
+      muted
+      title="Evolução clínica a cada sessão"
+      text="Registre a evolução ligada ao atendimento, veja o histórico da paciente em ordem e exporte em PDF."
+      screen="evolucoes"
+      alt="Evoluções clínicas de uma paciente em linha do tempo, com o atendimento vinculado e o botão de exportar PDF"
+    />
+  );
+}
+
+export function Agenda() {
+  return (
+    <Split
+      id="agenda"
+      flip
+      title="Agenda semanal para você"
+      text="Veja a semana, o dia ou o mês, bloqueie horários e abra a paciente direto do atendimento."
+      screen="agenda"
+      alt="Agenda da semana com atendimentos marcados por dia e horário"
+    />
+  );
+}
+
+export function Finance() {
+  return (
+    <section id="financeiro" className="sec bg-muted/60">
       <div className="wrap">
-        <h2 className="max-w-3xl text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
-          Agenda, financeiro e documentos <span className="text-primary">da clínica</span>
-        </h2>
-        <FeatureGrid
-          items={[
-            {
-              title: "Agenda",
-              text: "Veja os atendimentos do dia e abra o prontuário direto do horário.",
-              visual: <AgendaFragment />,
-            },
-            {
-              title: "Financeiro",
-              text: "Acompanhe o que foi pago e o que falta receber, sem planilha à parte.",
-              visual: <FinanceFragment />,
-            },
-            {
-              title: "Documentos",
-              text: "Termos, recibos e orientações da paciente guardados junto do cadastro.",
-              visual: <DocsFragment />,
-            },
-          ]}
-        />
+        <h2 className={h2}>Financeiro por mês, sem planilha</h2>
+        <p className={`${lead} max-w-4xl`}>
+          <span className="lg:block">Receitas, despesas e faturas pendentes do mês,</span>{" "}
+          <span className="lg:block">
+            com o registro de cada pagamento por paciente e procedimento.
+          </span>
+        </p>
+        <div className="mt-10">
+          <Screen
+            name="financeiro"
+            alt="Financeiro do mês com receitas, despesas, faturas pendentes e a lista de registros financeiros"
+          />
+        </div>
       </div>
     </section>
   );
@@ -224,16 +222,20 @@ export function FeaturesRoutine() {
 /* ------------------------------------------------------------------ */
 const faq = [
   {
+    q: "Recursos incluídos",
+    a: "Todos. A soupelvi tem um único plano, com tudo liberado: não há plano de entrada nem recurso vendido à parte.",
+  },
+  {
     q: "Cartão no período de teste",
     a: "Não. Você cria a conta com nome e e-mail e usa por 14 dias. O pagamento só aparece se você decidir contratar.",
   },
   {
     q: "Cadastro por e-mail",
-    a: "Você recebe um link por e-mail, informa os dados da clínica e já entra na plataforma em período de teste.",
+    a: "Você recebe um link por e-mail, completa o seu cadastro e já entra na plataforma em período de teste.",
   },
   {
     q: "Pagamento depois do teste",
-    a: "Dentro da plataforma, pelo administrador da clínica. O plano anual aceita Pix, cartão à vista ou parcelado em até 12 vezes. Também há plano mensal.",
+    a: "Dentro da plataforma, na área de assinatura. Você escolhe entre mensal e anual, e o anual aceita Pix, cartão à vista ou parcelado em até 12 vezes.",
   },
   {
     q: "Cancelamento do plano",
@@ -241,43 +243,54 @@ const faq = [
   },
   {
     q: "Dados das pacientes",
-    a: "São tratados com sigilo, conforme a LGPD, e você pode exportar os dados da clínica. Leia a Política de privacidade abaixo.",
+    a: "São tratados com sigilo, conforme a LGPD, e você pode exportar os seus dados. Leia a Política de privacidade abaixo.",
   },
 ];
 
 export function Pricing() {
   return (
-    <section id="planos" className="sec" style={{ "--hm": 2 } as React.CSSProperties}>
+    <section id="planos" className="sec">
       <div className="wrap grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
         <div className="lg:col-span-5">
           <h2 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
-            Plano anual com 14&nbsp;dias de teste
+            Teste por 14&nbsp;dias
           </h2>
-          <div className="mt-8 rounded-2xl border border-border bg-card p-6 shadow-soft">
+          <p className="mt-4 text-lg text-muted-foreground">
+            Todo plano tem 14 dias de teste. Você só paga se decidir continuar.
+          </p>
+          <div className="mt-8">
+            <StepsFragment />
+          </div>
+        </div>
+        <div className="lg:col-span-7 lg:col-start-6">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="text-xl font-semibold">Plano anual</h3>
-              {BLACK_FRIDAY && (
+              <h3 className="text-xl font-semibold">Plano único, tudo liberado</h3>
+              {PURPLE_FRIDAY && (
                 <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-foreground">
-                  Black Friday
+                  Purple Friday
                 </span>
               )}
             </div>
+            <p className="mt-2 text-base text-muted-foreground">
+              Todos os recursos da plataforma em um só plano, no pagamento anual:
+            </p>
             <p className="mt-4 flex flex-wrap items-baseline gap-x-3">
-              {BLACK_FRIDAY && (
+              {PURPLE_FRIDAY && (
                 <span className="text-lg text-muted-foreground line-through">
                   {formatBRL(ANNUAL_LIST_PRICE)}
                 </span>
               )}
-              <span className="font-display text-4xl font-bold text-primary">
+              <span className="font-display text-5xl font-bold text-primary">
                 {formatBRL(annualPrice)}
               </span>
               <span className="text-muted-foreground">por ano</span>
             </p>
-            <ul className="mt-5 space-y-2.5 text-base">
+            <ul className="mt-6 space-y-3 text-base">
               {[
                 `À vista no Pix ou no cartão: ${formatBRL(annualCashPrice)} (10% de desconto)`,
                 `Ou em até 12x de ${formatBRL(annualInstallment)} no cartão`,
-                "14 dias de teste antes de pagar",
+                "Prefere pagar por mês? Escolha o mensal dentro da plataforma",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-2.5">
                   <Check className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden />
@@ -285,17 +298,10 @@ export function Pricing() {
                 </li>
               ))}
             </ul>
-            <div className="mt-6">
+            <div className="mt-8">
               <SignupButton className="sm:w-full" />
             </div>
           </div>
-        </div>
-        <div className="lg:col-span-7 lg:col-start-6">
-          <CheckoutWindow
-            price={formatBRL(annualPrice)}
-            cashPrice={formatBRL(annualCashPrice)}
-            installment={`12x de ${formatBRL(annualInstallment)}`}
-          />
         </div>
       </div>
     </section>
@@ -304,20 +310,17 @@ export function Pricing() {
 
 export function Faq() {
   return (
-    <section id="faq" className="sec bg-muted/60" style={{ "--hm": 2 } as React.CSSProperties}>
+    <section id="faq" className="sec bg-muted/60">
       <div className="wrap grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
         <div className="lg:col-span-5">
           <h2 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
             Perguntas frequentes
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Do cadastro ao cancelamento, o caminho em três passos.
+            Do cadastro ao cancelamento, o que você precisa saber antes de começar.
           </p>
-          <div className="mt-8">
-            <StepsFragment />
-          </div>
         </div>
-        <dl className="grid gap-x-8 md:grid-cols-2 lg:col-span-7 lg:col-start-6 lg:grid-cols-1">
+        <dl className="lg:col-span-7 lg:col-start-6">
           {faq.map((f) => (
             <div key={f.q} className="border-b border-border py-4 first:pt-0 md:py-5">
               <dt className="text-lg font-semibold">{f.q}</dt>
@@ -338,31 +341,30 @@ const legalLink = "inline-flex min-h-11 items-center hover:underline underline-o
 export function Closing() {
   return (
     <footer className="sec closing on-dark text-white" style={heroGround}>
-      <div className="wrap flex h-full min-h-[calc(100svh-168px)] flex-col justify-between gap-12 lg:min-h-0">
-        <div>
-          <h2 className="max-w-4xl text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Teste a soupelvi por 14&nbsp;dias.
-          </h2>
-          <p className="mt-6 max-w-xl text-lg text-white/80">
-            Crie sua conta com nome e e-mail e contrate só se fizer sentido para a sua clínica.
-          </p>
-          <div className="mt-8">
-            <SignupButton />
-          </div>
+      <div className="wrap">
+        <h2 className="text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
+          Teste a soupelvi por 14&nbsp;dias.
+        </h2>
+        <p className="mt-6 max-w-4xl text-lg text-white/80">
+          Crie sua conta com nome e e-mail e contrate só se fizer sentido para você.
+        </p>
+        <div className="mt-8">
+          <SignupButton />
         </div>
-        <div className="grid items-start gap-8 border-t border-white/15 pt-8 text-sm text-white/80 lg:grid-cols-12 lg:gap-x-6">
-          <div className="lg:col-span-5">
+        <div className="mt-20 flex flex-col gap-8 border-t border-white/15 pt-8 text-sm text-white/80 md:flex-row md:items-start md:justify-between">
+          <div>
             <div className="flex h-11 items-center">
               <Logo variant="horizontal-branco" className="h-7" />
             </div>
-            <p className="mt-2">Gestão para fisioterapeutas pélvicas.</p>
+            <p className="mt-2">Feito pra quem vive a fisioterapia pélvica.</p>
             <address className="not-italic">Edifício Primavera Office | Florianópolis - SC</address>
           </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <nav aria-label="Seções" className="flex flex-wrap gap-x-6">
+          <div className="md:text-right">
+            <nav aria-label="Seções e documentos" className="flex flex-wrap gap-x-6 md:justify-end">
               {[
-                ["#produto", "Produto"],
-                ["#recursos", "Recursos"],
+                ["#produto", "Pacientes"],
+                ["#agenda", "Agenda"],
+                ["#financeiro", "Financeiro"],
                 ["#planos", "Planos"],
                 ["#faq", "Perguntas"],
               ].map(([href, label]) => (
@@ -370,8 +372,6 @@ export function Closing() {
                   {label}
                 </a>
               ))}
-            </nav>
-            <nav aria-label="Documentos legais" className="flex gap-6">
               <Link to="/termos" className={legalLink}>
                 Termos de uso
               </Link>
@@ -379,7 +379,7 @@ export function Closing() {
                 Privacidade
               </Link>
             </nav>
-            <p>© 2026 soupelvi · Feito no Brasil</p>
+            <p className="mt-2">© 2026 soupelvi · Feito no Brasil</p>
           </div>
         </div>
       </div>
@@ -397,7 +397,7 @@ export function Footer() {
             <Logo variant="horizontal-branco" className="inline-block h-7" />
           </div>
           <div className="flex flex-col gap-1 text-sm">
-            <p>Gestão para fisioterapeutas pélvicas.</p>
+            <p>Feito pra quem vive a fisioterapia pélvica.</p>
             <address className="not-italic">Edifício Primavera Office | Florianópolis - SC</address>
           </div>
           <div className="flex flex-col gap-1 text-sm md:items-end">

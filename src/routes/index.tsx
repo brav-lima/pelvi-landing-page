@@ -2,9 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/pelvi/Header";
 import {
   Hero,
-  Product,
-  FeaturesClinical,
-  FeaturesRoutine,
+  Patients,
+  Evolutions,
+  Agenda,
+  Finance,
   Pricing,
   Faq,
   Closing,
@@ -20,9 +21,10 @@ function Index() {
       <Header />
       <main id="main">
         <Hero />
-        <Product />
-        <FeaturesClinical />
-        <FeaturesRoutine />
+        <Patients />
+        <Evolutions />
+        <Agenda />
+        <Finance />
         <Pricing />
         <Faq />
       </main>

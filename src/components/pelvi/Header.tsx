@@ -3,11 +3,13 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { SIGNUPS_PAUSED } from "@/lib/signups";
-import { Button } from "@/components/ui/button";
+import SpecularButton from "@/components/ui/specular-button";
+import { specularPlum } from "@/lib/specular";
 
 const links = [
-  { href: "#produto", label: "Produto" },
-  { href: "#recursos", label: "Recursos" },
+  { href: "#produto", label: "Pacientes" },
+  { href: "#agenda", label: "Agenda" },
+  { href: "#financeiro", label: "Financeiro" },
   { href: "#planos", label: "Planos" },
   { href: "#faq", label: "Dúvidas" },
 ];
@@ -43,9 +45,9 @@ export function Header() {
           ))}
         </nav>
         <div className="hidden items-center justify-end gap-3 lg:flex">
-          <Button asChild className="h-11 rounded-xl px-5">
-            <Link to="/cadastro">{label}</Link>
-          </Button>
+          <SpecularButton as={Link} to="/cadastro" size="sm" {...specularPlum} className="min-h-11">
+            {label}
+          </SpecularButton>
         </div>
         <button
           type="button"
@@ -73,9 +75,15 @@ export function Header() {
               {l.label}
             </a>
           ))}
-          <Button asChild className="mt-2 h-12 w-full rounded-xl">
-            <Link to="/cadastro">{label}</Link>
-          </Button>
+          <SpecularButton
+            as={Link}
+            to="/cadastro"
+            size="md"
+            {...specularPlum}
+            className="mt-2 min-h-12 w-full"
+          >
+            {label}
+          </SpecularButton>
         </div>
       )}
     </header>

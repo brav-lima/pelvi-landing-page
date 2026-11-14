@@ -158,6 +158,11 @@
     outline-offset: 3px;
     border-radius: 6px;
   }
+  .specular-button:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  .on-dark .specular-button:focus-visible,
   .on-dark :where(a, button):focus-visible {
     outline-color: #fff;
   }
@@ -167,8 +172,7 @@
    Abaixo de 1024px cresce com o conteúdo, sem nunca cortar. */
 .sec {
   position: relative;
-  min-height: calc(var(--hm, 1) * 100svh);
-  padding: 96px 0 48px;
+  padding: 72px 0;
 }
 .wrap {
   width: min(100% - 48px, 1200px);
@@ -184,17 +188,11 @@
     width: min(100% - 96px, 1200px);
   }
 }
-@media (min-width: 640px) and (max-width: 1023px) {
-  .sec {
-    min-height: calc(var(--ht, 1) * 100svh);
-  }
-}
+
 @media (min-width: 1024px) {
   .sec {
-    height: calc(var(--h, 1) * 100svh);
     min-height: 0;
-    padding: 120px 0 72px;
-    overflow: hidden;
+    padding: 96px 0;
   }
 }
 
