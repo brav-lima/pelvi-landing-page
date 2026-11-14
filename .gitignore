@@ -40,3 +40,5 @@ docs
 
 # Originais de marca em alta resolução (versões web ficam em public/brand)
 /design/
+.env.*
+!.env.example
