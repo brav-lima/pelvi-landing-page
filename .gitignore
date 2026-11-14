@@ -42,3 +42,4 @@ docs
 /design/
 .env.*
 !.env.example
+.taste-skill/

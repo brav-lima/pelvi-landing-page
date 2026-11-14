@@ -37,7 +37,7 @@ function Cadastro() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b border-border/60">
-        <div className="mx-auto max-w-3xl px-6 h-14 flex items-center">
+        <div className="wrap flex h-16 items-center">
           <Link to="/" aria-label="soupelvi — voltar ao início">
             <Logo variant="horizontal-roxo" className="h-7" />
           </Link>
