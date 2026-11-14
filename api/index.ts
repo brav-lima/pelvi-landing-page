@@ -7,8 +7,8 @@ let server: StartServer | null = null;
 async function getServer(): Promise<StartServer> {
   if (server) return server;
   // @ts-expect-error dist/server/server.js is a build artifact with no declaration file
-  const mod: Partial<StartServer> & { default?: StartServer } =
-    await import("../dist/server/server.js");
+  const imported = await import("../dist/server/server.js");
+  const mod = imported as Partial<StartServer> & { default?: StartServer };
   // Handle both ESM default export and CJS interop wrapper
   server = (mod.default?.fetch ? mod.default : mod) as StartServer;
   return server;
