@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Loader2,
-  CheckCircle2,
   ShieldCheck,
   Sparkles,
   MapPin,
@@ -13,8 +10,6 @@ import {
   PauseCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { addAudienceContact } from "@/server/addAudienceContact";
 import { Logo } from "@/components/pelvi/Logo";
 import { SIGNUPS_PAUSED } from "@/lib/signups";
 
@@ -29,130 +24,24 @@ function SignupsPausedNotice({ className = "" }: { className?: string }) {
     >
       <PauseCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden />
       <p className="text-zinc-900">
-        <span className="font-semibold">As inscrições estão pausadas neste momento.</span> O período
-        de inscrições para o teste foi encerrado e não estamos recebendo novos cadastros por
-        enquanto. Obrigada pelo interesse!
+        <span className="font-semibold">Os cadastros estão pausados neste momento.</span> Voltamos
+        em breve. Obrigada pelo interesse!
       </p>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* FORMULÁRIO DA LISTA                                                  */
+/* BOTÃO DE CADASTRO                                                    */
 /* ------------------------------------------------------------------ */
-function EarlyAccessForm({
-  className,
-  inputClass = "",
-  idPrefix,
-}: {
-  className?: string;
-  inputClass?: string;
-  idPrefix: string;
-}) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("loading");
-    try {
-      await addAudienceContact({ data: { name, email } });
-      setStatus("done");
-    } catch {
-      setStatus("error");
-    }
-  }
-
-  if (status === "done") {
-    const firstName = name.trim().split(" ")[0];
-    return (
-      <div
-        role="status"
-        className={`flex items-start gap-3 rounded-2xl bg-white px-5 py-4 text-left text-sm shadow-soft ${className}`}
-      >
-        <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
-        <p className="text-zinc-900">
-          <span className="font-semibold">
-            Pronto{firstName ? `, ${firstName}` : ""}! Seu lugar está guardado.
-          </span>{" "}
-          A partir de 31/10 os primeiros acessos começam a sair, aos poucos. Fique de olho no seu
-          e-mail.
-        </p>
-      </div>
-    );
-  }
-
+function SignupButton({ className = "" }: { className?: string }) {
+  if (SIGNUPS_PAUSED) return <SignupsPausedNotice className={className} />;
   return (
-    <form onSubmit={handleSubmit} className={className} noValidate={false}>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <label htmlFor={`${idPrefix}-name`} className="sr-only">
-          Seu nome
-        </label>
-        <Input
-          id={`${idPrefix}-name`}
-          name="name"
-          autoComplete="given-name"
-          placeholder="Como podemos te chamar?"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          minLength={2}
-          disabled={status === "loading"}
-          className={`h-12 rounded-xl bg-background/80 backdrop-blur-sm ${inputClass}`}
-        />
-        <label htmlFor={`${idPrefix}-email`} className="sr-only">
-          Seu e-mail
-        </label>
-        <Input
-          id={`${idPrefix}-email`}
-          name="email"
-          type="email"
-          autoComplete="email"
-          inputMode="email"
-          placeholder="Seu melhor e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={status === "loading"}
-          className={`h-12 rounded-xl bg-background/80 backdrop-blur-sm ${inputClass}`}
-        />
-        <Button
-          type="submit"
-          size="lg"
-          disabled={status === "loading"}
-          className="h-12 rounded-xl px-7 shrink-0 shadow-soft"
-        >
-          {status === "loading" ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span className="sr-only">Guardando seu lugar…</span>
-            </>
-          ) : (
-            <>
-              Guardar meu lugar <ArrowRight className="ml-2 h-4 w-4" />
-            </>
-          )}
-        </Button>
-      </div>
-      <p className="mt-3 text-xs opacity-80">
-        Ao enviar, você concorda com os{" "}
-        <Link to="/termos" className="underline underline-offset-2">
-          Termos de uso
-        </Link>{" "}
-        e a{" "}
-        <Link to="/privacidade" className="underline underline-offset-2">
-          Política de privacidade
-        </Link>
-        .
-      </p>
-      {status === "error" && (
-        <p role="alert" className="mt-3 text-sm text-red-300">
-          Não conseguimos guardar sua inscrição agora. Confira o e-mail e tente de novo em
-          instantes.
-        </p>
-      )}
-    </form>
+    <Button asChild size="lg" className={`h-12 rounded-xl px-7 shadow-soft ${className}`}>
+      <Link to="/cadastro">
+        Testar por 14 dias <ArrowRight className="ml-2 h-4 w-4" />
+      </Link>
+    </Button>
   );
 }
 
@@ -201,28 +90,16 @@ export function Hero() {
             Você atende aqui, ali, na casa da paciente, e carrega cada história com você.
           </span>{" "}
           <span className="lg:block">A&nbsp;gente criou uma plataforma pra isso.</span>{" "}
-          <span className="lg:block">
-            Ainda não dá pra mostrar tudo, mas já dá pra&nbsp;guardar o seu lugar.
-          </span>
+          <span className="lg:block">Comece a testar por 14&nbsp;dias, sem compromisso.</span>
         </p>
-        <p className="mt-8 text-sm text-white/70">
-          {SIGNUPS_PAUSED
-            ? "Inscrições pausadas · período de inscrições do teste encerrado"
-            : "Acesso antecipado · poucas vagas · grátis durante o período de teste"}
-        </p>
+        <p className="mt-8 text-sm text-white/70">14 dias de teste · sem cartão de crédito</p>
         <div className="mt-4 mx-auto max-w-3xl">
-          {SIGNUPS_PAUSED ? (
-            <SignupsPausedNotice />
-          ) : (
-            <EarlyAccessForm idPrefix="hero" inputClass="border-white/20 text-foreground" />
-          )}
+          <SignupButton />
         </div>
         <p className="mt-4 text-xs text-white/50">
-          <span>Sem spam</span>
-          <span aria-hidden="true"> · </span>
           <span>Seus dados protegidos pela LGPD</span>
           <span aria-hidden="true"> · </span>
-          <span>Saia quando quiser</span>
+          <span>Cancele quando quiser</span>
         </p>
       </div>
     </section>
@@ -285,7 +162,7 @@ export function ForYou() {
               Tem uma clínica com outras fisioterapeutas?
             </span>{" "}
             A soupelvi nasceu pensando em você, mas também está pronta pra receber a sua equipe.
-            Entre na lista e conte pra gente quando o convite chegar.
+            Crie sua conta e conte pra gente o que funciona.
           </p>
         </div>
       </div>
@@ -299,18 +176,18 @@ export function ForYou() {
 const timeline = [
   {
     n: "01",
-    t: "Até 31 de outubro",
-    d: "Período de inscrições do teste. Ele foi encerrado e as inscrições estão pausadas.",
+    t: "Crie sua conta",
+    d: "Deixe seu nome e e-mail e receba por e-mail o link para concluir o cadastro da sua clínica.",
   },
   {
     n: "02",
-    t: "A partir de 31 de outubro",
-    d: "Os primeiros acessos começam a sair por e-mail, aos poucos, para quem está na lista.",
+    t: "Teste por 14 dias",
+    d: "Use a plataforma de verdade, com as suas pacientes, sem precisar de cartão de crédito.",
   },
   {
     n: "03",
-    t: "Com você junto",
-    d: "Durante o teste, o que você contar pra gente molda o que vem depois.",
+    t: "Contrate se fizer sentido",
+    d: "Dentro da plataforma, escolha pagar por Pix ou cartão, mensal ou anual.",
   },
 ];
 
@@ -350,8 +227,8 @@ export function Timeline() {
 /* PRIMEIROS ACESSOS                                                     */
 /* ------------------------------------------------------------------ */
 const testerHighlights = [
-  "Poucas vagas, por escolha: queremos acompanhar cada pessoa de perto.",
-  "Acesso gratuito durante todo o período de teste.",
+  "14 dias de teste para conhecer a plataforma, sem compromisso.",
+  "Pagamento por Pix ou cartão, mensal ou anual, direto na plataforma.",
   "Um canal direto pra contar o que funciona, o que falta e o que incomoda.",
   "Uso de verdade, desde o primeiro dia: com as suas pacientes, no consultório, na clínica ou no domicílio.",
   "Os seus dados e os das suas pacientes tratados com sigilo, conforme a LGPD.",
@@ -363,7 +240,7 @@ export function TesterProgram() {
       <div className="mx-auto max-w-5xl px-6">
         <div className="rounded-3xl p-8 md:p-12 bg-card border border-border/60 shadow-card">
           <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">
-            Primeiros acessos
+            Teste grátis
           </span>
           <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground leading-tight">
             Um grupo pequeno, pra&nbsp;construir com&nbsp;calma e&nbsp;de&nbsp;perto.
@@ -383,16 +260,10 @@ export function TesterProgram() {
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-primary/5 p-6">
             <p className="text-sm text-muted-foreground">
               {SIGNUPS_PAUSED
-                ? "As inscrições estão pausadas neste momento. O período de inscrições do teste foi encerrado."
-                : "A lista fica aberta até 31 de outubro. Depois disso, os acessos começam a sair."}
+                ? "Os cadastros estão pausados neste momento."
+                : "Crie sua conta e comece a testar hoje, por 14 dias."}
             </p>
-            {!SIGNUPS_PAUSED && (
-              <Button asChild className="rounded-xl px-6 shrink-0">
-                <a href="#lista">
-                  Guardar meu lugar <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            )}
+            {!SIGNUPS_PAUSED && <SignupButton className="shrink-0" />}
           </div>
         </div>
       </div>
@@ -429,21 +300,12 @@ export function CtaSection() {
         </h2>
         <p className="relative mt-5 text-base text-white/80 max-w-2xl mx-auto leading-relaxed text-balance">
           {SIGNUPS_PAUSED
-            ? "O período de inscrições do teste foi encerrado e as inscrições estão pausadas neste momento."
-            : "A lista de acesso antecipado fica aberta até\u00a031\u00a0de\u00a0outubro, com poucas vagas. Entre agora e receba o convite assim que os acessos começarem a sair."}
+            ? "Os cadastros estão pausados neste momento."
+            : "Crie sua conta, teste por 14 dias e contrate dentro da plataforma só se fizer sentido pra você."}
         </p>
         <div className="relative mt-10 max-w-2xl mx-auto">
-          {SIGNUPS_PAUSED ? (
-            <SignupsPausedNotice />
-          ) : (
-            <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
-          )}
+          <SignupButton />
         </div>
-        {!SIGNUPS_PAUSED && (
-          <p className="relative mt-5 text-xs text-white/60">
-            Só vamos te escrever sobre a soupelvi. Nada&nbsp;de&nbsp;spam.
-          </p>
-        )}
       </div>
     </section>
   );
@@ -468,7 +330,10 @@ export function Footer() {
               Edifício Primavera Office | Florianópolis - SC
             </address>
           </div>
-          <div className="flex flex-col gap-1 text-xs md:items-end" style={{ color: "hsl(296 20% 60%)" }}>
+          <div
+            className="flex flex-col gap-1 text-xs md:items-end"
+            style={{ color: "hsl(296 20% 60%)" }}
+          >
             <nav aria-label="Documentos legais" className="flex justify-center gap-4">
               <Link to="/termos" className="hover:underline">
                 Termos de uso

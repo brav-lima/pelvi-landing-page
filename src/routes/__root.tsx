@@ -6,9 +6,9 @@ import appCss from "../styles.css?url";
 const SITE_URL = "https://www.soupelvi.com.br";
 const TITLE = "soupelvi — plataforma para fisioterapeutas pélvicas";
 const DESCRIPTION =
-  "Uma plataforma feita para fisioterapeutas pélvicas, onde quer que você atenda. Inscrições para o teste pausadas no momento.";
+  "Uma plataforma feita para fisioterapeutas pélvicas, onde quer que você atenda. Teste grátis por 14 dias.";
 const OG_DESCRIPTION =
-  "Plataforma feita pra quem vive a fisioterapia pélvica. Inscrições para o teste pausadas no momento.";
+  "Plataforma feita pra quem vive a fisioterapia pélvica. Teste grátis por 14 dias.";
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
