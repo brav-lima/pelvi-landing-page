@@ -4,7 +4,7 @@ import { UserPlus, Clock, Wallet } from "lucide-react";
 const SCREENS = {
   dashboard: { src: "/screens/dashboard.jpg", width: 1622, height: 700 },
   evolucoes: { src: "/screens/evolucoes.jpg", width: 983, height: 468 },
-  agenda: { src: "/screens/agenda.jpg", width: 1146, height: 500 },
+  agenda: { src: "/screens/agenda.jpg", width: 1500, height: 863 },
   financeiro: { src: "/screens/financeiro.jpg", width: 1577, height: 592 },
 } as const;
 
