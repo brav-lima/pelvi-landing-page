@@ -6,9 +6,9 @@ import appCss from "../styles.css?url";
 const SITE_URL = "https://www.soupelvi.com.br";
 const TITLE = "soupelvi — feito pra quem vive a fisioterapia pélvica";
 const DESCRIPTION =
-  "Feito pra quem vive a fisioterapia pélvica: agenda, prontuário, evolução e financeiro no mesmo lugar, em um único plano com tudo liberado. Teste por 14 dias.";
+  "Feito pra quem vive a fisioterapia pélvica: agenda, prontuário, evolução e financeiro no mesmo lugar, em um único plano com tudo liberado e sem inteligência artificial. Experimente por 14 dias.";
 const OG_DESCRIPTION =
-  "Feito pra quem vive a fisioterapia pélvica. Um único plano, tudo liberado. Teste por 14 dias.";
+  "Feito pra quem vive a fisioterapia pélvica. Um único plano, tudo liberado, sem IA. Experimente por 14 dias.";
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [

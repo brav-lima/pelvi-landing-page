@@ -1,4 +1,4 @@
-/** Botão "Testar por 14 dias": plum com brilho especular na borda (segue o cursor). */
+/** Botão "Experimente por 14 dias": plum com brilho especular na borda (segue o cursor). */
 export const specularPlum = {
   tint: "#653b69",
   tintOpacity: 1,

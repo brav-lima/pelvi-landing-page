@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/pelvi/Header";
 import {
   Hero,
+  Steps,
   Prontuario,
   Rotina,
   Finance,
@@ -22,6 +23,7 @@ function Index() {
       <Header />
       <main id="main">
         <Hero />
+        <Steps />
         <Prontuario />
         <Rotina />
         <Finance />

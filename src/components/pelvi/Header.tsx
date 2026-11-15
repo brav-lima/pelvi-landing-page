@@ -19,7 +19,7 @@ const linkClass =
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const label = SIGNUPS_PAUSED ? "Cadastros pausados" : "Testar por 14 dias";
+  const label = SIGNUPS_PAUSED ? "Cadastros pausados" : "Experimente por 14 dias";
   return (
     <header className="nav fixed inset-x-0 top-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-md">
       <div className="wrap relative flex h-16 items-center justify-between lg:grid lg:grid-cols-3">

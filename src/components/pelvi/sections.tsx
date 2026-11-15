@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
+  BrainCog,
   CalendarDays,
   Check,
   ClipboardList,
@@ -13,6 +14,12 @@ import {
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import SpecularButton from "@/components/ui/specular-button";
 import { specularPlum } from "@/lib/specular";
@@ -51,7 +58,7 @@ export function SignupButton({ className = "" }: { className?: string }) {
       {...specularPlum}
       className={`min-h-12 w-full sm:w-auto ${className}`}
     >
-      Testar por 14 dias <ArrowRight className="h-4 w-4" aria-hidden />
+      Experimente por 14 dias <ArrowRight className="h-4 w-4" aria-hidden />
     </SpecularButton>
   );
 }
@@ -69,53 +76,72 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="sec on-dark overflow-hidden text-white !pt-[112px] lg:!pt-[136px] !pb-0"
-      style={heroGround}
+      className="sec overflow-hidden !pt-[112px] lg:!pt-[136px] !pb-0"
+      style={{ backgroundColor: "hsl(296 30% 98%)" }}
     >
-      <div className="wrap hero-text">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[520px] blur-3xl"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 60% 70% at 50% 100%, hsl(296 45% 62% / 0.55), transparent 70%), radial-gradient(ellipse 35% 50% at 10% 100%, hsl(296 40% 75% / 0.5), transparent 70%), radial-gradient(ellipse 35% 50% at 92% 90%, hsl(296 40% 75% / 0.5), transparent 70%)",
+        }}
+      />
+      <div className="wrap hero-text relative text-center">
         <div className="animate-fade-up">
-          <div className="mb-5 flex flex-col gap-1.5 text-sm text-white sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6">
-            <p className="flex items-center gap-2 font-semibold">
-              <Check className="h-4 w-4 text-white" aria-hidden />
-              Um único plano, com tudo liberado
+          {PURPLE_FRIDAY && (
+            <p className="mx-auto mb-6 inline-flex flex-wrap items-center justify-center gap-x-2 rounded-full border border-primary/20 bg-card px-4 py-1.5 text-sm font-medium text-primary shadow-card">
+              Purple Friday: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
+              <strong className="font-semibold">{formatBRL(annualPrice)}</strong>
             </p>
-            {PURPLE_FRIDAY && (
-              <p>
-                Purple Friday: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
-                <strong className="ml-1 font-semibold">{formatBRL(annualPrice)}</strong>
-              </p>
-            )}
-          </div>
-          <h1 className="text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4rem]">
+          )}
+          <h1 className="mx-auto max-w-4xl text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4rem]">
             Feito pra quem vive a fisioterapia pélvica.
           </h1>
-          <p className="mt-5 max-w-4xl text-lg leading-relaxed text-white/80">
-            <span className="lg:block">
+          <p className="mx-auto mt-5 max-w-3xl text-pretty text-lg leading-relaxed text-muted-foreground">
+            <span className="rounded-md bg-primary-soft px-1.5 py-0.5 font-medium text-foreground">
               Agenda, prontuário, evolução e financeiro no mesmo lugar,
             </span>{" "}
-            <span className="lg:block">
-              para você atender no consultório, na clínica ou no domicílio. Teste por 14&nbsp;dias.
-            </span>
+            para você atender no consultório, na clínica ou no domicílio. Um único plano, com tudo
+            liberado.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <SignupButton />
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="h-12 w-full rounded-xl border-white/30 bg-transparent px-7 text-white hover:bg-white/10 hover:text-white sm:w-auto"
+              className="h-12 w-full rounded-xl px-7 sm:w-auto"
             >
               <a href="#planos">Ver preços</a>
             </Button>
           </div>
+          <p className="mt-4 text-sm text-muted-foreground">
+            14 dias para usar · Sem cartão · Sem inteligência artificial
+          </p>
         </div>
-        <div className="mt-14 sm:mt-16">
+        <div className="mx-auto mt-12 max-h-[300px] max-w-5xl overflow-hidden text-left sm:max-h-[420px] [mask-image:linear-gradient(to_bottom,black_65%,transparent)]">
           <Screen
-            name="perfil"
-            tone="dark"
+            name="dashboard"
             priority
-            alt="Cadastro de uma paciente no sistema: histórico de consultas, resumo clínico e próximas consultas"
+            alt="Dashboard do sistema com consultas de hoje, receita do mês, agenda do dia, calendário e pagamentos pendentes"
           />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Steps() {
+  return (
+    <section id="comece" className="sec !pt-16 lg:!pt-24">
+      <div className="wrap">
+        <h2 className={`${h2} text-center`}>Comece sem cartão</h2>
+        <p className={`${lead} mx-auto max-w-2xl text-center`}>
+          Você tem 14 dias para usar sem pagar e só contrata se fizer sentido.
+        </p>
+        <div className="mt-10">
+          <StepsFragment />
         </div>
       </div>
     </section>
@@ -130,58 +156,62 @@ const lead = "mt-4 text-pretty text-lg leading-relaxed text-muted-foreground";
 
 type Item = { icon: LucideIcon; title: string; text: string };
 
-function ItemList({ items }: { items: Item[] }) {
-  return (
-    <ul className="mt-8 space-y-6">
-      {items.map(({ icon: Icon, title, text }) => (
-        <li key={title} className="flex gap-4">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-primary-soft text-primary">
-            <Icon className="h-5 w-5" aria-hidden />
-          </span>
-          <div>
-            <h3 className="text-lg font-semibold">{title}</h3>
-            <p className="mt-1 text-base leading-relaxed text-muted-foreground">{text}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Split({
+function Feature({
   id,
   eyebrow,
   title,
-  items,
+  text,
   screen,
   alt,
-  flip = false,
+  items,
   muted = false,
 }: {
   id: string;
-  eyebrow?: string;
-  title: string;
-  items: Item[];
-  screen: "evolucoes" | "agenda";
+  eyebrow: string;
+  title: [string, string];
+  text: string;
+  screen: "evolucoes" | "agenda" | "financeiro";
   alt: string;
-  flip?: boolean;
+  items?: Item[];
   muted?: boolean;
 }) {
   return (
     <section id={id} className={`sec ${muted ? "bg-muted/60" : ""}`}>
-      <div className="wrap grid items-center gap-10 lg:grid-cols-12 lg:gap-x-6">
-        <div className={flip ? "lg:col-span-5 lg:col-start-8 lg:row-start-1" : "lg:col-span-5"}>
-          {eyebrow && (
+      <div className="wrap">
+        <div className="grid items-end gap-6 lg:grid-cols-12 lg:gap-x-6">
+          <div className="lg:col-span-7">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
               {eyebrow}
             </p>
-          )}
-          <h2 className={h2}>{title}</h2>
-          <ItemList items={items} />
+            <h2 className={h2}>
+              {title[0]}
+              <span className="block text-primary/60">{title[1]}</span>
+            </h2>
+          </div>
+          <p className="text-pretty text-lg leading-relaxed text-muted-foreground lg:col-span-5">
+            {text}
+          </p>
         </div>
-        <div className={flip ? "lg:col-span-7 lg:row-start-1" : "lg:col-span-7 lg:col-start-6"}>
+        <div className="mx-auto mt-10 max-w-5xl">
           <Screen name={screen} alt={alt} />
         </div>
+        {items && (
+          <ul
+            className={`mt-8 grid gap-4 md:gap-6 ${
+              items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+            }`}
+          >
+            {items.map(({ icon: Icon, title: t, text: d }) => (
+              <li key={t} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary-soft text-primary">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </span>
+                <h3 className="mt-4 text-lg font-semibold">{t}</h3>
+                <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">{d}</p>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );
@@ -189,25 +219,26 @@ function Split({
 
 export function Prontuario() {
   return (
-    <Split
+    <Feature
       id="produto"
-      eyebrow="O que o soupelvi faz por você"
-      title="Prontuário feito para saúde pélvica"
+      eyebrow="Prontuário"
+      title={["Prontuário feito", "para saúde pélvica"]}
+      text="Anamnese, exame físico e evolução no mesmo registro, escritos por você e ligados a cada consulta."
       items={[
         {
           icon: ClipboardList,
           title: "Anamnese estruturada",
-          text: "Fichas pélvica geral e gestação, com seções objetivas e orientações de “o que investigar” ao lado de cada campo. Rascunho com salvamento automático e histórico de revisões.",
+          text: "Duas fichas: pélvica e gestação, com orientações de “o que investigar” ao lado de cada campo. Rascunho com salvamento automático e histórico de revisões.",
         },
         {
           icon: Stethoscope,
           title: "Exame físico completo",
-          text: "Inspeção, avaliação neurológica, mobilidade de tecidos, função do assoalho pélvico, dor, exames complementares e diagnóstico cinesiológico funcional, tudo em um único registro.",
+          text: "Inspeção, avaliação neurológica, mobilidade de tecidos, função do assoalho pélvico, dor e diagnóstico cinesiológico funcional em um único registro.",
         },
         {
           icon: TrendingUp,
           title: "Evolução com técnicas aplicadas",
-          text: "Cada evolução fica ligada à consulta e às técnicas usadas. Você monta o catálogo de técnicas de cada procedimento e acompanha a linha do tempo da paciente.",
+          text: "Cada evolução fica ligada à consulta e às técnicas usadas. Você monta o catálogo de técnicas e acompanha a linha do tempo da paciente.",
         },
       ]}
       screen="evolucoes"
@@ -218,20 +249,21 @@ export function Prontuario() {
 
 export function Rotina() {
   return (
-    <Split
+    <Feature
       id="rotina"
-      flip
       muted
-      title="A rotina de quem atende"
+      eyebrow="Rotina"
+      title={["A rotina de quem atende", "em uma só tela"]}
+      text="Agenda por dia, semana e mês, com aviso de conflito de horário e confirmação por WhatsApp em um clique."
       items={[
         {
           icon: CalendarDays,
           title: "Agenda que acompanha seu dia",
-          text: "Visão de dia, semana e mês, blocos proporcionais à duração, remarcação arrastando e filtro por profissional. Avisa quando há conflito de horário.",
+          text: "Blocos proporcionais à duração, remarcação arrastando e filtro por profissional.",
         },
         {
           icon: MessageCircle,
-          title: "Confirmação por WhatsApp em um clique",
+          title: "Confirmação por WhatsApp",
           text: "A mensagem já sai pronta, com nome, data, hora e profissional. Você personaliza o texto e envia pelo seu WhatsApp.",
         },
       ]}
@@ -243,28 +275,24 @@ export function Rotina() {
 
 export function Finance() {
   return (
-    <section id="financeiro" className="sec">
-      <div className="wrap">
-        <h2 className={h2}>Financeiro simples</h2>
-        <p className={`${lead} max-w-4xl`}>
-          <span className="lg:block">
-            Receitas e despesas, resumo do mês, parcelamento e baixa direto na tela.
-          </span>{" "}
-          <span className="lg:block">Dá para receber a consulta a partir da própria agenda.</span>
-        </p>
-        <div className="mt-10">
-          <Screen
-            name="financeiro"
-            alt="Financeiro do mês com receitas, despesas, faturas pendentes e a lista de registros financeiros"
-          />
-        </div>
-      </div>
-    </section>
+    <Feature
+      id="financeiro"
+      eyebrow="Financeiro"
+      title={["Financeiro simples,", "direto da agenda"]}
+      text="Receitas e despesas, resumo do mês, parcelamento e baixa direto na tela. Dá para receber a consulta a partir da própria agenda."
+      screen="financeiro"
+      alt="Financeiro do mês com receitas, despesas, faturas pendentes e a lista de registros financeiros"
+    />
   );
 }
 
 export function Security() {
   const cards: Item[] = [
+    {
+      icon: BrainCog,
+      title: "Sem inteligência artificial",
+      text: "Na saúde, a decisão é sua. O prontuário não é escrito, resumido nem interpretado por IA: o que está registrado é o que você registrou.",
+    },
     {
       icon: ShieldCheck,
       title: "Pensado para a LGPD",
@@ -279,8 +307,8 @@ export function Security() {
   return (
     <section id="seguranca" className="sec bg-muted/60">
       <div className="wrap">
-        <h2 className={h2}>Segurança e dados</h2>
-        <ul className="mt-10 grid gap-6 md:grid-cols-2">
+        <h2 className={h2}>Segurança, dados e sem IA</h2>
+        <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {cards.map(({ icon: Icon, title, text }) => (
             <li
               key={title}
@@ -307,7 +335,7 @@ export function ComingSoon() {
           <p className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-white">
             <Smartphone className="h-4 w-4" aria-hidden /> Em breve
           </p>
-          <h2 className={h2}>Portal e app da paciente</h2>
+          <h2 className={h2}>App da paciente</h2>
         </div>
         <p className="text-pretty text-lg leading-relaxed text-white/80 lg:col-span-7 lg:col-start-6">
           A paciente acessa suas consultas e seu plano de tratamento, e registra o diário miccional
@@ -327,15 +355,19 @@ const faq = [
     a: "Todos. A soupelvi tem um único plano, com tudo liberado: não há plano de entrada nem recurso vendido à parte.",
   },
   {
-    q: "Cartão no período de teste",
+    q: "Uso de inteligência artificial",
+    a: "A soupelvi não usa IA. Anamnese, exame físico e evolução são escritos por você, e nada no prontuário é gerado, resumido ou interpretado automaticamente.",
+  },
+  {
+    q: "Cartão nos 14 dias iniciais",
     a: "Não. Você cria a conta com nome e e-mail e usa por 14 dias. O pagamento só aparece se você decidir contratar.",
   },
   {
     q: "Cadastro por e-mail",
-    a: "Você recebe um link por e-mail, completa o seu cadastro e já entra na plataforma em período de teste.",
+    a: "Você recebe um link por e-mail, completa o seu cadastro e já entra na plataforma para usar por 14 dias.",
   },
   {
-    q: "Pagamento depois do teste",
+    q: "Pagamento depois dos 14 dias",
     a: "Dentro da plataforma, na área de assinatura. Você escolhe entre mensal e anual, e o anual aceita Pix, cartão à vista ou parcelado em até 12 vezes.",
   },
   {
@@ -354,14 +386,11 @@ export function Pricing() {
       <div className="wrap grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
         <div className="lg:col-span-5">
           <h2 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
-            Teste por 14&nbsp;dias
+            Um plano, tudo liberado
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Todo plano tem 14 dias de teste. Você só paga se decidir continuar.
+            Você usa por 14 dias sem pagar e só paga se decidir continuar.
           </p>
-          <div className="mt-8">
-            <StepsFragment />
-          </div>
         </div>
         <div className="lg:col-span-7 lg:col-start-6">
           <div className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8">
@@ -421,14 +450,18 @@ export function Faq() {
             Do cadastro ao cancelamento, o que você precisa saber antes de começar.
           </p>
         </div>
-        <dl className="lg:col-span-7 lg:col-start-6">
+        <Accordion type="single" collapsible className="lg:col-span-7 lg:col-start-6">
           {faq.map((f) => (
-            <div key={f.q} className="border-b border-border py-4 first:pt-0 md:py-5">
-              <dt className="text-lg font-semibold">{f.q}</dt>
-              <dd className="mt-2 text-base leading-relaxed text-muted-foreground">{f.a}</dd>
-            </div>
+            <AccordionItem key={f.q} value={f.q} className="border-border">
+              <AccordionTrigger className="gap-4 py-5 text-lg font-semibold hover:no-underline [&>svg]:h-5 [&>svg]:w-5">
+                {f.q}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-base leading-relaxed text-muted-foreground">
+                {f.a}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </dl>
+        </Accordion>
       </div>
     </section>
   );
@@ -444,7 +477,7 @@ export function Closing() {
     <footer className="sec closing on-dark text-white" style={heroGround}>
       <div className="wrap">
         <h2 className="text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
-          Teste a soupelvi por 14&nbsp;dias.
+          Experimente a soupelvi por 14&nbsp;dias.
         </h2>
         <p className="mt-6 max-w-4xl text-lg text-white/80">
           Crie sua conta com nome e e-mail e contrate só se fizer sentido para você.
