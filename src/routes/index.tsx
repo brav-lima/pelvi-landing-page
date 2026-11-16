@@ -8,6 +8,7 @@ import {
   Finance,
   Security,
   ComingSoon,
+  Community,
   Pricing,
   Faq,
   Closing,
@@ -29,6 +30,7 @@ function Index() {
         <Finance />
         <Security />
         <ComingSoon />
+        <Community />
         <Pricing />
         <Faq />
       </main>

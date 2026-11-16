@@ -98,12 +98,14 @@ export function Hero() {
           <h1 className="mx-auto max-w-4xl text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4rem]">
             Feito pra quem vive a fisioterapia pélvica.
           </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-pretty text-lg leading-relaxed text-muted-foreground">
-            <span className="rounded-md bg-primary-soft px-1.5 py-0.5 font-medium text-foreground">
+          <p className="mx-auto mt-5 max-w-3xl text-balance text-lg leading-relaxed text-muted-foreground">
+            Chega de caderno e planilha.
+            <br />
+            <span className="rounded-md box-decoration-clone bg-primary-soft sm:whitespace-nowrap px-1.5 py-0.5 font-medium text-foreground">
               Agenda, prontuário, evolução e financeiro no mesmo lugar,
             </span>{" "}
-            para você atender no consultório, na clínica ou no domicílio. Um único plano, com tudo
-            liberado.
+            com anamneses pensadas para a pélvica e para a gestação. Para você atender no
+            consultório, na clínica ou no domicílio, em um único plano com tudo liberado.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <SignupButton />
@@ -118,6 +120,9 @@ export function Hero() {
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
             14 dias para usar · Sem cartão · Sem inteligência artificial
+          </p>
+          <p className="mt-2 text-sm font-medium text-primary">
+            Lançamento: estamos construindo junto com quem atende
           </p>
         </div>
         <div className="mx-auto mt-12 max-h-[300px] max-w-5xl overflow-hidden text-left sm:max-h-[420px] [mask-image:linear-gradient(to_bottom,black_65%,transparent)]">
@@ -223,7 +228,7 @@ export function Prontuario() {
       id="produto"
       eyebrow="Prontuário"
       title={["Prontuário feito", "para saúde pélvica"]}
-      text="Anamnese, exame físico e evolução no mesmo registro, escritos por você e ligados a cada consulta."
+      text="Fichas de anamnese específicas para a pélvica e para a gestação, exame físico e evolução no mesmo registro, escritos por você e ligados a cada consulta."
       items={[
         {
           icon: ClipboardList,
@@ -307,7 +312,10 @@ export function Security() {
   return (
     <section id="seguranca" className="sec bg-muted/60">
       <div className="wrap">
-        <h2 className={h2}>Segurança, dados e sem IA</h2>
+        <h2 className={h2}>Dados sensíveis, tratados com cuidado</h2>
+        <p className={`${lead} max-w-2xl text-balance`}>
+          Segurança, LGPD e o seu controle sobre cada registro, sem inteligência artificial.
+        </p>
         <ul className="mt-10 grid gap-6 md:grid-cols-3">
           {cards.map(({ icon: Icon, title, text }) => (
             <li
@@ -339,7 +347,25 @@ export function ComingSoon() {
         </div>
         <p className="text-pretty text-lg leading-relaxed text-white/80 lg:col-span-7 lg:col-start-6">
           A paciente acessa suas consultas e seu plano de tratamento, e registra o diário miccional
-          e o diário evacuatório em casa. Você acompanha tudo no prontuário.
+          e o diário evacuatório em casa, sem depender da memória na hora da consulta. Você
+          acompanha tudo no prontuário.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+export function Community() {
+  return (
+    <section id="comunidade" className="sec">
+      <div className="wrap text-center">
+        <h2 className={`${h2} mx-auto max-w-3xl text-balance`}>
+          Estamos construindo junto com quem atende
+        </h2>
+        <p className={`${lead} mx-auto max-w-2xl text-balance`}>
+          A soupelvi está começando e cresce com quem atende.
+          <br />
+          Toda sugestão enviada dentro da plataforma entra no roadmap.
         </p>
       </div>
     </section>
@@ -347,7 +373,7 @@ export function ComingSoon() {
 }
 
 /* ------------------------------------------------------------------ */
-/* PLANOS + DÚVIDAS                                                     */
+/* PLANOS + DÚVIDAS                                                    */
 /* ------------------------------------------------------------------ */
 const faq = [
   {
