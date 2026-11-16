@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/pelvi/Header";
+import { Hero } from "@/components/pelvi/Hero";
 import {
-  Hero,
   Steps,
   Prontuario,
   Rotina,

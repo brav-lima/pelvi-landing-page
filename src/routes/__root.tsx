@@ -8,7 +8,7 @@ const TITLE = "soupelvi — feito pra quem vive a fisioterapia pélvica";
 const DESCRIPTION =
   "Feito pra quem vive a fisioterapia pélvica: chega de caderno e planilha. Agenda, prontuário com anamneses de pélvica e gestação, evolução e financeiro no mesmo lugar, em um único plano e sem inteligência artificial. Experimente por 14 dias.";
 const OG_DESCRIPTION =
-  "Feito pra quem vive a fisioterapia pélvica. Chega de caderno e planilha: um único plano, tudo liberado, sem IA. Construído junto com quem atende. Experimente por 14 dias.";
+  "Feito pra quem vive a fisioterapia pélvica. Chega de caderno e planilha: um único plano, tudo liberado, sem IA. Construída junto com quem atende. Experimente por 14 dias.";
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [

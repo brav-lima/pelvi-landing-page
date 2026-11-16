@@ -20,7 +20,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import SpecularButton from "@/components/ui/specular-button";
 import { specularPlum } from "@/lib/specular";
 import { Logo } from "@/components/pelvi/Logo";
@@ -68,74 +67,6 @@ const heroGround = {
   backgroundImage:
     "radial-gradient(circle 520px at 0% 0%, hsl(296 28% 32% / 0.35), transparent 70%), radial-gradient(circle 460px at 100% 100%, hsl(296 28% 22% / 0.5), transparent 70%)",
 } as const;
-
-/* ------------------------------------------------------------------ */
-/* HERO — promessa no topo e o sistema logo abaixo                      */
-/* ------------------------------------------------------------------ */
-export function Hero() {
-  return (
-    <section
-      id="top"
-      className="sec overflow-hidden !pt-[112px] lg:!pt-[136px] !pb-0"
-      style={{ backgroundColor: "hsl(296 30% 98%)" }}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[520px] blur-3xl"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 60% 70% at 50% 100%, hsl(296 45% 62% / 0.55), transparent 70%), radial-gradient(ellipse 35% 50% at 10% 100%, hsl(296 40% 75% / 0.5), transparent 70%), radial-gradient(ellipse 35% 50% at 92% 90%, hsl(296 40% 75% / 0.5), transparent 70%)",
-        }}
-      />
-      <div className="wrap hero-text relative text-center">
-        <div className="animate-fade-up">
-          {PURPLE_FRIDAY && (
-            <p className="mx-auto mb-6 inline-flex flex-wrap items-center justify-center gap-x-2 rounded-full border border-primary/20 bg-card px-4 py-1.5 text-sm font-medium text-primary shadow-card">
-              Purple Friday: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
-              <strong className="font-semibold">{formatBRL(annualPrice)}</strong>
-            </p>
-          )}
-          <h1 className="mx-auto max-w-4xl text-[2.5rem] font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4rem]">
-            Feito pra quem vive a fisioterapia pélvica.
-          </h1>
-          <p className="mx-auto mt-5 max-w-3xl text-balance text-lg leading-relaxed text-muted-foreground">
-            Chega de caderno e planilha.
-            <br />
-            <span className="rounded-md box-decoration-clone bg-primary-soft sm:whitespace-nowrap px-1.5 py-0.5 font-medium text-foreground">
-              Agenda, prontuário, evolução e financeiro no mesmo lugar,
-            </span>{" "}
-            com anamneses pensadas para a pélvica e para a gestação. Para você atender no
-            consultório, na clínica ou no domicílio, em um único plano com tudo liberado.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <SignupButton />
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="h-12 w-full rounded-xl px-7 sm:w-auto"
-            >
-              <a href="#planos">Ver preços</a>
-            </Button>
-          </div>
-          <p className="mt-4 text-sm text-muted-foreground">
-            14 dias para usar · Sem cartão · Sem inteligência artificial
-          </p>
-          <p className="mt-2 text-sm font-medium text-primary">
-            Lançamento: estamos construindo junto com quem atende
-          </p>
-        </div>
-        <div className="mx-auto mt-12 max-h-[300px] max-w-5xl overflow-hidden text-left sm:max-h-[420px] [mask-image:linear-gradient(to_bottom,black_65%,transparent)]">
-          <Screen
-            name="dashboard"
-            priority
-            alt="Dashboard do sistema com consultas de hoje, receita do mês, agenda do dia, calendário e pagamentos pendentes"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 export function Steps() {
   return (
@@ -355,18 +286,40 @@ export function ComingSoon() {
   );
 }
 
+/* Profissionais que usam desde o início e autorizaram aparecer. Com 8 ou mais, trocar a fileira por carrossel. */
+const PARTNERS = [
+  {
+    name: "Carol Lazzarim, fisioterapia pélvica",
+    src: "/parceiros/carol-lazzarim.png",
+    width: 480,
+    height: 447,
+  },
+];
+
 export function Community() {
   return (
-    <section id="comunidade" className="sec">
+    <section id="comunidade" className="sec bg-muted/60">
       <div className="wrap text-center">
-        <h2 className={`${h2} mx-auto max-w-3xl text-balance`}>
-          Estamos construindo junto com quem atende
-        </h2>
+        <h2 className={`${h2} mx-auto max-w-3xl text-balance`}>Evoluímos com quem atende</h2>
         <p className={`${lead} mx-auto max-w-2xl text-balance`}>
-          A soupelvi está começando e cresce com quem atende.
+          Desde o início, junto com profissionais que atendem todos os dias.
           <br />
-          Toda sugestão enviada dentro da plataforma entra no roadmap.
+          Toda sugestão enviada dentro da plataforma entra nos nossos planos.
         </p>
+        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+          {PARTNERS.map(({ name, src, width, height }) => (
+            <li key={name}>
+              <img
+                src={src}
+                alt={name}
+                width={width}
+                height={height}
+                loading="lazy"
+                className="h-24 w-auto sm:h-28"
+              />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
