@@ -1,479 +1,524 @@
-import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
-  Loader2,
-  CheckCircle2,
-  ShieldCheck,
-  Sparkles,
-  MapPin,
-  HeartHandshake,
-  Clock,
-  Users,
+  BrainCog,
+  CalendarDays,
+  Check,
+  ClipboardList,
+  Download,
+  MessageCircle,
   PauseCircle,
+  ShieldCheck,
+  Smartphone,
+  Stethoscope,
+  TrendingUp,
+  type LucideIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { addAudienceContact } from "@/server/addAudienceContact";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import SpecularButton from "@/components/ui/specular-button";
+import { specularPlum } from "@/lib/specular";
 import { Logo } from "@/components/pelvi/Logo";
+import { Screen, StepsFragment } from "@/components/pelvi/product-ui";
 import { SIGNUPS_PAUSED } from "@/lib/signups";
+import {
+  ANNUAL_LIST_PRICE,
+  PURPLE_FRIDAY,
+  annualCashPrice,
+  annualInstallment,
+  annualPrice,
+  formatBRL,
+} from "@/lib/promo";
 
 /* ------------------------------------------------------------------ */
-/* AVISO DE INSCRIÇÕES PAUSADAS                                         */
+/* AÇÃO PRINCIPAL                                                       */
 /* ------------------------------------------------------------------ */
-function SignupsPausedNotice({ className = "" }: { className?: string }) {
-  return (
-    <div
-      role="status"
-      className={`mx-auto flex max-w-2xl items-start gap-3 rounded-2xl bg-white px-5 py-4 text-left text-sm shadow-soft ${className}`}
-    >
-      <PauseCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden />
-      <p className="text-zinc-900">
-        <span className="font-semibold">As inscrições estão pausadas neste momento.</span> O período
-        de inscrições para o teste foi encerrado e não estamos recebendo novos cadastros por
-        enquanto. Obrigada pelo interesse!
-      </p>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* FORMULÁRIO DA LISTA                                                  */
-/* ------------------------------------------------------------------ */
-function EarlyAccessForm({
-  className,
-  inputClass = "",
-  idPrefix,
-}: {
-  className?: string;
-  inputClass?: string;
-  idPrefix: string;
-}) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setStatus("loading");
-    try {
-      await addAudienceContact({ data: { name, email } });
-      setStatus("done");
-    } catch {
-      setStatus("error");
-    }
-  }
-
-  if (status === "done") {
-    const firstName = name.trim().split(" ")[0];
+export function SignupButton({ className = "" }: { className?: string }) {
+  if (SIGNUPS_PAUSED) {
     return (
-      <div
+      <p
         role="status"
-        className={`flex items-start gap-3 rounded-2xl bg-white px-5 py-4 text-left text-sm shadow-soft ${className}`}
+        className={`flex items-center gap-2 rounded-xl bg-white px-4 py-3 text-sm text-zinc-900 ${className}`}
       >
-        <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
-        <p className="text-zinc-900">
-          <span className="font-semibold">
-            Pronto{firstName ? `, ${firstName}` : ""}! Seu lugar está guardado.
-          </span>{" "}
-          A partir de 31/10 os primeiros acessos começam a sair, aos poucos. Fique de olho no seu
-          e-mail.
-        </p>
-      </div>
+        <PauseCircle className="h-5 w-5 text-primary shrink-0" aria-hidden />
+        Os cadastros estão pausados neste momento.
+      </p>
     );
   }
-
   return (
-    <form onSubmit={handleSubmit} className={className} noValidate={false}>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <label htmlFor={`${idPrefix}-name`} className="sr-only">
-          Seu nome
-        </label>
-        <Input
-          id={`${idPrefix}-name`}
-          name="name"
-          autoComplete="given-name"
-          placeholder="Como podemos te chamar?"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          minLength={2}
-          disabled={status === "loading"}
-          className={`h-12 rounded-xl bg-background/80 backdrop-blur-sm ${inputClass}`}
-        />
-        <label htmlFor={`${idPrefix}-email`} className="sr-only">
-          Seu e-mail
-        </label>
-        <Input
-          id={`${idPrefix}-email`}
-          name="email"
-          type="email"
-          autoComplete="email"
-          inputMode="email"
-          placeholder="Seu melhor e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={status === "loading"}
-          className={`h-12 rounded-xl bg-background/80 backdrop-blur-sm ${inputClass}`}
-        />
-        <Button
-          type="submit"
-          size="lg"
-          disabled={status === "loading"}
-          className="h-12 rounded-xl px-7 shrink-0 shadow-soft"
-        >
-          {status === "loading" ? (
-            <>
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span className="sr-only">Guardando seu lugar…</span>
-            </>
-          ) : (
-            <>
-              Guardar meu lugar <ArrowRight className="ml-2 h-4 w-4" />
-            </>
-          )}
-        </Button>
-      </div>
-      <p className="mt-3 text-xs opacity-80">
-        Ao enviar, você concorda com os{" "}
-        <Link to="/termos" className="underline underline-offset-2">
-          Termos de uso
-        </Link>{" "}
-        e a{" "}
-        <Link to="/privacidade" className="underline underline-offset-2">
-          Política de privacidade
-        </Link>
-        .
-      </p>
-      {status === "error" && (
-        <p role="alert" className="mt-3 text-sm text-red-300">
-          Não conseguimos guardar sua inscrição agora. Confira o e-mail e tente de novo em
-          instantes.
-        </p>
-      )}
-    </form>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* HERO                                                                 */
-/* ------------------------------------------------------------------ */
-// Brilho com queda suave (curva tipo gaussiana): sem "quina" visível na borda.
-const GLOW_STOPS = [1, 0.85, 0.65, 0.45, 0.28, 0.15, 0.07, 0.02, 0];
-function glow(shape: string, hsl: string, alpha: number) {
-  const stops = GLOW_STOPS.map(
-    (k, i) =>
-      `hsl(${hsl} / ${+(alpha * k).toFixed(4)}) ${Math.round((i / (GLOW_STOPS.length - 1)) * 100)}%`,
-  );
-  return `radial-gradient(${shape}, ${stops.join(", ")})`;
-}
-
-export function Hero() {
-  return (
-    <section
-      id="top"
-      className="relative overflow-hidden"
-      style={{
-        backgroundColor: "hsl(296 28% 12%)",
-        backgroundImage: [
-          glow("circle 480px at 0% 0%", "296 28% 32%", 0.2),
-          glow("circle 400px at 100% 260px", "296 28% 22%", 0.4),
-        ].join(", "),
-      }}
+    <SpecularButton
+      as={Link}
+      to="/cadastro"
+      size="md"
+      {...specularPlum}
+      className={`min-h-12 w-full sm:w-auto ${className}`}
     >
-      <div className="mx-auto max-w-6xl px-6 pt-10 pb-20 lg:pt-12 lg:pb-28 text-center relative animate-fade-up">
-        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-semibold tracking-wide uppercase">
-          <Sparkles className="h-3 w-3" strokeWidth={1.5} /> 13 de outubro · Dia do Fisioterapeuta
-        </span>
-        <div className="mt-6 flex justify-center">
-          <Logo variant="vertical-branco" priority className="h-20 md:h-24" />
+      Experimente por 14 dias <ArrowRight className="h-4 w-4" aria-hidden />
+    </SpecularButton>
+  );
+}
+
+const heroGround = {
+  backgroundColor: "hsl(296 28% 12%)",
+  backgroundImage:
+    "radial-gradient(circle 520px at 0% 0%, hsl(296 28% 32% / 0.35), transparent 70%), radial-gradient(circle 460px at 100% 100%, hsl(296 28% 22% / 0.5), transparent 70%)",
+} as const;
+
+export function Steps() {
+  return (
+    <section id="comece" className="sec !pt-16 lg:!pt-24">
+      <div className="wrap">
+        <h2 className={`${h2} text-center`}>Comece sem cartão</h2>
+        <p className={`${lead} mx-auto max-w-2xl text-center`}>
+          Você tem 14 dias para usar sem pagar e só contrata se fizer sentido.
+        </p>
+        <div className="mt-10">
+          <StepsFragment />
         </div>
-        <p className="mt-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/70">
-          Plataforma para fisioterapeutas pélvicas
-        </p>
-        <h1 className="mt-4 text-[2rem] sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.15] font-semibold tracking-tight text-white">
-          <span className="block">Um espaço só seu,</span>{" "}
-          <span className="block">feito pra&nbsp;quem vive a&nbsp;fisioterapia&nbsp;pélvica.</span>
-        </h1>
-        <p className="mt-6 text-white/75 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto">
-          <span className="lg:block">
-            Você atende aqui, ali, na casa da paciente, e carrega cada história com você.
-          </span>{" "}
-          <span className="lg:block">A&nbsp;gente criou uma plataforma pra isso.</span>{" "}
-          <span className="lg:block">
-            Ainda não dá pra mostrar tudo, mas já dá pra&nbsp;guardar o seu lugar.
-          </span>
-        </p>
-        <p className="mt-8 text-sm text-white/70">
-          {SIGNUPS_PAUSED
-            ? "Inscrições pausadas · período de inscrições do teste encerrado"
-            : "Acesso antecipado · poucas vagas · grátis durante o período de teste"}
-        </p>
-        <div className="mt-4 mx-auto max-w-3xl">
-          {SIGNUPS_PAUSED ? (
-            <SignupsPausedNotice />
-          ) : (
-            <EarlyAccessForm idPrefix="hero" inputClass="border-white/20 text-foreground" />
-          )}
-        </div>
-        <p className="mt-4 text-xs text-white/50">
-          <span>Sem spam</span>
-          <span aria-hidden="true"> · </span>
-          <span>Seus dados protegidos pela LGPD</span>
-          <span aria-hidden="true"> · </span>
-          <span>Saia quando quiser</span>
-        </p>
       </div>
     </section>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/* PRA VOCÊ (reconhecimento, sem revelar funcionalidades)               */
+/* RECURSOS — uma tela real por recurso                                 */
 /* ------------------------------------------------------------------ */
-const recognition = [
-  {
-    icon: MapPin,
-    t: "Seu trabalho não cabe em um endereço só",
-    d: "Consultório, clínica parceira, domicílio. Você vai aonde a paciente precisa, e tudo o que importa deveria ir junto.",
-  },
-  {
-    icon: HeartHandshake,
-    t: "A pélvica pede outro olhar",
-    d: "Escuta, delicadeza e detalhes que ferramentas genéricas nunca foram feitas pra entender.",
-  },
-  {
-    icon: Clock,
-    t: "Seu tempo é das pacientes",
-    d: "O que acontece fora da sessão deveria pesar menos no fim do dia.",
-  },
-];
+const h2 = "text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]";
+const lead = "mt-4 text-pretty text-lg leading-relaxed text-muted-foreground";
 
-export function ForYou() {
+type Item = { icon: LucideIcon; title: string; text: string };
+
+function Feature({
+  id,
+  eyebrow,
+  title,
+  text,
+  screen,
+  alt,
+  items,
+  muted = false,
+}: {
+  id: string;
+  eyebrow: string;
+  title: [string, string];
+  text: string;
+  screen: "evolucoes" | "agenda" | "financeiro";
+  alt: string;
+  items?: Item[];
+  muted?: boolean;
+}) {
   return (
-    <section id="pra-voce" className="py-24 bg-background">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">
-            A gente te escutou
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            <span className="block">A clínica pode mudar.</span>{" "}
-            <span className="block text-primary">
-              A&nbsp;história com&nbsp;cada&nbsp;paciente continua&nbsp;sua.
-            </span>
-          </h2>
-        </div>
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
-          {recognition.map(({ icon: Icon, t, d }) => (
-            <div key={t} className="rounded-3xl p-7 bg-card border border-border/60">
-              <Icon className="h-6 w-6 text-primary" strokeWidth={1.5} aria-hidden />
-              <h3 className="mt-5 text-lg font-semibold">{t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-12 text-center text-muted-foreground">
-          E o que tem lá dentro?{" "}
-          <span className="text-foreground font-medium">Quem entra primeiro descobre antes.</span>
-        </p>
-        <div className="mt-8 mx-auto max-w-2xl rounded-2xl border border-border/60 bg-muted/40 px-6 py-5 flex items-start gap-4">
-          <Users className="h-5 w-5 text-primary shrink-0 mt-0.5" strokeWidth={1.5} aria-hidden />
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            <span className="text-foreground font-medium">
-              Tem uma clínica com outras fisioterapeutas?
-            </span>{" "}
-            A soupelvi nasceu pensando em você, mas também está pronta pra receber a sua equipe.
-            Entre na lista e conte pra gente quando o convite chegar.
+    <section id={id} className={`sec ${muted ? "bg-muted/60" : ""}`}>
+      <div className="wrap">
+        <div className="grid items-end gap-6 lg:grid-cols-12 lg:gap-x-6">
+          <div className="lg:col-span-7">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+              {eyebrow}
+            </p>
+            <h2 className={h2}>
+              {title[0]}
+              <span className="block text-primary/60">{title[1]}</span>
+            </h2>
+          </div>
+          <p className="text-pretty text-lg leading-relaxed text-muted-foreground lg:col-span-5">
+            {text}
           </p>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* COMO VAI FUNCIONAR                                                   */
-/* ------------------------------------------------------------------ */
-const timeline = [
-  {
-    n: "01",
-    t: "Até 31 de outubro",
-    d: "Período de inscrições do teste. Ele foi encerrado e as inscrições estão pausadas.",
-  },
-  {
-    n: "02",
-    t: "A partir de 31 de outubro",
-    d: "Os primeiros acessos começam a sair por e-mail, aos poucos, para quem está na lista.",
-  },
-  {
-    n: "03",
-    t: "Com você junto",
-    d: "Durante o teste, o que você contar pra gente molda o que vem depois.",
-  },
-];
-
-export function Timeline() {
-  return (
-    <section id="como-funciona" className="py-24 bg-muted/50">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="max-w-xl mx-auto text-center">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">
-            Como vai funcionar
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-foreground leading-tight">
-            <span className="block">Sem pressa,</span>{" "}
-            <span className="block text-primary">um passo de&nbsp;cada&nbsp;vez.</span>
-          </h2>
+        <div className="mx-auto mt-10 max-w-5xl">
+          <Screen name={screen} alt={alt} />
         </div>
-        <ol className="mt-14 grid md:grid-cols-3 gap-5">
-          {timeline.map(({ n, t, d }) => (
-            <li
-              key={n}
-              className="rounded-3xl p-6 bg-card border border-border/60 hover:border-primary/40 hover:shadow-card transition-all duration-300"
-            >
-              <span className="text-4xl font-bold text-border/80 font-display" aria-hidden>
-                {n}
-              </span>
-              <h3 className="mt-4 text-lg font-semibold">{t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* PRIMEIROS ACESSOS                                                     */
-/* ------------------------------------------------------------------ */
-const testerHighlights = [
-  "Poucas vagas, por escolha: queremos acompanhar cada pessoa de perto.",
-  "Acesso gratuito durante todo o período de teste.",
-  "Um canal direto pra contar o que funciona, o que falta e o que incomoda.",
-  "Uso de verdade, desde o primeiro dia: com as suas pacientes, no consultório, na clínica ou no domicílio.",
-  "Os seus dados e os das suas pacientes tratados com sigilo, conforme a LGPD.",
-];
-
-export function TesterProgram() {
-  return (
-    <section id="primeiros-acessos" className="py-24 bg-background">
-      <div className="mx-auto max-w-5xl px-6">
-        <div className="rounded-3xl p-8 md:p-12 bg-card border border-border/60 shadow-card">
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">
-            Primeiros acessos
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold text-foreground leading-tight">
-            Um grupo pequeno, pra&nbsp;construir com&nbsp;calma e&nbsp;de&nbsp;perto.
-          </h2>
-          <ul className="mt-10 space-y-4">
-            {testerHighlights.map((item) => (
-              <li key={item} className="flex items-start gap-3">
-                <ShieldCheck
-                  className="h-5 w-5 text-primary shrink-0 mt-0.5"
-                  strokeWidth={1.5}
-                  aria-hidden
-                />
-                <span className="text-foreground leading-relaxed">{item}</span>
+        {items && (
+          <ul
+            className={`mt-8 grid gap-4 md:gap-6 ${
+              items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+            }`}
+          >
+            {items.map(({ icon: Icon, title: t, text: d }) => (
+              <li key={t} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary-soft text-primary">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </span>
+                <h3 className="mt-4 text-lg font-semibold">{t}</h3>
+                <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">{d}</p>
               </li>
             ))}
           </ul>
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 rounded-2xl bg-primary/5 p-6">
-            <p className="text-sm text-muted-foreground">
-              {SIGNUPS_PAUSED
-                ? "As inscrições estão pausadas neste momento. O período de inscrições do teste foi encerrado."
-                : "A lista fica aberta até 31 de outubro. Depois disso, os acessos começam a sair."}
-            </p>
-            {!SIGNUPS_PAUSED && (
-              <Button asChild className="rounded-xl px-6 shrink-0">
-                <a href="#lista">
-                  Guardar meu lugar <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            )}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* CTA FINAL                                                            */
-/* ------------------------------------------------------------------ */
-export function CtaSection() {
-  return (
-    <section id="lista" className="px-4 sm:px-6 pb-24 pt-4 scroll-mt-16">
-      <div
-        className="mx-auto max-w-4xl rounded-3xl px-5 sm:px-8 py-16 sm:py-20 text-center relative overflow-hidden text-white"
-        style={{
-          backgroundImage: [
-            "radial-gradient(circle at 0% 0%, hsl(0 0% 100% / 0.10) 0%, hsl(0 0% 100% / 0.06) 15%, hsl(0 0% 100% / 0.03) 30%, hsl(0 0% 100% / 0) 50%)",
-            "radial-gradient(circle at 100% 100%, hsl(0 0% 100% / 0.05) 0%, hsl(0 0% 100% / 0.03) 15%, hsl(0 0% 100% / 0.015) 30%, hsl(0 0% 100% / 0) 50%)",
-            "linear-gradient(135deg, hsl(296 28% 32%) 0%, hsl(296 28% 24%) 100%)",
-          ].join(", "),
-        }}
-      >
-        <span className="relative inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold tracking-wide uppercase mb-6">
-          <Sparkles className="h-3 w-3" strokeWidth={1.5} /> Feliz dia, fisio
-        </span>
-        <h2 className="relative text-[1.75rem] sm:text-4xl md:text-5xl font-semibold leading-tight max-w-2xl mx-auto">
-          <span className="block text-white/60 font-medium">
-            Você cuida de&nbsp;tanta&nbsp;gente.
-          </span>{" "}
-          <span className="block">
-            Deixa a&nbsp;gente&nbsp;cuidar de&nbsp;um&nbsp;pedacinho da&nbsp;sua&nbsp;rotina.
-          </span>
-        </h2>
-        <p className="relative mt-5 text-base text-white/80 max-w-2xl mx-auto leading-relaxed text-balance">
-          {SIGNUPS_PAUSED
-            ? "O período de inscrições do teste foi encerrado e as inscrições estão pausadas neste momento."
-            : "A lista de acesso antecipado fica aberta até\u00a031\u00a0de\u00a0outubro, com poucas vagas. Entre agora e receba o convite assim que os acessos começarem a sair."}
-        </p>
-        <div className="relative mt-10 max-w-2xl mx-auto">
-          {SIGNUPS_PAUSED ? (
-            <SignupsPausedNotice />
-          ) : (
-            <EarlyAccessForm idPrefix="cta" inputClass="border-white/30 text-foreground" />
-          )}
-        </div>
-        {!SIGNUPS_PAUSED && (
-          <p className="relative mt-5 text-xs text-white/60">
-            Só vamos te escrever sobre a soupelvi. Nada&nbsp;de&nbsp;spam.
-          </p>
         )}
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* RODAPÉ                                                               */
-/* ------------------------------------------------------------------ */
-export function Footer() {
+export function Prontuario() {
   return (
-    <footer style={{ background: "hsl(296 28% 18%)" }}>
-      <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid gap-4 text-center md:grid-cols-3 md:items-center">
-          <div className="md:text-left">
-            <Logo variant="horizontal-branco" className="h-7 inline-block" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <p className="text-sm" style={{ color: "hsl(296 20% 70%)" }}>
-              Plataforma para fisioterapeutas pélvicas.
+    <Feature
+      id="produto"
+      eyebrow="Prontuário"
+      title={["Prontuário feito", "para saúde pélvica"]}
+      text="Fichas de anamnese específicas para a pélvica e para a gestação, exame físico e evolução no mesmo registro, escritos por você e ligados a cada consulta."
+      items={[
+        {
+          icon: ClipboardList,
+          title: "Anamnese estruturada",
+          text: "Duas fichas: pélvica e gestação, com orientações de “o que investigar” ao lado de cada campo. Rascunho com salvamento automático e histórico de revisões.",
+        },
+        {
+          icon: Stethoscope,
+          title: "Exame físico completo",
+          text: "Inspeção, avaliação neurológica, mobilidade de tecidos, função do assoalho pélvico, dor e diagnóstico cinesiológico funcional em um único registro.",
+        },
+        {
+          icon: TrendingUp,
+          title: "Evolução com técnicas aplicadas",
+          text: "Cada evolução fica ligada à consulta e às técnicas usadas. Você monta o catálogo de técnicas e acompanha a linha do tempo da paciente.",
+        },
+      ]}
+      screen="evolucoes"
+      alt="Evoluções clínicas de uma paciente em linha do tempo, com o atendimento vinculado e o botão de exportar PDF"
+    />
+  );
+}
+
+export function Rotina() {
+  return (
+    <Feature
+      id="rotina"
+      muted
+      eyebrow="Rotina"
+      title={["A rotina de quem atende", "em uma só tela"]}
+      text="Agenda por dia, semana e mês, com aviso de conflito de horário e confirmação por WhatsApp em um clique."
+      items={[
+        {
+          icon: CalendarDays,
+          title: "Agenda que acompanha seu dia",
+          text: "Blocos proporcionais à duração, remarcação arrastando e filtro por profissional.",
+        },
+        {
+          icon: MessageCircle,
+          title: "Confirmação por WhatsApp",
+          text: "A mensagem já sai pronta, com nome, data, hora e profissional. Você personaliza o texto e envia pelo seu WhatsApp.",
+        },
+      ]}
+      screen="agenda"
+      alt="Agenda da semana com atendimentos marcados por dia e horário"
+    />
+  );
+}
+
+export function Finance() {
+  return (
+    <Feature
+      id="financeiro"
+      eyebrow="Financeiro"
+      title={["Financeiro simples,", "direto da agenda"]}
+      text="Receitas e despesas, resumo do mês, parcelamento e baixa direto na tela. Dá para receber a consulta a partir da própria agenda."
+      screen="financeiro"
+      alt="Financeiro do mês com receitas, despesas, faturas pendentes e a lista de registros financeiros"
+    />
+  );
+}
+
+export function Security() {
+  const cards: Item[] = [
+    {
+      icon: BrainCog,
+      title: "Sem inteligência artificial",
+      text: "Na saúde, a decisão é sua. O prontuário não é escrito, resumido nem interpretado por IA: o que está registrado é o que você registrou.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "Pensado para a LGPD",
+      text: "Registro da base legal dos dados sensíveis, aceite de termos com histórico e consentimento da paciente.",
+    },
+    {
+      icon: Download,
+      title: "Seus dados são seus",
+      text: "Exporte um pacote completo com os seus dados quando quiser, inclusive depois do encerramento do contrato.",
+    },
+  ];
+  return (
+    <section id="seguranca" className="sec bg-muted/60">
+      <div className="wrap">
+        <h2 className={h2}>Dados sensíveis, tratados com cuidado</h2>
+        <p className={`${lead} max-w-2xl text-balance`}>
+          Segurança, LGPD e o seu controle sobre cada registro, sem inteligência artificial.
+        </p>
+        <ul className="mt-10 grid gap-6 md:grid-cols-3">
+          {cards.map(({ icon: Icon, title, text }) => (
+            <li
+              key={title}
+              className="rounded-2xl border border-border bg-card p-6 shadow-card md:p-8"
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary-soft text-primary">
+                <Icon className="h-6 w-6" aria-hidden />
+              </span>
+              <h3 className="mt-5 text-xl font-semibold">{title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground">{text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+export function ComingSoon() {
+  return (
+    <section id="em-breve" className="sec on-dark text-white" style={heroGround}>
+      <div className="wrap grid items-center gap-8 lg:grid-cols-12 lg:gap-x-6">
+        <div className="lg:col-span-5">
+          <p className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.12em] text-white">
+            <Smartphone className="h-4 w-4" aria-hidden /> Em breve
+          </p>
+          <h2 className={h2}>App da paciente</h2>
+        </div>
+        <p className="text-pretty text-lg leading-relaxed text-white/80 lg:col-span-7 lg:col-start-6">
+          A paciente acessa suas consultas e seu plano de tratamento, e registra o diário miccional
+          e o diário evacuatório em casa, sem depender da memória na hora da consulta. Você
+          acompanha tudo no prontuário.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* Profissionais que usam desde o início e autorizaram aparecer. Com 8 ou mais, trocar a fileira por carrossel. */
+const PARTNERS = [
+  {
+    name: "Carol Lazzarim, fisioterapia pélvica",
+    src: "/parceiros/carol-lazzarim.png",
+    width: 480,
+    height: 447,
+  },
+];
+
+export function Community() {
+  return (
+    <section id="comunidade" className="sec bg-muted/60">
+      <div className="wrap text-center">
+        <h2 className={`${h2} mx-auto max-w-3xl text-balance`}>Evoluímos com quem atende</h2>
+        <p className={`${lead} mx-auto max-w-2xl text-balance`}>
+          Desde o início, junto com profissionais que atendem todos os dias.
+          <br />
+          Toda sugestão enviada dentro da plataforma entra nos nossos planos.
+        </p>
+        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+          {PARTNERS.map(({ name, src, width, height }) => (
+            <li key={name}>
+              <img
+                src={src}
+                alt={name}
+                width={width}
+                height={height}
+                loading="lazy"
+                className="h-24 w-auto sm:h-28"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* PLANOS + DÚVIDAS                                                    */
+/* ------------------------------------------------------------------ */
+const faq = [
+  {
+    q: "Recursos incluídos",
+    a: "Todos. A soupelvi tem um único plano, com tudo liberado: não há plano de entrada nem recurso vendido à parte.",
+  },
+  {
+    q: "Uso de inteligência artificial",
+    a: "A soupelvi não usa IA. Anamnese, exame físico e evolução são escritos por você, e nada no prontuário é gerado, resumido ou interpretado automaticamente.",
+  },
+  {
+    q: "Cartão nos 14 dias iniciais",
+    a: "Não. Você cria a conta com nome e e-mail e usa por 14 dias. O pagamento só aparece se você decidir contratar.",
+  },
+  {
+    q: "Cadastro por e-mail",
+    a: "Você recebe um link por e-mail, completa o seu cadastro e já entra na plataforma para usar por 14 dias.",
+  },
+  {
+    q: "Pagamento depois dos 14 dias",
+    a: "Dentro da plataforma, na área de assinatura. Você escolhe entre mensal e anual, e o anual aceita Pix, cartão à vista ou parcelado em até 12 vezes.",
+  },
+  {
+    q: "Cancelamento do plano",
+    a: "O cancelamento é feito dentro da plataforma, com uma prévia do valor a estornar antes de você confirmar.",
+  },
+  {
+    q: "Dados das pacientes",
+    a: "São tratados com sigilo, conforme a LGPD, e você pode exportar os seus dados. Leia a Política de privacidade abaixo.",
+  },
+];
+
+export function Pricing() {
+  return (
+    <section id="planos" className="sec">
+      <div className="wrap grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
+        <div className="lg:col-span-5">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
+            Um plano, tudo liberado
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Você usa por 14 dias sem pagar e só paga se decidir continuar.
+          </p>
+        </div>
+        <div className="lg:col-span-7 lg:col-start-6">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h3 className="text-xl font-semibold">Plano único, tudo liberado</h3>
+              {PURPLE_FRIDAY && (
+                <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-foreground">
+                  Purple Friday
+                </span>
+              )}
+            </div>
+            <p className="mt-2 text-base text-muted-foreground">
+              Todos os recursos da plataforma em um só plano, no pagamento anual:
             </p>
-            <address className="not-italic text-xs" style={{ color: "hsl(296 20% 60%)" }}>
-              Edifício Primavera Office | Florianópolis - SC
-            </address>
+            <p className="mt-4 flex flex-wrap items-baseline gap-x-3">
+              {PURPLE_FRIDAY && (
+                <span className="text-lg text-muted-foreground line-through">
+                  {formatBRL(ANNUAL_LIST_PRICE)}
+                </span>
+              )}
+              <span className="font-display text-5xl font-bold text-primary">
+                {formatBRL(annualPrice)}
+              </span>
+              <span className="text-muted-foreground">por ano</span>
+            </p>
+            <ul className="mt-6 space-y-3 text-base">
+              {[
+                `À vista no Pix ou no cartão: ${formatBRL(annualCashPrice)} (10% de desconto)`,
+                `Ou em até 12x de ${formatBRL(annualInstallment)} no cartão`,
+                "Prefere pagar por mês? Escolha o mensal dentro da plataforma",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-2.5">
+                  <Check className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden />
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8">
+              <SignupButton className="sm:w-full" />
+            </div>
           </div>
-          <div className="flex flex-col gap-1 text-xs md:items-end" style={{ color: "hsl(296 20% 60%)" }}>
-            <nav aria-label="Documentos legais" className="flex justify-center gap-4">
-              <Link to="/termos" className="hover:underline">
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function Faq() {
+  return (
+    <section id="faq" className="sec bg-muted/60">
+      <div className="wrap grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
+        <div className="lg:col-span-5">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl lg:text-[2.75rem]">
+            Perguntas frequentes
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Do cadastro ao cancelamento, o que você precisa saber antes de começar.
+          </p>
+        </div>
+        <Accordion type="single" collapsible className="lg:col-span-7 lg:col-start-6">
+          {faq.map((f) => (
+            <AccordionItem key={f.q} value={f.q} className="border-border">
+              <AccordionTrigger className="gap-4 py-5 text-lg font-semibold hover:no-underline [&>svg]:h-5 [&>svg]:w-5">
+                {f.q}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-base leading-relaxed text-muted-foreground">
+                {f.a}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* FECHAMENTO + RODAPÉ — uma tela                                       */
+/* ------------------------------------------------------------------ */
+const legalLink = "inline-flex min-h-11 items-center hover:underline underline-offset-4";
+
+export function Closing() {
+  return (
+    <footer className="sec closing on-dark text-white" style={heroGround}>
+      <div className="wrap">
+        <h2 className="text-4xl font-semibold leading-[1.05] sm:text-6xl lg:text-7xl">
+          Experimente a soupelvi por 14&nbsp;dias.
+        </h2>
+        <p className="mt-6 max-w-4xl text-lg text-white/80">
+          Crie sua conta com nome e e-mail e contrate só se fizer sentido para você.
+        </p>
+        <div className="mt-8">
+          <SignupButton />
+        </div>
+        <div className="mt-20 flex flex-col gap-8 border-t border-white/15 pt-8 text-sm text-white/80 md:flex-row md:items-start md:justify-between">
+          <div>
+            <div className="flex h-11 items-center">
+              <Logo variant="horizontal-branco" className="h-7" />
+            </div>
+            <p className="mt-2">Feito pra quem vive a fisioterapia pélvica.</p>
+            <address className="not-italic">Edifício Primavera Office | Florianópolis - SC</address>
+          </div>
+          <div className="md:text-right">
+            <nav aria-label="Seções e documentos" className="flex flex-wrap gap-x-6 md:justify-end">
+              {[
+                ["#produto", "Prontuário"],
+                ["#rotina", "Rotina"],
+                ["#financeiro", "Financeiro"],
+                ["#planos", "Planos"],
+                ["#faq", "Perguntas"],
+              ].map(([href, label]) => (
+                <a key={href} href={href} className={legalLink}>
+                  {label}
+                </a>
+              ))}
+              <Link to="/termos" className={legalLink}>
                 Termos de uso
               </Link>
-              <Link to="/privacidade" className="hover:underline">
+              <Link to="/privacidade" className={legalLink}>
+                Privacidade
+              </Link>
+            </nav>
+            <p className="mt-2">© 2026 soupelvi · Feito no Brasil</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* Rodapé simples das páginas internas (termos, privacidade). */
+export function Footer() {
+  return (
+    <footer className="on-dark text-white/80" style={{ background: "hsl(296 28% 18%)" }}>
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <div className="grid gap-4 text-center md:grid-cols-3 md:items-center">
+          <div className="md:text-left">
+            <Logo variant="horizontal-branco" className="inline-block h-7" />
+          </div>
+          <div className="flex flex-col gap-1 text-sm">
+            <p>Feito pra quem vive a fisioterapia pélvica.</p>
+            <address className="not-italic">Edifício Primavera Office | Florianópolis - SC</address>
+          </div>
+          <div className="flex flex-col gap-1 text-sm md:items-end">
+            <nav aria-label="Documentos legais" className="flex justify-center gap-4">
+              <Link to="/termos" className={legalLink}>
+                Termos de uso
+              </Link>
+              <Link to="/privacidade" className={legalLink}>
                 Privacidade
               </Link>
             </nav>

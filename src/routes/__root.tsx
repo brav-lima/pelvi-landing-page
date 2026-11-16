@@ -4,11 +4,11 @@ import appCss from "../styles.css?url";
 
 // Domínio público da landing. Ajuste aqui se o domínio final for outro.
 const SITE_URL = "https://www.soupelvi.com.br";
-const TITLE = "soupelvi — plataforma para fisioterapeutas pélvicas";
+const TITLE = "soupelvi — feito pra quem vive a fisioterapia pélvica";
 const DESCRIPTION =
-  "Uma plataforma feita para fisioterapeutas pélvicas, onde quer que você atenda. Inscrições para o teste pausadas no momento.";
+  "Feito pra quem vive a fisioterapia pélvica: chega de caderno e planilha. Agenda, prontuário com anamneses de pélvica e gestação, evolução e financeiro no mesmo lugar, em um único plano e sem inteligência artificial. Experimente por 14 dias.";
 const OG_DESCRIPTION =
-  "Plataforma feita pra quem vive a fisioterapia pélvica. Inscrições para o teste pausadas no momento.";
+  "Feito pra quem vive a fisioterapia pélvica. Chega de caderno e planilha: um único plano, tudo liberado, sem IA. Construída junto com quem atende. Experimente por 14 dias.";
 const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
@@ -80,7 +80,7 @@ export const Route = createRootRoute({
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "soupelvi — plataforma para fisioterapeutas pélvicas",
+        content: "soupelvi — feito pra quem vive a fisioterapia pélvica",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: TITLE },

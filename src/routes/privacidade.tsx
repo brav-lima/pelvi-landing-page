@@ -22,9 +22,9 @@ function Privacidade() {
   return (
     <LegalLayout title="Política de privacidade">
       <p>
-        Esta Política explica como tratamos seus dados pessoais quando você se inscreve na lista
-        de acesso antecipado da soupelvi, em conformidade com a Lei Geral de Proteção de Dados
-        (LGPD, Lei nº 13.709/2018). Ela complementa os <Link to="/termos">Termos de uso</Link>.
+        Esta Política explica como tratamos seus dados pessoais quando você se inscreve na lista de
+        acesso antecipado da soupelvi, em conformidade com a Lei Geral de Proteção de Dados (LGPD,
+        Lei nº 13.709/2018). Ela complementa os <Link to="/termos">Termos de uso</Link>.
       </p>
 
       <h2>1. Controlador</h2>
@@ -41,8 +41,7 @@ function Privacidade() {
         </li>
         <li>
           Dados técnicos básicos de acesso (como endereço IP e tipo de navegador), registrados
-          automaticamente pela infraestrutura de hospedagem para segurança e funcionamento do
-          site.
+          automaticamente pela infraestrutura de hospedagem para segurança e funcionamento do site.
         </li>
       </ul>
       <p>Não coletamos dados de pacientes nem dados pessoais sensíveis por este site.</p>
@@ -50,17 +49,19 @@ function Privacidade() {
       <h2>3. Para que usamos</h2>
       <ul>
         <li>Registrar sua inscrição na lista de acesso antecipado.</li>
-        <li>Enviar e-mails sobre a liberação de acessos, o lançamento e novidades da plataforma.</li>
+        <li>
+          Enviar e-mails sobre a liberação de acessos, o lançamento e novidades da plataforma.
+        </li>
         <li>Responder a contatos e pedidos relacionados aos seus dados.</li>
         <li>Manter a segurança e prevenir abusos no site.</li>
       </ul>
 
       <h2>4. Base legal</h2>
       <p>
-        O tratamento de nome e e-mail se baseia no seu <strong>consentimento</strong> (art. 7º,
-        I, da LGPD), dado ao enviar o formulário. Os registros técnicos de acesso se baseiam no
-        nosso legítimo interesse em manter o site seguro (art. 7º, IX). Você pode retirar o
-        consentimento a qualquer momento.
+        O tratamento de nome e e-mail se baseia no seu <strong>consentimento</strong> (art. 7º, I,
+        da LGPD), dado ao enviar o formulário. Os registros técnicos de acesso se baseiam no nosso
+        legítimo interesse em manter o site seguro (art. 7º, IX). Você pode retirar o consentimento
+        a qualquer momento.
       </p>
 
       <h2>5. Com quem compartilhamos</h2>
@@ -84,9 +85,9 @@ function Privacidade() {
 
       <h2>6. Por quanto tempo guardamos</h2>
       <p>
-        Mantemos nome e e-mail enquanto você estiver na lista e durante o período de lançamento
-        da plataforma. Se você pedir a exclusão ou se descadastrar, removemos seus dados, salvo
-        quando a lei exigir a guarda por mais tempo.
+        Mantemos nome e e-mail enquanto você estiver na lista e durante o período de lançamento da
+        plataforma. Se você pedir a exclusão ou se descadastrar, removemos seus dados, salvo quando
+        a lei exigir a guarda por mais tempo.
       </p>
 
       <h2>7. Seus direitos</h2>
@@ -94,7 +95,10 @@ function Privacidade() {
       <ul>
         <li>confirmação de que tratamos seus dados e acesso a eles;</li>
         <li>correção de dados incompletos, inexatos ou desatualizados;</li>
-        <li>anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade;</li>
+        <li>
+          anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em
+          desconformidade;
+        </li>
         <li>portabilidade dos dados;</li>
         <li>eliminação dos dados tratados com base no consentimento;</li>
         <li>informação sobre com quem compartilhamos seus dados;</li>
@@ -109,9 +113,9 @@ function Privacidade() {
 
       <h2>8. Segurança</h2>
       <p>
-        Adotamos medidas técnicas e organizacionais razoáveis para proteger seus dados contra
-        acesso não autorizado, perda ou alteração, como conexão criptografada (HTTPS) e controle
-        de acesso às credenciais dos serviços que usamos.
+        Adotamos medidas técnicas e organizacionais razoáveis para proteger seus dados contra acesso
+        não autorizado, perda ou alteração, como conexão criptografada (HTTPS) e controle de acesso
+        às credenciais dos serviços que usamos.
       </p>
 
       <h2>9. Cookies</h2>
