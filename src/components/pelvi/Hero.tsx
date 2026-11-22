@@ -2,7 +2,7 @@ import { ClipboardCheck, MessageCircle, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Screen } from "@/components/pelvi/product-ui";
 import { SignupButton } from "@/components/pelvi/sections";
-import { ANNUAL_LIST_PRICE, PURPLE_FRIDAY, annualPrice, formatBRL } from "@/lib/promo";
+import { ANNUAL_LIST_PRICE, PURPLE_WEEK, annualPrice, formatBRL } from "@/lib/promo";
 import "./hero.css";
 
 /* Hero escuro: título riscado à caneta, fundo vivo e cartões flutuantes sobre o sistema. */
@@ -74,9 +74,9 @@ export function Hero() {
 
       <div className="wrap relative text-center">
         <div className="animate-fade-up">
-          {PURPLE_FRIDAY && (
+          {PURPLE_WEEK && (
             <p className="mx-auto mb-6 inline-flex flex-wrap items-center justify-center gap-x-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-sm font-medium text-white">
-              Purple Friday: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
+              Purple Week, até 30/11: plano anual de {formatBRL(ANNUAL_LIST_PRICE)} por{" "}
               <strong className="font-semibold">{formatBRL(annualPrice)}</strong>
             </p>
           )}

@@ -27,7 +27,7 @@ import { Screen, StepsFragment } from "@/components/pelvi/product-ui";
 import { SIGNUPS_PAUSED } from "@/lib/signups";
 import {
   ANNUAL_LIST_PRICE,
-  PURPLE_FRIDAY,
+  PURPLE_WEEK,
   annualCashPrice,
   annualInstallment,
   annualPrice,
@@ -375,9 +375,9 @@ export function Pricing() {
           <div className="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="text-xl font-semibold">Plano único, tudo liberado</h3>
-              {PURPLE_FRIDAY && (
+              {PURPLE_WEEK && (
                 <span className="rounded-full bg-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary-foreground">
-                  Purple Friday
+                  Purple Week
                 </span>
               )}
             </div>
@@ -385,7 +385,7 @@ export function Pricing() {
               Todos os recursos da plataforma em um só plano, no pagamento anual:
             </p>
             <p className="mt-4 flex flex-wrap items-baseline gap-x-3">
-              {PURPLE_FRIDAY && (
+              {PURPLE_WEEK && (
                 <span className="text-lg text-muted-foreground line-through">
                   {formatBRL(ANNUAL_LIST_PRICE)}
                 </span>
