@@ -82,7 +82,7 @@
   --secondary: hsl(290 8% 96%);
   --secondary-foreground: hsl(290 18% 12%);
   --muted: hsl(290 6% 95%);
-  --muted-foreground: hsl(290 8% 45%);
+  --muted-foreground: hsl(290 10% 30%);
   /* Accent suave ameixa */
   --accent: hsl(296 25% 92%);
   --accent-foreground: hsl(296 28% 26%);
@@ -144,6 +144,81 @@
     font-family: var(--font-display);
     font-feature-settings: "ss01", "ss02";
     letter-spacing: -0.01em;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+    scroll-padding-top: 0;
+  }
+  /* Foco visível em tudo que se clica ou digita */
+  :where(a, button, input, summary, [role="button"], [tabindex]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .specular-button:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+  .on-dark .specular-button:focus-visible,
+  .on-dark :where(a, button):focus-visible {
+    outline-color: #fff;
+  }
+}
+
+/* Quadro de seção: cada seção ocupa exatamente 1 ou 2 telas no desktop (--h), topo alinhado.
+   Abaixo de 1024px cresce com o conteúdo, sem nunca cortar. */
+.sec {
+  position: relative;
+  padding: 72px 0;
+}
+.wrap {
+  width: min(100% - 48px, 1200px);
+  margin-inline: auto;
+}
+@media (min-width: 640px) {
+  .wrap {
+    width: min(100% - 128px, 1200px);
+  }
+}
+@media (min-width: 1024px) {
+  .wrap {
+    width: min(100% - 96px, 1200px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .sec {
+    min-height: 0;
+    padding: 96px 0;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: -64px;
+  z-index: 100;
+  border-radius: 10px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 12px 18px;
+  font-weight: 600;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 

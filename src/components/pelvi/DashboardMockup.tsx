@@ -24,12 +24,39 @@ export function DashboardMockup() {
               <Calendar className="h-4 w-4 text-primary" />
             </div>
             {[
-              { h: "08:30", n: "Camila R.", t: "Avaliação pélvica", c: "bg-primary/15 text-primary", s: "Confirmada" },
-              { h: "10:00", n: "Beatriz L.", t: "Reabilitação · 5/10", c: "bg-secondary/20 text-secondary", s: "Pacote" },
-              { h: "11:00", n: "Helena M.", t: "Biofeedback", c: "bg-accent text-accent-foreground", s: "Hoje" },
-              { h: "14:30", n: "Júlia S.", t: "Pós-parto · 2/8", c: "bg-secondary/20 text-secondary", s: "Pacote" },
+              {
+                h: "08:30",
+                n: "Camila R.",
+                t: "Avaliação pélvica",
+                c: "bg-primary/15 text-primary",
+                s: "Confirmada",
+              },
+              {
+                h: "10:00",
+                n: "Beatriz L.",
+                t: "Reabilitação · 5/10",
+                c: "bg-secondary/20 text-secondary",
+                s: "Pacote",
+              },
+              {
+                h: "11:00",
+                n: "Helena M.",
+                t: "Biofeedback",
+                c: "bg-accent text-accent-foreground",
+                s: "Hoje",
+              },
+              {
+                h: "14:30",
+                n: "Júlia S.",
+                t: "Pós-parto · 2/8",
+                c: "bg-secondary/20 text-secondary",
+                s: "Pacote",
+              },
             ].map((a) => (
-              <div key={a.h} className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/40">
+              <div
+                key={a.h}
+                className="flex items-center gap-3 p-3 rounded-xl bg-muted/40 border border-border/40"
+              >
                 <div className="text-xs font-medium text-muted-foreground w-12">{a.h}</div>
                 <div className="flex-1">
                   <p className="text-sm font-medium">{a.n}</p>
