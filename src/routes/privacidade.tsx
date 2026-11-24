@@ -85,9 +85,6 @@ function Privacidade() {
       </p>
       <ul>
         <li>
-          <strong>Resend</strong>: envio de e-mails;
-        </li>
-        <li>
           <strong>Cloudflare (Turnstile)</strong>: verificação anti-robô no formulário de cadastro;
         </li>
         <li>

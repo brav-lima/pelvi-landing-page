@@ -10,7 +10,7 @@ export const Route = createFileRoute("/termos")({
       {
         name: "description",
         content:
-          "Termos de uso do site e da lista de acesso antecipado da plataforma soupelvi, para fisioterapeutas pélvicas.",
+          "Termos de uso do site e do cadastro com teste gratuito de 14 dias da plataforma soupelvi, para fisioterapeutas pélvicas.",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/termos` }],
@@ -23,9 +23,9 @@ function Termos() {
     <LegalLayout title="Termos de uso">
       <p>
         Estes Termos de uso regulam o acesso ao site <strong>www.soupelvi.com.br</strong> e a
-        inscrição na lista de acesso antecipado da plataforma soupelvi. Ao navegar no site ou enviar
-        o formulário de inscrição, você declara ter lido e concordado com estes Termos e com a{" "}
-        <Link to="/privacidade">Política de Privacidade</Link>.
+        criação de conta na plataforma soupelvi, com teste gratuito de 14 dias. Ao navegar no site
+        ou enviar o formulário de cadastro, você declara ter lido e concordado com estes Termos e
+        com a <Link to="/privacidade">Política de Privacidade</Link>.
       </p>
 
       <h2>1. Quem somos</h2>
@@ -39,32 +39,32 @@ function Termos() {
       <h2>2. O que este site oferece</h2>
       <p>
         O site apresenta a plataforma e permite que profissionais de fisioterapia pélvica informem
-        nome e e-mail para entrar na lista de acesso antecipado. A plataforma ainda está em
-        desenvolvimento: a inscrição não garante vaga, prazo de liberação, funcionalidades
-        específicas ou gratuidade futura além do que for informado por e-mail no momento do convite.
+        nome e e-mail para criar uma conta e experimentar a plataforma gratuitamente por 14 dias.
+        Após o envio do formulário, você recebe por e-mail um link para concluir o cadastro.
       </p>
 
-      <h2>3. Inscrição na lista de acesso antecipado</h2>
+      <h2>3. Cadastro e teste gratuito</h2>
       <ul>
         <li>Você deve ser maior de 18 anos e informar dados verdadeiros e que sejam seus.</li>
         <li>
-          Os acessos são liberados de forma gradual e a critério da soupelvi, sem obrigação de
-          convidar todas as pessoas inscritas.
+          O teste gratuito dura 14 dias e não exige contratação. Ao final do período, você decide se
+          deseja contratar a plataforma, o que é feito dentro dela.
         </li>
         <li>
-          A inscrição é gratuita e não cria vínculo contratual de prestação de serviço. O uso
-          efetivo da plataforma poderá exigir a aceitação de termos específicos.
+          A contratação e o uso continuado da plataforma estão sujeitos às condições apresentadas no
+          momento da contratação, que poderão exigir a aceitação de termos específicos.
         </li>
         <li>
-          Você pode sair da lista a qualquer momento, pelo link de descadastro presente nos e-mails
-          ou por pedido ao nosso contato.
+          Você pode pedir a exclusão da sua conta e dos seus dados a qualquer momento, pelo nosso
+          contato.
         </li>
       </ul>
 
       <h2>4. Comunicações</h2>
       <p>
-        Ao se inscrever, você concorda em receber e-mails sobre o lançamento, a liberação de acessos
-        e novidades da plataforma. Não enviamos spam e todo e-mail traz opção de descadastro.
+        Ao se cadastrar, você concorda em receber e-mails sobre sua conta, o período de teste e
+        novidades da plataforma. Não enviamos spam e os e-mails promocionais trazem opção de
+        descadastro.
       </p>
 
       <h2>5. Dados pessoais</h2>
@@ -110,7 +110,7 @@ function Termos() {
       <p>
         Podemos atualizar estes Termos a qualquer momento. A versão vigente fica sempre nesta
         página, com a data da última atualização. Mudanças relevantes serão comunicadas por e-mail
-        às pessoas inscritas.
+        às pessoas cadastradas.
       </p>
 
       <h2>11. Lei aplicável e foro</h2>
