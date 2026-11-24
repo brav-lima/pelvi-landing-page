@@ -290,9 +290,15 @@ export function ComingSoon() {
 const PARTNERS = [
   {
     name: "Carol Lazzarim, fisioterapia pélvica",
-    src: "/parceiros/carol-lazzarim.png",
+    src: "/parceiros/carol-lazzarim.webp",
     width: 480,
     height: 447,
+  },
+  {
+    name: "Luana Cecconi, fisioterapia pélvica",
+    src: "/parceiros/luana-cecconi.webp",
+    width: 912,
+    height: 662,
   },
 ];
 
@@ -308,14 +314,14 @@ export function Community() {
         </p>
         <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
           {PARTNERS.map(({ name, src, width, height }) => (
-            <li key={name}>
+            <li key={name} className="rounded-2xl bg-white px-8 py-5 shadow-sm ring-1 ring-black/5">
               <img
                 src={src}
                 alt={name}
                 width={width}
                 height={height}
                 loading="lazy"
-                className="h-24 w-auto sm:h-28"
+                className="h-28 w-auto sm:h-36"
               />
             </li>
           ))}
