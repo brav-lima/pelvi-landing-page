@@ -69,7 +69,8 @@ function Termos() {
 
       <h2>5. Dados pessoais</h2>
       <p>
-        Coletamos apenas nome e e-mail, tratados conforme a Lei Geral de Proteção de Dados (Lei nº
+        Coletamos nome e e-mail, informados por você, além de métricas agregadas de navegação por
+        meio de analytics sem cookies, tratados conforme a Lei Geral de Proteção de Dados (Lei nº
         13.709/2018). Os detalhes estão na <Link to="/privacidade">Política de Privacidade</Link>.
       </p>
 

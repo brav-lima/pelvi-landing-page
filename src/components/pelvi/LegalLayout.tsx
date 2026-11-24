@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Logo } from "@/components/pelvi/Logo";
 import { Footer } from "@/components/pelvi/sections";
 
-export const LEGAL_UPDATED_AT = "13 de outubro de 2026";
+export const LEGAL_UPDATED_AT = "24 de novembro de 2026";
 export const CONTACT_EMAIL = "admin@soupelvi.com.br";
 
 export function LegalLayout({ title, children }: { title: string; children: React.ReactNode }) {

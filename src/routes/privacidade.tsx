@@ -10,7 +10,7 @@ export const Route = createFileRoute("/privacidade")({
       {
         name: "description",
         content:
-          "Como a soupelvi coleta, usa e protege seu nome e e-mail na lista de acesso antecipado, conforme a LGPD.",
+          "Como a soupelvi coleta, usa e protege seu nome e e-mail na lista de acesso antecipado e os dados de navegação do site, conforme a LGPD.",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/privacidade` }],
@@ -43,6 +43,12 @@ function Privacidade() {
           Dados técnicos básicos de acesso (como endereço IP e tipo de navegador), registrados
           automaticamente pela infraestrutura de hospedagem para segurança e funcionamento do site.
         </li>
+        <li>
+          <strong>Dados de navegação e uso do site</strong>, coletados de forma agregada pelo Vercel
+          Web Analytics: páginas visitadas, site de origem (referrer), país, tipo de dispositivo,
+          navegador e sistema operacional. Esses dados não incluem seu nome ou e-mail e não
+          identificam você diretamente.
+        </li>
       </ul>
       <p>Não coletamos dados de pacientes nem dados pessoais sensíveis por este site.</p>
 
@@ -54,14 +60,19 @@ function Privacidade() {
         </li>
         <li>Responder a contatos e pedidos relacionados aos seus dados.</li>
         <li>Manter a segurança e prevenir abusos no site.</li>
+        <li>
+          Entender, de forma agregada, como o site é usado (por exemplo, quais páginas são mais
+          acessadas) para melhorá-lo.
+        </li>
       </ul>
 
       <h2>4. Base legal</h2>
       <p>
         O tratamento de nome e e-mail se baseia no seu <strong>consentimento</strong> (art. 7º, I,
         da LGPD), dado ao enviar o formulário. Os registros técnicos de acesso se baseiam no nosso
-        legítimo interesse em manter o site seguro (art. 7º, IX). Você pode retirar o consentimento
-        a qualquer momento.
+        legítimo interesse em manter o site seguro (art. 7º, IX), assim como as métricas agregadas
+        de uso, que usamos para melhorar o site. Você pode retirar o consentimento a qualquer
+        momento.
       </p>
 
       <h2>5. Com quem compartilhamos</h2>
@@ -74,7 +85,8 @@ function Privacidade() {
           <strong>Resend</strong>: armazenamento da lista de contatos e envio de e-mails;
         </li>
         <li>
-          <strong>Vercel</strong>: hospedagem do site e registros técnicos de acesso.
+          <strong>Vercel</strong>: hospedagem do site, registros técnicos de acesso e métricas de
+          audiência (Vercel Web Analytics).
         </li>
       </ul>
       <p>
@@ -120,8 +132,11 @@ function Privacidade() {
 
       <h2>9. Cookies</h2>
       <p>
-        Este site não usa cookies de publicidade ou de rastreamento. Se isso mudar, atualizaremos
-        esta Política e, quando necessário, pediremos seu consentimento.
+        Este site não usa cookies de publicidade. Para medir a audiência, usamos o Vercel Web
+        Analytics, que <strong>não utiliza cookies</strong> e não armazena informações no seu
+        dispositivo: as visitas são contabilizadas de forma agregada, sem criar um perfil individual
+        nem acompanhar você entre sites. Se isso mudar, atualizaremos esta Política e, quando
+        necessário, pediremos seu consentimento.
       </p>
 
       <h2>10. Alterações</h2>
