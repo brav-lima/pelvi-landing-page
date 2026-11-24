@@ -293,12 +293,14 @@ const PARTNERS = [
     src: "/parceiros/carol-lazzarim.webp",
     width: 480,
     height: 447,
+    instagram: "carollazzarim",
   },
   {
     name: "Luana Cecconi, fisioterapia pélvica",
     src: "/parceiros/luana-cecconi.webp",
     width: 912,
     height: 662,
+    instagram: "fisioluanacecconi",
   },
 ];
 
@@ -313,16 +315,24 @@ export function Community() {
           Toda sugestão enviada dentro da plataforma entra nos nossos planos.
         </p>
         <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
-          {PARTNERS.map(({ name, src, width, height }) => (
-            <li key={name} className="rounded-2xl bg-white px-8 py-5 shadow-sm ring-1 ring-black/5">
-              <img
-                src={src}
-                alt={name}
-                width={width}
-                height={height}
-                loading="lazy"
-                className="h-28 w-auto sm:h-36"
-              />
+          {PARTNERS.map(({ name, src, width, height, instagram }) => (
+            <li key={name}>
+              <a
+                href={`https://www.instagram.com/${instagram}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Instagram de ${name}`}
+                className="block rounded-2xl bg-white px-8 py-5 shadow-sm ring-1 ring-black/5 transition-shadow hover:shadow-md"
+              >
+                <img
+                  src={src}
+                  alt={name}
+                  width={width}
+                  height={height}
+                  loading="lazy"
+                  className="h-28 w-auto sm:h-36"
+                />
+              </a>
             </li>
           ))}
         </ul>
