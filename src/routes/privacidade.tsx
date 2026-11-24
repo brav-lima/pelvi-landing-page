@@ -10,7 +10,7 @@ export const Route = createFileRoute("/privacidade")({
       {
         name: "description",
         content:
-          "Como a soupelvi coleta, usa e protege seu nome e e-mail na lista de acesso antecipado e os dados de navegação do site, conforme a LGPD.",
+          "Como a soupelvi coleta, usa e protege seu nome e e-mail no cadastro para contratação da plataforma e os dados de navegação do site, conforme a LGPD.",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/privacidade` }],
@@ -22,9 +22,9 @@ function Privacidade() {
   return (
     <LegalLayout title="Política de privacidade">
       <p>
-        Esta Política explica como tratamos seus dados pessoais quando você se inscreve na lista de
-        acesso antecipado da soupelvi, em conformidade com a Lei Geral de Proteção de Dados (LGPD,
-        Lei nº 13.709/2018). Ela complementa os <Link to="/termos">Termos de uso</Link>.
+        Esta Política explica como tratamos seus dados pessoais quando você preenche o cadastro para
+        contratar a soupelvi, em conformidade com a Lei Geral de Proteção de Dados (LGPD, Lei nº
+        13.709/2018). Ela complementa os <Link to="/termos">Termos de uso</Link>.
       </p>
 
       <h2>1. Controlador</h2>
@@ -37,7 +37,7 @@ function Privacidade() {
       <h2>2. Dados que coletamos</h2>
       <ul>
         <li>
-          <strong>Nome e e-mail</strong>, informados por você no formulário de inscrição.
+          <strong>Nome e e-mail</strong>, informados por você no formulário de cadastro.
         </li>
         <li>
           Dados técnicos básicos de acesso (como endereço IP e tipo de navegador), registrados
@@ -54,9 +54,10 @@ function Privacidade() {
 
       <h2>3. Para que usamos</h2>
       <ul>
-        <li>Registrar sua inscrição na lista de acesso antecipado.</li>
+        <li>Registrar seu cadastro e viabilizar a contratação da plataforma.</li>
         <li>
-          Enviar e-mails sobre a liberação de acessos, o lançamento e novidades da plataforma.
+          Enviar o link para você concluir o cadastro e e-mails sobre sua conta, o uso e novidades
+          da plataforma.
         </li>
         <li>Responder a contatos e pedidos relacionados aos seus dados.</li>
         <li>Manter a segurança e prevenir abusos no site.</li>
@@ -68,8 +69,10 @@ function Privacidade() {
 
       <h2>4. Base legal</h2>
       <p>
-        O tratamento de nome e e-mail se baseia no seu <strong>consentimento</strong> (art. 7º, I,
-        da LGPD), dado ao enviar o formulário. Os registros técnicos de acesso se baseiam no nosso
+        O tratamento de nome e e-mail se baseia na execução de procedimentos preliminares
+        relacionados a contrato do qual você é parte, a seu pedido (art. 7º, V, da LGPD), para
+        viabilizar a contratação da plataforma, e no seu <strong>consentimento</strong> (art. 7º, I)
+        para o envio de comunicações opcionais. Os registros técnicos de acesso se baseiam no nosso
         legítimo interesse em manter o site seguro (art. 7º, IX), assim como as métricas agregadas
         de uso, que usamos para melhorar o site. Você pode retirar o consentimento a qualquer
         momento.
@@ -82,7 +85,10 @@ function Privacidade() {
       </p>
       <ul>
         <li>
-          <strong>Resend</strong>: armazenamento da lista de contatos e envio de e-mails;
+          <strong>Resend</strong>: envio de e-mails;
+        </li>
+        <li>
+          <strong>Cloudflare (Turnstile)</strong>: verificação anti-robô no formulário de cadastro;
         </li>
         <li>
           <strong>Vercel</strong>: hospedagem do site, registros técnicos de acesso e métricas de
@@ -97,9 +103,9 @@ function Privacidade() {
 
       <h2>6. Por quanto tempo guardamos</h2>
       <p>
-        Mantemos nome e e-mail enquanto você estiver na lista e durante o período de lançamento da
-        plataforma. Se você pedir a exclusão ou se descadastrar, removemos seus dados, salvo quando
-        a lei exigir a guarda por mais tempo.
+        Mantemos nome e e-mail enquanto durar o processo de contratação e a relação com você como
+        cliente. Se você pedir a exclusão ou se descadastrar, removemos seus dados, salvo quando a
+        lei exigir a guarda por mais tempo.
       </p>
 
       <h2>7. Seus direitos</h2>
