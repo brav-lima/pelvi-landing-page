@@ -509,6 +509,13 @@ export function Closing() {
               </Link>
             </nav>
             <p className="mt-2">© 2026 soupelvi · Feito no Brasil</p>
+            <p className="text-xs text-white/60">
+              Plataforma desenvolvida e operada por{" "}
+              <Link to="/termos" className="underline underline-offset-4 hover:text-white">
+                Blvckship Tecnologia LTDA
+              </Link>{" "}
+              · CNPJ 69.304.059/0001-70
+            </p>
           </div>
         </div>
       </div>
@@ -539,6 +546,13 @@ export function Footer() {
               </Link>
             </nav>
             <p>© 2026 soupelvi · Feito no Brasil</p>
+            <p className="text-xs text-white/60">
+              Plataforma desenvolvida e operada por{" "}
+              <Link to="/termos" className="underline underline-offset-4 hover:text-white">
+                Blvckship Tecnologia LTDA
+              </Link>{" "}
+              · CNPJ 69.304.059/0001-70
+            </p>
           </div>
         </div>
       </div>
